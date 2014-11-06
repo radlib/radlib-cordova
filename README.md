@@ -1,4 +1,4 @@
-Demo-www-folder
+radlib-cordova
 ===============
 
 All the files in the www folder in the apache cordova directory
