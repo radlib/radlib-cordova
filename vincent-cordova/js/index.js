@@ -1,16 +1,18 @@
+
 function readStartStop(){
 	if(document.getElementById("buttonStartStop").innerHTML == "Start Reading"){
-		//bluetoothSerial.connect("AA:00:AA:00:AA:00", successful, unsuccessful);
+		bluetoothScanner.scan(successful, unsuccessful);
 		document.getElementById("buttonStartStop").innerHTML = "Stop Reading";
 	}else{
+		bluetoothScanner.stop(successful, unsuccessful);
 		document.getElementById("buttonStartStop").innerHTML = "Start Reading";
 	}
 }
 
-function successful(){
-	document.getElementById("buttonStartStop").innerHTML = "Connected!!";
+function successful(data){
+	document.getElementById("status1").innerHTML = data;
 }
 
-function unsuccessful(){
-	document.getElementById("buttonStartStop").innerHTML = "Unsuccessful!";
+function unsuccessful(data){
+	document.getElementById("status2").innerHTML = data;
 }
