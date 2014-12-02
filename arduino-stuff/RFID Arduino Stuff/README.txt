@@ -1,0 +1,1 @@
+Put the RFIDMFRC522 folder in the Arduino "Libraries" folder then run the Sketch!
