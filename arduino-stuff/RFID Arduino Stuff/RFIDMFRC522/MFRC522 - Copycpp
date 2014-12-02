@@ -1138,7 +1138,7 @@ void MFRC522::PICC_DumpToSerial(Uid *uid	///< Pointer to Uid struct returned fro
 	}
 
 	Serial.println();
-	//PICC_HaltA(); // Already done if it was a MIFARE Classic PICC.
+	PICC_HaltA(); // Already done if it was a MIFARE Classic PICC.
 } // End PICC_DumpToSerial()
 
 /**
@@ -1177,7 +1177,7 @@ void MFRC522::PICC_DumpMifareClassicToSerial(	Uid *uid,		///< Pointer to Uid str
 			PICC_DumpMifareClassicSectorToSerial(uid, key, i);
 		}
 	}
-	//PICC_HaltA(); // Halt the PICC before stopping the encrypted session.
+	PICC_HaltA(); // Halt the PICC before stopping the encrypted session.
 	PCD_StopCrypto1();
 } // End PICC_DumpMifareClassicToSerial()
 

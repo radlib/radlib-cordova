@@ -17,14 +17,23 @@ void loop() // Arduino IDE's way of abstracting main
 {
 	if (!mfrc522.PICC_IsNewCardPresent()) 
         {
-		return;
+		//return;
 	}
+       // else
+        {
+               // mfrc522.PICC_IsNewCardPresent();
+        }
 
 	if (!mfrc522.PICC_ReadCardSerial()) 
         {
-		return;
+		//return;
 	}
-
+        //else
+        {
+               // mfrc522.PICC_ReadCardSerial();
+        }
 	// Dump debug info about the card. PICC_HaltA() is automatically called.
 	mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
+
+mfrc522.PICC_DumpMifareUltralightToSerial();
 }
