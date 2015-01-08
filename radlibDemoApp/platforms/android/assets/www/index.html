@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+    </head>
+    <body>
+        <div class="headerDiv">
+			<h1 id="headerTitle">RFID Demo App</h1>
+			<img id="headerImg" src="img/logo.png">
+        </div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		
+		<p id="testing"> Please select your device:
+		</p>
+		
+		<select>
+			<option value="aretePop">Arete Pop</option>
+			<option value="alien">Alien</option>
+			<option value="forgot">More Schtuff</option>
+			<option value="whee">Arduino/RFID</option>
+		</select>
+		
+		<button id="buttonStartStop" onClick="readStartStop()">Start Reading</button>
+		
+		<br>
+		
+		<p id="status1"> Status1 </p>
+		<p id="status2"> Status2 </p>
+		
+		<br>
+		<br>
+		
+		<table>
+			<tr>
+				<th>Time read</th>
+				<th>ID Tag</th>
+			</tr>
+			<tr>
+				<td>Blank</td>
+				<td>Blank</td>
+			</tr>
+			<tr>
+				<td>Blank</td>
+				<td>Blank</td>
+			</tr>
+		</table>
+    </body>
+</html>
