@@ -41,6 +41,7 @@ public class BluetoothScanner extends CordovaPlugin {
 		private BluetoothSocket socket;
 		private InputStream iStream;
 		private OutputStream oStream;
+		StringBuilder sb;
 		
 		public BluetoothThread(BluetoothDevice device, CallbackContext callbackContext){
 			this.device = device;
@@ -62,32 +63,39 @@ public class BluetoothScanner extends CordovaPlugin {
 		}
 		
 		public void run() {
+            byte[] data = new byte[1024];
             byte[] bufferT = new byte[1024];
-            int bufferSize = 0;
-            byte[] temp = new byte[1024];
+            sb = new StringBuilder(1024);
             int bytes = 0;
+			int nextFrameStart;
 
             // Keep listening to the InputStream while connected
             while (true) {
             	try {
 					bytes = iStream.read(bufferT);
 					if(bytes > 0){
-						byte[] data = Arrays.copyOf(bufferT,bytes);
-						String str = new String(data, "UTF-8");
-						PluginResult result = new PluginResult(PluginResult.Status.OK, str);
-				        result.setKeepCallback(true);
-				        callbackContext.sendPluginResult(result);
-						try {
-							sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+						data = Arrays.copyOf(bufferT,bytes);
 						
-	            	}
+						String str = new String(data, "UTF-8");
+						sb.append(str);
+					}
+					
+					nextFrameStart = sb.lastIndexOf("~~~~~~~~HEADER~~~~~~~~");
+					if(nextFrameStart > 0){
+						//send everything up until the next frame
+						String frameToSend = sb.substring(0, nextFrameStart);
+						PluginResult result = new PluginResult(PluginResult.Status.OK, frameToSend);
+					    result.setKeepCallback(true);
+					    callbackContext.sendPluginResult(result);
+					        
+					    //start building up the next frame
+					    String nextFrame = sb.substring(nextFrameStart, sb.length());
+					    sb = new StringBuilder(1024);
+					    sb.append(nextFrame);
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-            	
             }
         }
 		
@@ -103,6 +111,8 @@ public class BluetoothScanner extends CordovaPlugin {
 			scanNearbyBluetooth(callbackContext);
 			//callbackContext.success("scan success");
 			return true;
+		}else if(action.equals("connect")){
+			connect((String)args.get(0), callbackContext);
 		}else if(action.equals("stop")){
 			stop();
 			callbackContext.success("success stop");
