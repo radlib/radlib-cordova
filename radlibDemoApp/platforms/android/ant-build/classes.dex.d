@@ -13,6 +13,7 @@ C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\m
 C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\megster\cordova\BluetoothSerialService$ConnectThread.class \
 C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\megster\cordova\BluetoothSerialService.class \
 C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothScanner$1$1.class \
+C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothScanner$1$2.class \
 C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothScanner$1.class \
 C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothScanner$BluetoothThread.class \
 C:\Users\Vincent\Desktop\radlibDemoApp\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothScanner.class \
