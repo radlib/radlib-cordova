@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+    </head>
+    <body>
+        <div class="headerDiv">
+			<h1 id="headerTitle">RFID Demo App</h1>
+			<img id="headerImg" src="img/logo.png">
+        </div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		
+		<p id="select"> Please select your device:
+		</p>
+		
+		<select>
+			<option value="whee">Arduino/RFID</option>
+			<option value="aretePop">Arete Pop</option>
+			<option value="alien">Alien</option>
+			<option value="forgot">More Schtuff</option>
+		</select>
+		
+		<button id="buttonStartStop" onClick="readStartStop()">Start Reading</button>
+		
+		<button onClick="BTRFID()">Direct Connect BT</button>
+		<br>
+		
+		<button id="toggleBT" onClick="toggleBT()">Turn Bluetooth On</button>
+		
+		<button id="testing" onClick="testing()">Testing</button>
+		
+		<p id="status"> success/error logs </p>
+		
+		<br>
+		<br>
+		
+		<table id="rfidTable">
+			<tr>
+				<th>ID Tag</th>
+				<th>RFID Module</th>
+				<th>Time Read</th>
+				<th>Count</th>
+			</tr>
+		</table>
+    </body>
+</html>

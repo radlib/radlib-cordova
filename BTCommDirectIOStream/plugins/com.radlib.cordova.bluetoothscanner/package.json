@@ -1,0 +1,18 @@
+{
+    "version": "0.0.0",
+    "name": "com.radlib.cordova.bluetoothscanner",
+    "cordova_name": "BluetoothScanner",
+    "description": "Bluetooth Scanner Plugin",
+    "keywords": [
+        "radlib"
+    ],
+    "platforms": [
+        "android"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.6.3"
+        }
+    ]
+}
