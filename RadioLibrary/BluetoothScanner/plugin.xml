@@ -18,6 +18,10 @@
         <clobbers target="bluetoothScanner" />
     </js-module>
 	
+	<js-module name="Resources" src ="www/Resources.js">
+        <clobbers target="resources" />
+    </js-module>
+	
 	<platform name="android">
 		
 		<config-file target="res/xml/config.xml" parent="/widget">

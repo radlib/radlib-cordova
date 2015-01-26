@@ -32,6 +32,10 @@ public class BluetoothScanner extends CordovaPlugin {
 	
 	private static final UUID KNOWN_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	
+	/**
+		Thread for initializing an IOStream communiction with a bluetooth device. Will send all data
+		back to the cordova callback function set in as the phone receives the data.
+	*/
 	private class BluetoothThread extends Thread {
 		private BluetoothDevice device;
 		private CallbackContext callbackContext;
@@ -75,21 +79,9 @@ public class BluetoothScanner extends CordovaPlugin {
 						data = Arrays.copyOf(bufferT,bytes);
 						
 						String str = new String(data, "UTF-8");
-						sb.append(str);
-					}
-					
-					nextFrameStart = sb.lastIndexOf("~~~~~~~~HEADER~~~~~~~~");
-					if(nextFrameStart > 0){
-						//send everything up until the next frame
-						String frameToSend = sb.substring(0, nextFrameStart);
-						PluginResult result = new PluginResult(PluginResult.Status.OK, frameToSend);
+						PluginResult result = new PluginResult(PluginResult.Status.OK, str);
 					    result.setKeepCallback(true);
 					    callbackContext.sendPluginResult(result);
-					        
-					    //start building up the next frame
-					    String nextFrame = sb.substring(nextFrameStart, sb.length());
-					    sb = new StringBuilder(1024);
-					    sb.append(nextFrame);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -123,28 +115,9 @@ public class BluetoothScanner extends CordovaPlugin {
 			turnOffBT();
 			callbackContext.success("bluetooth disabled");
 			return true;
-		}else if(action.equals("testing")){
-			testing(callbackContext);
-			callbackContext.success("testing");
-			return true;
 		}
 		callbackContext.error("invalid command");
 		return false;
-	}
-	
-	//for testing with JSON, delete later
-	public void testing(final CallbackContext callbackContext){
-		try {
-			JSONObject object = new JSONObject();
-			object = object.put("id", "50 94 28 D7");
-			object = object.put("reader", "bluetooth");
-			object = object.put("firstSeen", new SimpleDateFormat("HH:mm:ss").
-									  format(Calendar.getInstance().getTime()));
-			
-			callbackContext.success(object);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	/**

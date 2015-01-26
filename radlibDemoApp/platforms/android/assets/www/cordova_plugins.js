@@ -13,6 +13,13 @@ module.exports = [
         "clobbers": [
             "bluetoothScanner"
         ]
+    },
+    {
+        "file": "plugins/com.radlib.cordova.bluetoothscanner/www/Resources.js",
+        "id": "com.radlib.cordova.bluetoothscanner.Resources",
+        "clobbers": [
+            "resources"
+        ]
     }
 ];
 module.exports.metadata = 

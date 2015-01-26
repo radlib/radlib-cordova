@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>Radlib RFID App</title>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
     </head>
@@ -30,14 +30,16 @@
 			<option value="forgot">More Schtuff</option>
 		</select>
 		
-		<button id="buttonStartStop" onClick="readStartStop()">Start Reading</button>
+		<button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
 		
-		<button onClick="BTRFID()">Direct Connect BT</button>
+		<button id="buttonDirectIOParsed" onClick="directConnectLFParsed()">Direct Connect LF IO Parsed</button>
 		<br>
 		
-		<button id="toggleBT" onClick="toggleBT()">Turn Bluetooth On</button>
+		<button id="buttonToggleBT" onClick="toggleBT()">Turn Bluetooth On</button>
 		
-		<button id="testing" onClick="testing()">Testing</button>
+		<button id="buttonScanIOStream" onClick="scanConnectLFStream()">Scan IO Stream</button>
+		
+		<button id="buttonDirectIOStream" onClick="directConnectLFStream()">Direct Connect LF IO Stream</button>
 		
 		<p id="status"> success/error logs </p>
 		

@@ -78,8 +78,7 @@ public class BluetoothScanner extends CordovaPlugin {
 						sb.append(str);
 					}
 					
-					nextFrameStart = sb.lastIndexOf("~~~~~~~~HEADER~~~~~~~~");
-					if(nextFrameStart > 0){
+					if(sb.toString().length() > 100){
 						//send everything up until the next frame
 						String frameToSend = sb.substring(0, nextFrameStart);
 						PluginResult result = new PluginResult(PluginResult.Status.OK, frameToSend);
