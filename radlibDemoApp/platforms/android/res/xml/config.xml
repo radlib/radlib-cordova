@@ -7,12 +7,15 @@
     <feature name="BluetoothScanner">
         <param name="android-package" value="com.radlib.cordova.BluetoothScanner" />
     </feature>
-    <name>HelloWorld</name>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+    </feature>
+    <name>RadLib Demo</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        An Apache Cordova application that demonstrates the capabilities of the RadLib RFID Library.
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+        RadLib
     </author>
     <content src="index.html" />
     <access origin="*" />

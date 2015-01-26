@@ -17,7 +17,12 @@
                             "count": 1
                         }
                     ],
-                    "/*": []
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
+                            "count": 1
+                        }
+                    ]
                 }
             },
             "AndroidManifest.xml": {
@@ -42,6 +47,9 @@
             "PACKAGE_NAME": "com.example.hello"
         },
         "com.radlib.cordova.bluetoothscanner": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "com.msopentech.websql": {
             "PACKAGE_NAME": "com.example.hello"
         }
     },

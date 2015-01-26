@@ -26,7 +26,8 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "com.megster.cordova.bluetoothserial": "0.3.3",
-    "com.radlib.cordova.bluetoothscanner": "0.0.0"
+    "com.radlib.cordova.bluetoothscanner": "0.0.0",
+    "com.msopentech.websql": "0.0.7"
 }
 // BOTTOM OF METADATA
 });
