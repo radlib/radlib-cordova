@@ -34,23 +34,33 @@ module.exports = {
 		//parser function, expects frames "starting with HEADER"
 		var parsedResults = function(data){
 			buffer = buffer.concat(data);
-			var nextFrameStart = buffer.lastIndexOf("CS:");
+			var nextFrameStart = buffer.lastIndexOf("EP: ");
 			if(nextFrameStart > 0){
+//NEW LOGIC GOES HERE
+//while(indexOf(EP:) > 0), go to that index, parse, then looop
 				var currentFrame = buffer.substring(0, nextFrameStart);
-				var idIndex = currentFrame.indexOf("EP: ");
-				if(idIndex >= 0){//skip past header
+				var idIndex;// = currentFrame.indexOf("EP: ");
+				//if(idIndex >= 0){//skip past header
+				if(currentFrame.indexOf("EP: ") >= 0){
+					idIndex = currentFrame.indexOf("EP: ");
 					idIndex += 4;
 					returnVal.id = currentFrame.substring(idIndex, idIndex + 24);
-				}
-				if(currentFrame.indexOf("OK: ") >= 0){//msg given when seen
+					//returnVal.id = "888888888888888888888888";
 					returnVal.report = "seen";
-					success(returnVal);//return object with "reader", "id", and "firstSeen" fields
+					success(returnVal);
+					buffer = buffer.substring(nextFrameStart, buffer.length);
 				}
-				else if(currentFrame.indexOf("ER:005") >= 0){//msg given when lost
-					returnVal.report = "lost";
-				}   
+				//if(currentFrame.indexOf("OK: ") >= 0){//msg given when seen
+					//returnVal.report = "seen";
+					//success(returnVal);//return object with "reader", "id", and "firstSeen" fields
+					//buffer = buffer.substring(nextFrameStart, buffer.length);
+				//}
+				//else if(currentFrame.indexOf("ER:005") >= 0){//msg given when lost
+					//returnVal.report = "lost";
+				//}  
+			//END OF NEW LOGIC
 			    //start building up the next frame
-			    buffer = buffer.substring(nextFrameStart, buffer.length);
+			    //buffer = buffer.substring(nextFrameStart, buffer.length);
 			}
 		};
 		if(address == ""){//scan for nearby bluetooth devices
@@ -81,5 +91,3 @@ module.exports = {
 		cordova.exec(success, failure, "BluetoothScanner", "turnOffBT", []);
 	},
 };
-
-
