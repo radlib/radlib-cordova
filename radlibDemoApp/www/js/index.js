@@ -65,7 +65,16 @@ function toggleBT(){
 
 //update table entries when an ID tag has been seen
 function updateTable(object) {
-    var table = document.getElementById("rfidTable");
+	var db_object = {};
+	db_object.id = object.id;
+	db_object.reader = "LF Reader";
+	if(object.report == "seen"){
+		db_object.firstSeen = resources.getCurrentTime();
+		db_updateCount(db_object);
+	}else if(object.report == "lost"){
+		//do nothing for now
+	}
+    /*var table = document.getElementById("tagsTable");
 	//check if id is in table by checking the values in the leftmost column
 	for(var r = 1; r < table.rows.length; r++){
 		if(table.rows[r].cells[0].innerHTML === object.id){
@@ -83,7 +92,7 @@ function updateTable(object) {
 	id.innerHTML = object.id;
 	reader.innerHTML = "LF Reader";
 	timeRead.innerHTML = resources.getCurrentTime();
-	count.innerHTML = "1";
+	count.innerHTML = "1";*/
 }
 
 // Creates a database of 5 MB called TAGS with fields [id, module, time_read, count]
