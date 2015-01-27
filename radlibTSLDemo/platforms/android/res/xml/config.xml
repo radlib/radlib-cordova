@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.tsldemo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="BluetoothSerial">
+        <param name="android-package" value="com.megster.cordova.BluetoothSerial" />
+    </feature>
+    <feature name="BluetoothScanner">
+        <param name="android-package" value="com.radlib.cordova.BluetoothScanner" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+    </feature>
+    <name>RadLib - TSL 1128 Demo</name>
+    <description>
+        An Apache Cordova application that demonstrates the capabilities of the RadLib RFID Library.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        RadLib
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
