@@ -1,3 +1,40 @@
+function getStream() {
+	var dropdown = document.getElementById("reader_selector");
+	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
+
+	if (selectedReader == "scan") {
+		scanConnectLFStream();
+	}
+	else if (selectedReader == "tsl_1128") {
+		directConnectHFStream();
+	}
+	else if (selectedReader == "rc522_lf") {
+		directConnectLFStream();
+	}
+	else {
+		alert("Please select a reader");
+	}
+}
+
+function getParsed() {
+	var dropdown = document.getElementById("reader_selector");
+	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
+
+	if (selectedReader == "scan") {
+		scanConnectLFParsed();
+	}
+	else if (selectedReader == "tsl_1128") {
+		directConnectHFParsed();
+	}
+	else if (selectedReader == "rc522_lf") {
+		directConnectLFParsed();
+	}
+	else {
+		alert("Please select a reader");
+	}
+}
+
+
 /*toggles between start scanning for nearby bluetooth devices and stop scanning
 for parsed values
 */
@@ -11,9 +48,14 @@ function scanConnectLFParsed(){
 	}
 }
 
-//direct connec to OUR low freq bluetooth reader for parsed results
+//direct connect to OUR low freq bluetooth reader for parsed results
 function directConnectLFParsed(){
 	bluetoothScanner.connectParsed(updateTable, dumpLog, "00:14:03:02:03:26");
+}
+
+//direct connect to OUR hi freq bluetooth reader for parsed results
+function directConnectHFParsed(){
+	bluetoothScanner.connectHFParsed(updateTable, dumpLog, "20:14:05:08:15:63");
 }
 
 /*toggles between start scanning for nearby bluetooth devices and stop scanning
@@ -47,6 +89,12 @@ function directConnectLFStream(){
 	bluetoothScanner.connectStream(dumpLog, dumpLog, "00:14:03:02:03:26");
 }
 
+//direct connect to OUR low freq bluetooth reader for IO Stream
+function directConnectHFStream(){
+	bluetoothScanner.connectStream(dumpLog, dumpLog, "20:14:05:08:15:63");
+}
+
+
 //successful/unsuccessful callback function. currently used as a success/error dump
 function dumpLog(data){
 	document.getElementById("status").innerHTML = data;
@@ -66,8 +114,18 @@ function toggleBT(){
 //update table entries when an ID tag has been seen
 function updateTable(object) {
 	var db_object = {};
+	var dropdown = document.getElementById("reader_selector");
+	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 	db_object.id = object.id;
-	db_object.reader = "LF Reader";
+
+	if (selectedReader == "tsl_1128") {
+		db_object.reader = "TSL 1128 UHF";
+	}
+	else if (selectedReader == "rc522_lf") {
+		db_object.reader = "RC552 LF";
+	}
+//Darren was here
+
 	if(object.report == "seen"){
 		db_object.firstSeen = resources.getCurrentTime();
 		db_updateCount(db_object);
@@ -93,6 +151,11 @@ function updateTable(object) {
 	reader.innerHTML = "LF Reader";
 	timeRead.innerHTML = resources.getCurrentTime();
 	count.innerHTML = "1";*/
+}
+
+function db_initAndLoad() {
+	db_init();
+	db_print();
 }
 
 // Creates a database of 5 MB called TAGS with fields [id, module, time_read, count]
@@ -173,11 +236,18 @@ function db_clear() {
 	var dbSize = 5 * 1024 * 1024;
 	var db = openDatabase("testDatabase", "1.0", "Test DB", dbSize);
 
-	db.transaction(function (tx) {
-  		tx.executeSql('DROP TABLE TAGS');
-	});
+	var result = confirm("Are you sure you want to clear the database?");
+	
+	if (result == true) {
+		db.transaction(function (tx) {
+  			tx.executeSql('DROP TABLE TAGS');
+		});
 
-	document.querySelector('#tagsDB').innerHTML = "<table id='tagsTable'><tr><th>ID Tag</th><th>RFID Module</th><th>Time Read</th><th>Count</th></tr></table>";
+		document.querySelector('#tagsDB').innerHTML = "<table id='tagsTable'><tr><th>ID Tag</th><th>RFID Module</th><th>Time Read</th><th>Count</th></tr></table>";
+		alert("Database cleared!");
+		db_init();
+	}
+
 }
 
 function testCSV() {

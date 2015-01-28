@@ -19,14 +19,13 @@
         </div>
 			
 		<!-- These breaks are necessary to ensure content falls below top banner -->
-		<br /><br /><br /><br /><br />
+		<br /><br /><br /><br />
 		<!--<h2>Select a reader to get started.</h2-->
 		<button id="buttonToggleBT" onClick="toggleBT()">Turn Bluetooth On</button>
 		<br />
 		<div id="input">
-			<h2 id="status" class="log">Select a reader to get started.</h2>
 			<select id="reader_selector" class="input_select">
-				<option value="prompt" selected="true" disabled>Select an option</option>
+				<option value="prompt" selected="true" disabled>Select a reader</option>
 				<option value="scan">Scan for readers</option>
 			    <option value="tsl_1128">TSL 1128</option>
 		    	<option value="rc522_lf">RC522 LF</option>
@@ -35,7 +34,7 @@
 			<button id="button_stream" class="input_button" onclick="getStream()">Get I/O Stream</button>
 		    <button id="button_parsed" class="input_button" onclick="getParsed()">Get Parsed Data</button>
 		</div>
-		<br /><br /><br /><br /><br />
+		<br /><br />
 		
 
 		<!--

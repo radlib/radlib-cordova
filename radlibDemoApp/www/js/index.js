@@ -114,8 +114,18 @@ function toggleBT(){
 //update table entries when an ID tag has been seen
 function updateTable(object) {
 	var db_object = {};
+	var dropdown = document.getElementById("reader_selector");
+	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 	db_object.id = object.id;
-	db_object.reader = "LF Reader";
+
+	if (selectedReader == "tsl_1128") {
+		db_object.reader = "TSL 1128 UHF";
+	}
+	else if (selectedReader == "rc522_lf") {
+		db_object.reader = "RC552 LF";
+	}
+//Darren was here
+
 	if(object.report == "seen"){
 		db_object.firstSeen = resources.getCurrentTime();
 		db_updateCount(db_object);
@@ -235,6 +245,7 @@ function db_clear() {
 
 		document.querySelector('#tagsDB').innerHTML = "<table id='tagsTable'><tr><th>ID Tag</th><th>RFID Module</th><th>Time Read</th><th>Count</th></tr></table>";
 		alert("Database cleared!");
+		db_init();
 	}
 
 }
