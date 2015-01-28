@@ -2,25 +2,43 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>RC522 LF Demo</title>
+        <title>RadLib Beta Demo</title>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
     </head>
-    <body>
+
+    <!-- Initialize database as soon as body loads -->
+    <body onload="db_initAndLoad()">
+        
         <div class="headerDiv">
         	<div><img id="headerImg" src="img/logo.png" /></div>
-			<h1 id="headerTitle">RC522 LF Demo</h1>
+			<h1 id="headerTitle">RadLib Demo</h1>
         </div>
 			
+		<!-- These breaks are necessary to ensure content falls below top banner -->
+		<br /><br /><br /><br /><br />
+		<!--<h2>Select a reader to get started.</h2-->
+		<button id="buttonToggleBT" onClick="toggleBT()">Turn Bluetooth On</button>
 		<br />
-		<br />
-		<br />
-		<br />
-		<br />
+		<div id="input">
+			<h2 id="status" class="log">Select a reader to get started.</h2>
+			<select id="reader_selector" class="input_select">
+				<option value="prompt" selected="true" disabled>Select an option</option>
+				<option value="scan">Scan for readers</option>
+			    <option value="tsl_1128">TSL 1128</option>
+		    	<option value="rc522_lf">RC522 LF</option>
+			</select>
+			<br />
+			<button id="button_stream" class="input_button" onclick="getStream()">Get I/O Stream</button>
+		    <button id="button_parsed" class="input_button" onclick="getParsed()">Get Parsed Data</button>
+		</div>
+		<br /><br /><br /><br /><br />
 		
+
+		<!--
 		<button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
 
 		<button id="buttonDirectIOParsed" onClick="directConnectLFParsed()">Direct Connect LF IO Parsed</button>
@@ -31,16 +49,10 @@
 		<button id="buttonScanIOStream" onClick="scanConnectLFStream()">Scan IO Stream</button>
 		
 		<button id="buttonDirectIOStream" onClick="directConnectLFStream()">Direct Connect LF IO Stream</button>
-		
+
 		<button id="testing" onClick="testing()">Testing</button>
 		
-		<button id="db_init" onClick="db_init()">Initialize Database</button>
-		
-		<button id="db_print" onClick="db_print()">Load Database</button>
-		
-		<button id="delete" onClick="db_clear()">Clear Database</button>
-
-		<p id="status"> success/error logs </p>
+		<button id="delete" onClick="db_clear()">Clear Database</button> -->
 
 		<div id="tagsDB">
 			<table id="tagsTable">
@@ -53,6 +65,8 @@
 			</table>
 		</div>
 
+
+		<button id="delete" onClick="db_clear()">Clear Database</button>
 		<br />
     </body>
 </html>
