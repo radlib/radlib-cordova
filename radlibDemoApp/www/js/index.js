@@ -124,7 +124,6 @@ function updateTable(object) {
 	else if (selectedReader == "rc522_lf") {
 		db_object.reader = "RC552 LF";
 	}
-//Darren was here
 
 	if(object.report == "seen"){
 		db_object.firstSeen = resources.getCurrentTime();
