@@ -32,9 +32,9 @@ function scanConnectLFStream(){
 // testing
 function testing(){
 	var object = {};
-	object.id = "20 50 60 70";
+	object.id = "12 34 56 78";
 	object.firstSeen = resources.getCurrentTime();
-	object.reader = "bluetooth";
+	object.reader = "DEBUG";
 	object.count = 1;
 
 	db_init();

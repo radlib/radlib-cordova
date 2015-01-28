@@ -16,13 +16,14 @@ div.headerDiv {
 }
 
 #headerTitle {
+	float: right;
 	color: white;
 }
 
 #headerImg{
 	float: left;
 	margin-top: 10px;
-	width: 100px;
+	width: 115px;
 }
 
 table {
