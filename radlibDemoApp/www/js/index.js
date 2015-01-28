@@ -39,13 +39,7 @@ function getParsed() {
 for parsed values
 */
 function scanConnectLFParsed(){
-	if(document.getElementById("buttonScanIOParsed").innerHTML == "Scan for Readers IO Parsed"){
-		bluetoothScanner.connectParsed(updateTable, dumpLog, "");
-		document.getElementById("buttonScanIOParsed").innerHTML = "Stop Scan";
-	}else{
-		bluetoothScanner.stopDiscovery(dumpLog, dumpLog);
-		document.getElementById("buttonScanIOParsed").innerHTML = "Scan for Readers IO Parsed";
-	}
+	bluetoothScanner.connectParsed(updateTable, dumpLog, "");
 }
 
 //direct connect to OUR low freq bluetooth reader for parsed results
@@ -62,13 +56,7 @@ function directConnectHFParsed(){
 for IO Stream
 */
 function scanConnectLFStream(){
-	if(document.getElementById("buttonScanIOStream").innerHTML == "Scan for Readers IO Stream"){
-		bluetoothScanner.connectStream(dumpLog, dumpLog, "");
-		document.getElementById("buttonScanIOStream").innerHTML = "Stop Scan";
-	}else{
-		bluetoothScanner.stopDiscovery(dumpLog, dumpLog);
-		document.getElementById("buttonScanIOStream").innerHTML = "Scan for Readers IO Stream";
-	}
+	bluetoothScanner.connectStream(dumpLog, dumpLog, "");
 }
 
 // testing
