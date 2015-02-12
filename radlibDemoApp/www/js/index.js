@@ -91,7 +91,9 @@ function dumpLog(data){
 //toggles turning on bluetooth on/off
 function toggleBT(){
 	if(document.getElementById("buttonToggleBT").innerHTML == "Turn Bluetooth On"){
-		bluetoothScanner.turnOnBT(dumpLog, dumpLog);
+      //EXAMPLE OF HOW TO CALL radlib object
+      //DELETE ME after you understand
+		radlib.test(dumpLog, dumpLog);
 		document.getElementById("buttonToggleBT").innerHTML = "Turn Bluetooth Off";
 	}else{
 		bluetoothScanner.turnOffBT(dumpLog, dumpLog);
