@@ -9,20 +9,11 @@
                 "parents": {
                     "/widget": [
                         {
-                            "xml": "<feature name=\"BluetoothSerial\"><param name=\"android-package\" value=\"com.megster.cordova.BluetoothSerial\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"BluetoothScanner\"><param name=\"android-package\" value=\"com.radlib.cordova.BluetoothScanner\" /></feature>",
+                            "xml": "<feature name=\"BluetoothComm\"><param name=\"android-package\" value=\"com.radlib.cordova.BluetoothComm\" /></feature>",
                             "count": 1
                         }
                     ],
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /></feature>",
-                            "count": 1
-                        }
-                    ]
+                    "/*": []
                 }
             },
             "AndroidManifest.xml": {
@@ -30,11 +21,11 @@
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH\" />",
-                            "count": 2
+                            "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\" />",
-                            "count": 2
+                            "count": 1
                         }
                     ],
                     "/*": []
@@ -43,14 +34,11 @@
         }
     },
     "installed_plugins": {
-        "com.megster.cordova.bluetoothserial": {
-            "PACKAGE_NAME": "com.example.hello"
-        },
-        "com.radlib.cordova.bluetoothscanner": {
-            "PACKAGE_NAME": "com.example.hello"
-        },
         "com.msopentech.websql": {
-            "PACKAGE_NAME": "com.example.hello"
+            "PACKAGE_NAME": "com.example.lfdemo"
+        },
+        "com.radlib.cordova.rfidreader": {
+            "PACKAGE_NAME": "com.example.lfdemo"
         }
     },
     "dependent_plugins": {}
