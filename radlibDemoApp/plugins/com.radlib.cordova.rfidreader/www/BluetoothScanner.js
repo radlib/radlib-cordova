@@ -41,6 +41,7 @@ module.exports = {
 				if(idIndex >= 0){//skip past header
 					idIndex += 10;
 					returnVal.id = currentFrame.substring(idIndex, idIndex + 11);
+					returnVal.reader = "RC522 LF";
 				}
 				if(currentFrame.indexOf("responded with NAK") >= 0){//msg given when seen
 					returnVal.report = "seen";
@@ -60,41 +61,45 @@ module.exports = {
 		}
 	},
 
-	connectHFParsed: function(success, failure, address){
+	connectUHFParsed: function(success, failure, address){
 		var tagId, result;
 		var returnVal = {};
 		var buffer = "";
-		//parser function, expects frames "starting with HEADER"
+
 		var parsedResults = function(data){
 			buffer = buffer.concat(data);
-			var nextFrameStart = buffer.lastIndexOf("EP: ");
-			if(nextFrameStart > 0){
-//NEW LOGIC GOES HERE
-//while(indexOf(EP:) > 0), go to that index, parse, then looop
-				var currentFrame = buffer.substring(0, nextFrameStart);
-				var idIndex;// = currentFrame.indexOf("EP: ");
-				//if(idIndex >= 0){//skip past header
-				if(currentFrame.indexOf("EP: ") >= 0){
-					idIndex = currentFrame.indexOf("EP: ");
-					idIndex += 4;
-					returnVal.id = currentFrame.substring(idIndex, idIndex + 24);
-					//returnVal.id = "888888888888888888888888";
-					returnVal.report = "seen";
-					success(returnVal);
-					buffer = buffer.substring(nextFrameStart, buffer.length);
-				}
-				//if(currentFrame.indexOf("OK: ") >= 0){//msg given when seen
-					//returnVal.report = "seen";
-					//success(returnVal);//return object with "reader", "id", and "firstSeen" fields
-					//buffer = buffer.substring(nextFrameStart, buffer.length);
-				//}
-				//else if(currentFrame.indexOf("ER:005") >= 0){//msg given when lost
-					//returnVal.report = "lost";
-				//}  
-			//END OF NEW LOGIC
-			    //start building up the next frame
-			    //buffer = buffer.substring(nextFrameStart, buffer.length);
+			if(buffer.lastIndexOf("OK:") >= 0){
+				var nextFrameStart = buffer.lastIndexOf("OK:");
 			}
+			else{
+				var nextFrameStart = buffer.lastIndexOf("ER:");
+			}
+
+			var currentFrame = buffer.substring(0, nextFrameStart);
+			var idIndex;
+
+			while(currentFrame.indexOf("EP: ") >= 0){ // indexOf returns -1 if not found
+				idIndex = currentFrame.indexOf("EP: ");
+				currentFrame = currentFrame.slice(0, idIndex) + currentFrame.slice(idIndex + 4, currentFrame.length); // remove "EP: " from the string
+				returnVal.id = currentFrame.substring(idIndex, idIndex + 24);
+				returnVal.report = "seen";
+				returnVal.reader = "TSL 1128 UHF";
+				success(returnVal);
+			}
+
+			buffer = buffer.substring(nextFrameStart, buffer.length);
+
+			//if(currentFrame.indexOf("OK: ") >= 0){//msg given when seen
+				//returnVal.report = "seen";
+				//success(returnVal);//return object with "reader", "id", and "firstSeen" fields
+				//buffer = buffer.substring(nextFrameStart, buffer.length);
+			//}
+			//else if(currentFrame.indexOf("ER:005") >= 0){//msg given when lost
+				//returnVal.report = "lost";
+			//}  
+
+		    //start building up the next frame
+		    //buffer = buffer.substring(nextFrameStart, buffer.length);
 		};
 		if(address == ""){//scan for nearby bluetooth devices
 			cordova.exec(parsedResults, failure, "BluetoothComm", "startDiscovery", []);
