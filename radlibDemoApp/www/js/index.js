@@ -21,7 +21,7 @@ function getParsed() {
 	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
 	if (selectedReader == "scan") {
-		scanConnectLFParsed();
+		scanConnectLFParsed(); // this is bad we need a way to select the reader
 	}
 	else if (selectedReader == "tsl_1128") {
 		directConnectUHFParsed();
@@ -91,9 +91,7 @@ function dumpLog(data){
 //toggles turning on bluetooth on/off
 function toggleBT(){
 	if(document.getElementById("buttonToggleBT").innerHTML == "Turn Bluetooth On"){
-      //EXAMPLE OF HOW TO CALL radlib object
-      //DELETE ME after you understand
-		radlib.test(dumpLog, dumpLog);
+		bluetoothScanner.turnOnBT(dumpLog, dumpLog);
 		document.getElementById("buttonToggleBT").innerHTML = "Turn Bluetooth Off";
 	}else{
 		bluetoothScanner.turnOffBT(dumpLog, dumpLog);

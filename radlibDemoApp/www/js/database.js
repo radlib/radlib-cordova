@@ -4,7 +4,13 @@ function updateTable(object) {
 	var dropdown = document.getElementById("reader_selector");
 	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 	db_object.id = object.id;
-	db_object.reader = object.reader;
+
+	if (selectedReader == "tsl_1128") {
+		db_object.reader = "TSL 1128 UHF";
+	}
+	else if (selectedReader == "rc522_lf") {
+		db_object.reader = "RC552 LF";
+	}
 
 	if(object.report == "seen"){
 		db_object.firstSeen = resources.getCurrentTime();
