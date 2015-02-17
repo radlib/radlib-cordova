@@ -1,2 +1,2 @@
-C:\radlibBetaDemo\platforms\android\ant-build\AndroidManifest.xml : \
-C:\radlibBetaDemo\platforms\android\AndroidManifest.xml \
+C:\radlibRestructured\platforms\android\ant-build\AndroidManifest.xml : \
+C:\radlibRestructured\platforms\android\AndroidManifest.xml \
