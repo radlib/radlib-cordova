@@ -48,6 +48,7 @@ function db_updateCount(object) {
 	    	}
 	    	else {
 	    		db_incrementCount(object);
+
 	    	}
 	    	db_print();
  		}, null);

@@ -1,3 +1,36 @@
+function initialize_all() {
+	var slideMenuButton = document.getElementById('slide-menu-button');
+    slideMenuButton.onclick = function (e) {
+        var cl = document.body.classList;
+        if (cl.contains('left-nav')) {
+            cl.remove('left-nav');
+        } else {
+            cl.add('left-nav');
+        }
+    };
+    db_initAndLoad();
+}
+
+/*
+window.onload = {
+	var slideMenuButton = document.getElementById('slide-menu-button');
+    slideMenuButton.onclick = function (e) {
+        var cl = document.body.classList;
+        if (cl.contains('left-nav')) {
+            cl.remove('left-nav');
+        } else {
+            cl.add('left-nav');
+        }
+    };
+}*/
+
+$('#cheque').change(
+	function() {
+		console.log("CHANGED CHECKBOX!");
+		toggleBT();
+	});
+
+
 function getStream() {
 	var dropdown = document.getElementById("reader_selector");
 	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
@@ -90,6 +123,15 @@ function dumpLog(data){
 
 //toggles turning on bluetooth on/off
 function toggleBT(){
+	if (document.getElementById('cheque').checked) {
+		console.log("BLUETOOTH TURNED ON");
+		radlib.test(dumpLog, dumpLog);
+	} else {
+		console.log("BLUETOOTH TURNED OFFFFFFFF");
+		bluetoothScanner.turnOffBT(dumpLog, dumpLog);
+	}
+
+	/*
 	if(document.getElementById("buttonToggleBT").innerHTML == "Turn Bluetooth On"){
       //EXAMPLE OF HOW TO CALL radlib object
       //DELETE ME after you understand
@@ -98,5 +140,5 @@ function toggleBT(){
 	}else{
 		bluetoothScanner.turnOffBT(dumpLog, dumpLog);
 		document.getElementById("buttonToggleBT").innerHTML = "Turn Bluetooth On";
-	}
+	}*/
 }
