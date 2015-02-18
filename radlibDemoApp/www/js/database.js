@@ -2,15 +2,8 @@
 function updateTable(object) {
 	var db_object = {};
 	var dropdown = document.getElementById("reader_selector");
-	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 	db_object.id = object.id;
-
-	if (selectedReader == "tsl_1128") {
-		db_object.reader = "TSL 1128 UHF";
-	}
-	else if (selectedReader == "rc522_lf") {
-		db_object.reader = "RC552 LF";
-	}
+	db_object.reader = object.reader;
 
 	if(object.report == "seen"){
 		db_object.firstSeen = resources.getCurrentTime();

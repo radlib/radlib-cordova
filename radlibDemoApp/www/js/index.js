@@ -39,7 +39,7 @@ function getStream() {
 		scanConnectLFStream();
 	}
 	else if (selectedReader == "tsl_1128") {
-		directConnectHFStream();
+		directConnectUHFStream();
 	}
 	else if (selectedReader == "rc522_lf") {
 		directConnectLFStream();
@@ -57,7 +57,7 @@ function getParsed() {
 		scanConnectLFParsed();
 	}
 	else if (selectedReader == "tsl_1128") {
-		directConnectHFParsed();
+		directConnectUHFParsed();
 	}
 	else if (selectedReader == "rc522_lf") {
 		directConnectLFParsed();
@@ -81,8 +81,8 @@ function directConnectLFParsed(){
 }
 
 //direct connect to OUR hi freq bluetooth reader for parsed results
-function directConnectHFParsed(){
-	bluetoothScanner.connectHFParsed(updateTable, dumpLog, "20:14:05:08:15:63");
+function directConnectUHFParsed(){
+	bluetoothScanner.connectUHFParsed(updateTable, dumpLog, "20:14:05:08:15:63");
 }
 
 /*toggles between start scanning for nearby bluetooth devices and stop scanning
@@ -111,7 +111,7 @@ function directConnectLFStream(){
 }
 
 //direct connect to OUR low freq bluetooth reader for IO Stream
-function directConnectHFStream(){
+function directConnectUHFStream(){
 	bluetoothScanner.connectStream(dumpLog, dumpLog, "20:14:05:08:15:63");
 }
 
