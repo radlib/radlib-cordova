@@ -2,7 +2,6 @@
 function updateTable(object) {
 	var db_object = {};
 	var dropdown = document.getElementById("reader_selector");
-	var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 	db_object.id = object.id;
 	db_object.reader = object.reader;
 
