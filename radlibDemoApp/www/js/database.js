@@ -120,24 +120,33 @@ function db_clear() {
 document.addEventListener("deviceready", null, false);
 
 // Exports database content to CSV
-// For Android, this is located in "My Files" root directory.
+// For Android, this is located in "My Files/Downloads" directory.
 function db_export() {
-   window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, gotDirectory, dumpLog);
+   //cordova.file.externalRootDirectory accesses the root directory
+   //Download specifies the Download directory within the root directory
+   //gotDirectory runs on success, dumpLog runs on error
+   window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory + "Download", gotDirectory, dumpLog);
 
 }
 
 function gotDirectory(dir) {
+   //creates a .csv file within the directory. It creates the file if none exists
+   //gotFile runs on success, dumpLog runs on error
    dir.getFile("radlib.csv", {create:true}, gotFile, dumpLog);                    
 }
 
 function gotFile(file){
+   //initiates a writer object to write to the file
+   //writeToFile runs on success, dumpLog runs on error;
    file.createWriter(writeToFile, dumpLog); 
 };
 
 function writeToFile(writer){
+   //accesses the database
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("testDatabase", "1.0", "Test DB", dbSize);
    
+   //adds alerts to tell the user when the exporting is completed or failed
    writer.onwriteend = function(e) {
       alert("CSV Writing complete");
    };
@@ -146,19 +155,20 @@ function writeToFile(writer){
       alert('Write failed: ' + e.toString());
    };
    
+   //creates a query to select all items from the table
    db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
          var csvTextString = "", len = results.rows.length, i, blob;
          
-         //table headers
+         //prepare a string with the table headers
          csvTextString += "ID Tag" + "," + "RFID Module" + "," + "Time Read" + "," + "Count" + "\n";
          
-         //add values
+         //appends the table values to the string
          for (i = 0; i < len; i++){
             csvTextString += results.rows.item(i).id + "," + results.rows.item(i).module + "," + results.rows.item(i).time_read + "," + results.rows.item(i).count + "\n";
          }
          
-         //write to file
+         //write the string to file
          blob = new Blob([csvTextString], {type: 'text/plain'});
          writer.write(blob);	 
       }, null);
