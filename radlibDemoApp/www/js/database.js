@@ -116,21 +116,51 @@ function db_clear() {
 
 }
 
+//allow cordova.file to be used
+document.addEventListener("deviceready", null, false);
+
 // Exports database content to CSV
+// For Android, this is located in "My Files" root directory.
 function db_export() {
+   window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, gotDirectory, dumpLog);
 
 }
 
-function testCSV() {
-	 var csvData = "";
-	 db.transaction(function(tx){
-	 tx.executeSql('SELECT * FROM LOGS', [], function (tx, results){
-	 var len = results.rows.length, i;
-
-	  for (i = 1; i < len; i++) {
-	   csvData += results.rows.item(i).id + "," + results.rows.item(i).log + "\n";
-	   }
-	 window.location='data:text/csv;charset=utf8,' + encodeURIComponent(csvData);
-	  });
- });
+function gotDirectory(dir) {
+   dir.getFile("radlib.csv", {create:true}, gotFile, dumpLog);                    
 }
+
+function gotFile(file){
+   file.createWriter(writeToFile, dumpLog); 
+};
+
+function writeToFile(writer){
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("testDatabase", "1.0", "Test DB", dbSize);
+   
+   writer.onwriteend = function(e) {
+      alert("CSV Writing complete");
+   };
+
+   writer.onerror = function(e) {
+      alert('Write failed: ' + e.toString());
+   };
+   
+   db.transaction(function (tx) {
+      tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
+         var csvTextString = "", len = results.rows.length, i, blob;
+         
+         //table headers
+         csvTextString += "ID Tag" + "," + "RFID Module" + "," + "Time Read" + "," + "Count" + "\n";
+         
+         //add values
+         for (i = 0; i < len; i++){
+            csvTextString += results.rows.item(i).id + "," + results.rows.item(i).module + "," + results.rows.item(i).time_read + "," + results.rows.item(i).count + "\n";
+         }
+         
+         //write to file
+         blob = new Blob([csvTextString], {type: 'text/plain'});
+         writer.write(blob);	 
+      }, null);
+   });
+};

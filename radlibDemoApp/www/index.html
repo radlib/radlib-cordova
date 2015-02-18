@@ -33,7 +33,7 @@
     		<nav class="site">
     			 <ul class="topcoat-list side-nav__list">
                     <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Export to CSV clicked')">
+                        <a href="#" class="side-nav__button" onclick="db_export()">
                             <p>Export to CSV</p>
                         </a>
                     </li>
@@ -103,7 +103,7 @@
 
 
 			<div id="dbButtons">
-				<button class="topcoat-button--large--quiet" id="export" onClick="db_clear()">Export Database</button>
+				<button class="topcoat-button--large--quiet" id="export" onClick="db_export()">Export Database</button>
 				<button class="topcoat-button--large--quiet" id="delete" onClick="db_clear()">Clear Database</button>
 			</div>
 
