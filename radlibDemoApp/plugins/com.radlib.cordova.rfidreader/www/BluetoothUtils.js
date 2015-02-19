@@ -1,5 +1,13 @@
+var bluetooth = require("./CommBluetooth");
 
+var bluetoothUtils = {};
 
-var IExistSoBuildDoesntFail;
+bluetoothUtils.turnOnBluetooth = function(success, failure) {
+   bluetooth.turnOnBT(success, failure);
+};
 
-module.exports = IExistSoBuildDoesntFail;
+bluetoothUtils.turnOffBluetooth = function(success, failure) {
+   bluetooth.turnOffBT(success, failure);
+};
+
+module.exports = bluetoothUtils;
