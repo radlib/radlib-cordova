@@ -10,8 +10,17 @@ var bluetooth = require("./CommBluetooth");
 var radlib = {};
 
 //provide a function as property of radlib object
+//REMOVE THE FOLLOWING 3 FUNCTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 radlib.test = function(success, failure){
    bluetooth.turnOnBT(success, failure);
+};
+
+radlib.turnOnBluetooth = function(success, failure) {
+   bluetooth.turnOnBT(success, failure);
+};
+
+radlib.turnOffBluetooth = function(success, failure) {
+   bluetooth.turnOffBT(success, failure);
 };
 
 //export object with all its functions
