@@ -1,5 +1,5 @@
 
+var exec = require('cordova/exec');
+var tsl_1128_uhf;
 
-var IExistSoBuildDoesntFail;
-
-module.exports = IExistSoBuildDoesntFail;
+module.exports = tsl_1128_uhf;

@@ -124,21 +124,8 @@ function dumpLog(data){
 //toggles turning on bluetooth on/off
 function toggleBT(){
 	if (document.getElementById('cheque').checked) {
-		console.log("BLUETOOTH TURNED ON");
-		radlib.test(dumpLog, dumpLog);
+		bluetoothUtils.turnOnBluetooth(dumpLog, dumpLog);
 	} else {
-		console.log("BLUETOOTH TURNED OFFFFFFFF");
-		bluetoothScanner.turnOffBT(dumpLog, dumpLog);
+		bluetoothUtils.turnOffBluetooth(dumpLog, dumpLog);
 	}
-
-	/*
-	if(document.getElementById("buttonToggleBT").innerHTML == "Turn Bluetooth On"){
-      //EXAMPLE OF HOW TO CALL radlib object
-      //DELETE ME after you understand
-		radlib.test(dumpLog, dumpLog);
-		document.getElementById("buttonToggleBT").innerHTML = "Turn Bluetooth Off";
-	}else{
-		bluetoothScanner.turnOffBT(dumpLog, dumpLog);
-		document.getElementById("buttonToggleBT").innerHTML = "Turn Bluetooth On";
-	}*/
 }

@@ -68,6 +68,17 @@ function db_addEntry(object) {
 
 }
 
+//deletes specified tag from the table
+function db_deleteEntry(object) {
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("testDatabase", "1.0", "Test DB", dbSize);
+   
+	db.transaction(function (tx) {
+		tx.executeSql("DELETE FROM TAGS WHERE id = '" + object.id + "'");
+	});   
+
+}
+
 // Updates HTML table containing database entries
 function db_print() {
 	var dbSize = 5 * 1024 * 1024;
