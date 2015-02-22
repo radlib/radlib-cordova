@@ -1,5 +1,42 @@
+var bluetooth = require('./CommBluetooth');
 
-var exec = require('cordova/exec');
-var arduino_rc522_lf;
+//create empty object to be exported
+var arduino_rc522_lf{};
 
+arduino_rc522_lf.connectRC522Parsed = function(success, failure, address) {
+   var tagId, result;
+   var returnVal = {};
+   var buffer = "";
+
+   //parser function, expects frames "starting with HEADER"
+   var parsedResults = function(data){
+      buffer = buffer.concat(data);
+      var nextFrameStart = buffer.lastIndexOf("~~~~~~~~HEADER~~~~~~~~");
+      if(nextFrameStart > 0){
+         var currentFrame = buffer.substring(0, nextFrameStart);
+         var idIndex = currentFrame.indexOf("Card UID: ");
+         if(idIndex >= 0){//skip past header
+            idIndex += 10;
+            returnVal.id = currentFrame.substring(idIndex, idIndex + 11);
+            returnVal.reader = "RC522 LF";
+         }
+         if(currentFrame.indexOf("responded with NAK") >= 0){//msg given when seen
+            returnVal.report = "seen";
+            success(returnVal);//return object with "reader", "id", and "firstSeen" fields
+         }
+         else if(currentFrame.indexOf("Timeout in communication") >= 0){//msg given when lost
+            returnVal.report = "lost";
+         }
+         //start building up the next frame
+         buffer = buffer.substring(nextFrameStart, buffer.length);
+      }
+   };
+
+   if(address == ""){//scan for nearby bluetooth devices
+      bluetooth.startDiscovery(parsedResults, failure);
+   }else{//connect directly to the provided address
+      bluetooth.connectStream(parsedResults, failure, address);
+   }
+};
+   
 module.exports = arduino_rc522_lf;
