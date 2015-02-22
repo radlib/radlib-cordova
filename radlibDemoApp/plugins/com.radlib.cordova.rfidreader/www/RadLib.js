@@ -5,6 +5,7 @@
 
 //require the necessary external files
 var bluetooth = require("./CommBluetooth");
+var bluetoothUtils = require("./BluetoothUtils")
 var rc522 = require("./ReaderArduino_RC522_LF");
 var tsl1128 = require("./ReaderTSL_1128_UHF");
 
@@ -116,7 +117,7 @@ radlib.connectUHFParsed = function(success, failure, address){
 };
 
 radlib.stopDiscovery = function (success, failure) {
-	bluetooth.stopDiscovery(success, failure, "BluetoothComm", "stopDiscovery", []);
+	bluetoothUtils.stopDiscovery(success, failure, "BluetoothComm", "stopDiscovery", []);
 };
 /* COMBINE THE ABOVE FUNCTIONS */
 
