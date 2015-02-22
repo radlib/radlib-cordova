@@ -1,5 +1,5 @@
 
+var exec = require('cordova/exec');
+var arduino_rc522_lf;
 
-var IExistSoBuildDoesntFail;
-
-module.exports = IExistSoBuildDoesntFail;
+module.exports = arduino_rc522_lf;

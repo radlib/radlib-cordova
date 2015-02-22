@@ -10,4 +10,8 @@ bluetooth.turnOffBT = function (success, failure) {
    exec(success, failure, "BluetoothComm", "turnOffBT", []);
 };
 
+bluetooth.stopDiscovery = function (success, failure) {
+   exec(success, failure, "BluetoothComm", "stopDiscovery", []);
+};
+
 module.exports = bluetooth;
