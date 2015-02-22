@@ -2,12 +2,12 @@
 <html>
     <head>
         <meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
         <title>RadLib Beta Demo</title>
-        <!-- MOVE THIS LATER!!!!!!!!!! -->
+
         <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/database.js"></script>
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Delete Database clicked')">
+                        <a href="#" class="side-nav__button" onclick="db_clear()">
                             <p>Delete Database</p>
                         </a>
                     </li>
@@ -102,10 +102,10 @@
 			</div>
 
 
-			<div id="dbButtons">
+			<!--div id="dbButtons">
 				<button class="topcoat-button--large--quiet" id="export" onClick="db_export()">Export Database</button>
 				<button class="topcoat-button--large--quiet" id="delete" onClick="db_clear()">Clear Database</button>
-			</div>
+			</div-->
 
         </div>
         <!--div class="headerDiv">
