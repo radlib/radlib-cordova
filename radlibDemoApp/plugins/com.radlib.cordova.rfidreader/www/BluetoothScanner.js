@@ -8,13 +8,13 @@ module.exports = {
 		#address empty string "" to scan for nearby devices,
 		         otherwise provide a valid bluetooth MAC address in string format
 	*/
-	connectStream: function(success, failure, address){
+	/*connectStream: function(success, failure, address){
 		if(address == ""){//scan for nearby bluetooth devices
 			cordova.exec(success, failure, "BluetoothComm", "startDiscovery", []);
 		}else{//connect directly to the provided address
 			cordova.exec(success, failure, "BluetoothComm", "connect", [address]);
 		}
-	},
+	},*/
 
 	/*
 		function to connect to a bluetooth device.
@@ -27,7 +27,7 @@ module.exports = {
 		#address empty string "" to scan for nearby devices,
 		         otherwise provide a valid bluetooth MAC address in string format
 	*/
-	connectParsed: function(success, failure, address){
+	/*connectParsed: function(success, failure, address){
 		var tagId, result;
 		var returnVal = {};
 		var buffer = "";
@@ -59,9 +59,9 @@ module.exports = {
 		}else{//connect directly to the provided address
 			cordova.exec(parsedResults ,failure, "BluetoothComm", "connect", [address]);
 		}
-	},
+	},*/
 
-	connectUHFParsed: function(success, failure, address){
+	/*connectUHFParsed: function(success, failure, address){
 		var tagId, result;
 		var returnVal = {};
 		var buffer = "";
@@ -106,7 +106,7 @@ module.exports = {
 		}else{//connect directly to the provided address
 			cordova.exec(parsedResults ,failure, "BluetoothComm", "connect", [address]);
 		}
-	},
+	},*/
 	
 	/**
 		stop bluetooth discovery
@@ -118,16 +118,16 @@ module.exports = {
 	/**
 		function to turn on bluetooth
 	*/
-	turnOnBT: function(success, failure){
+	/*turnOnBT: function(success, failure){
 		cordova.exec(success, failure, "BluetoothComm", "turnOnBT", []);
-	},
+	},*/
 	
 	/**
 		function to turn on bluetooth
 	*/
-	turnOffBT: function(success, failure){
+	/*turnOffBT: function(success, failure){
 		cordova.exec(success, failure, "BluetoothComm", "turnOffBT", []);
-	},
+	},*/
 };
 
 

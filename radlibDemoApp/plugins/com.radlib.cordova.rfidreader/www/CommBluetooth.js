@@ -19,7 +19,11 @@ bluetooth.stopDiscovery = function (success, failure) {
 };
 
 bluetooth.connectStream = function (success, failure, address) {
-   exec(success, failure, "BluetoothComm", "connect", [address]);
+	if(address == ""){//scan for nearby bluetooth devices
+		exec(success, failure, "BluetoothComm", "startDiscovery", []);
+	}else{//connect directly to the provided address
+		exec(success, failure, "BluetoothComm", "connect", [address]);
+	}
 };
 
 module.exports = bluetooth;
