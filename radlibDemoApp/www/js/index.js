@@ -47,7 +47,7 @@ function getStream() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.directConnect(dumpLog, dumpLog, "", "STREAM");
+      radlib.directConnect(dumpLog, dumpLog, "", "STREAM"); // CURRENTLY BROKEN
    }
    else if (selectedReader == "tsl_1128") {
       radlib.directConnect(dumpLog, dumpLog, objTSL1128, "STREAM");
@@ -65,7 +65,7 @@ function getParsed() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      scanConnectLFParsed(); // UI CHANGES NEED TO BE DONE SO YOU CAN SCAN FOR A PARTICULAR READER
+      radlib.directConnect(dumpLog, dumpLog, "", "PARSED"); // CURRENTLY BROKEN
    }
    else if (selectedReader == "tsl_1128") {
       radlib.directConnect(updateTable, dumpLog, objTSL1128, "PARSED");
@@ -76,14 +76,6 @@ function getParsed() {
    else {
       alert("Please select a reader");
    }
-}
-
-/*toggles between start scanning for nearby bluetooth devices and stop scanning
-for parsed values
-*/
-function scanConnectLFParsed(){
-   //radlib.connectRC522Parsed(updateTable, dumpLog, "");
-   // broken at the moment
 }
 
 // testing

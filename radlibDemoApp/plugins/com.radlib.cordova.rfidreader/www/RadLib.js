@@ -30,7 +30,7 @@ radlib.directConnect = function(success, failure, object, mode) {
       // simply here as an example for future expansion
    }
    else {
-      document.getElementById("status").innerHTML = "ERROR: Not valid connection type!";
+      dumpLog("ERROR: Not valid connection type!");
    }
 };
 
