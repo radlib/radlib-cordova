@@ -67,7 +67,6 @@ function getParsed() {
    }
 }
 
-
 /*toggles between start scanning for nearby bluetooth devices and stop scanning
 for parsed values
 */
@@ -82,8 +81,6 @@ function directConnectLFParsed(){
 
 //direct connect to OUR hi freq bluetooth reader for parsed results
 function directConnectUHFParsed(){
-   //ReaderTSL_1128_UHF.connectUHFParsed(updateTable, dumpLog, "20:14:05:08:15:63");
-   //radlib.connectTSL1128Parsed(updateTable, dumpLog, "00:07:80:08:78:01");
    radlib.connectTSL1128Parsed(updateTable, dumpLog, "20:14:05:08:15:63");
 }
 
@@ -91,7 +88,7 @@ function directConnectUHFParsed(){
 for IO Stream
 */
 function scanConnectLFStream(){
-   bluetoothScanner.connectStream(dumpLog, dumpLog, "");
+   radlib.streamIO(dumpLog, dumpLog, "");
 }
 
 // testing
@@ -109,12 +106,12 @@ function testing(){
 
 //direct connect to OUR low freq bluetooth reader for IO Stream
 function directConnectLFStream(){
-   bluetoothScanner.connectStream(dumpLog, dumpLog, "00:14:03:02:03:26");
+   radlib.streamIO(dumpLog, dumpLog, "00:14:03:02:03:26");
 }
 
 //direct connect to OUR low freq bluetooth reader for IO Stream
 function directConnectUHFStream(){
-   bluetoothScanner.connectStream(dumpLog, dumpLog, "20:14:05:08:15:63");
+   radlib.streamIO(dumpLog, dumpLog, "20:14:05:08:15:63");
 }
 
 
