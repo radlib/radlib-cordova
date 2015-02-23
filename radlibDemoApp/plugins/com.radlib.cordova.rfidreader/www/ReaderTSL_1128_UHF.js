@@ -1,5 +1,6 @@
 
 var bluetooth = require('./CommBluetooth');
+var resources = require('./Resources');
 var ReaderTSL_1128_UHF = {};
 
 ReaderTSL_1128_UHF.connectTSL1128Parsed = function(success, failure, reader){
