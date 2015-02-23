@@ -36,7 +36,37 @@ radlib.connectStream = function(success, failure, address){
 };
 
 radlib.connectParsed = function(success, failure, address){
-  rc522.connectRC522Parsed(success, failure, address);
+	var tagId, result;
+	var returnVal = {};
+	var buffer = "";
+	//parser function, expects frames "starting with HEADER"
+	var parsedResults = function(data){
+		buffer = buffer.concat(data);
+		var nextFrameStart = buffer.lastIndexOf("~~~~~~~~HEADER~~~~~~~~");
+		if(nextFrameStart > 0){
+			var currentFrame = buffer.substring(0, nextFrameStart);
+			var idIndex = currentFrame.indexOf("Card UID: ");
+			if(idIndex >= 0){//skip past header
+				idIndex += 10;
+				returnVal.id = currentFrame.substring(idIndex, idIndex + 11);
+				returnVal.reader = "RC522 LF";
+			}
+			if(currentFrame.indexOf("responded with NAK") >= 0){//msg given when seen
+				returnVal.report = "seen";
+				success(returnVal);//return object with "reader", "id", and "firstSeen" fields
+			}
+			else if(currentFrame.indexOf("Timeout in communication") >= 0){//msg given when lost
+				returnVal.report = "lost";
+			}   
+		    //start building up the next frame
+		    buffer = buffer.substring(nextFrameStart, buffer.length);
+		}
+	};
+	if(address == ""){//scan for nearby bluetooth devices
+		cordova.exec(parsedResults, failure, "BluetoothComm", "startDiscovery", []);
+	}else{//connect directly to the provided address
+		cordova.exec(parsedResults ,failure, "BluetoothComm", "connect", [address]);
+	}
 };
 
 radlib.connectUHFParsed = function(success, failure, address){
