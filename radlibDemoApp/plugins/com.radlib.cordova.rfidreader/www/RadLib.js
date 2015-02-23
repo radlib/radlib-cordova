@@ -12,55 +12,35 @@ var tsl1128 = require("./ReaderTSL_1128_UHF");
 //create empty object to be exported
 var radlib = {};
 
-//provide a function as property of radlib object
-//REMOVE THE FOLLOWING 3 FUNCTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/*radlib.test = function(success, failure){
-   bluetooth.turnOnBT(success, failure);
-};
-
-radlib.turnOnBluetooth = function(success, failure) {
-   bluetooth.turnOnBT(success, failure);
-};
-
-radlib.turnOffBluetooth = function(success, failure) {
-   bluetooth.turnOffBT(success, failure);
-};*/
-
-/* COMBINE THE FOLLOWING FUNCTIONS */
-radlib.connectStream = function(success, failure, address){
-	if(address == ""){//scan for nearby bluetooth devices
-		cordova.exec(success, failure, "BluetoothComm", "startDiscovery", []);
-	}else{//connect directly to the provided address
-		cordova.exec(success, failure, "BluetoothComm", "connect", [address]);
-	}
+/* COMBINE THE FOLLOWING FUNCTIONS INTO radlib.connect() */
+radlib.streamIO = function(success, failure, address){
+   bluetooth.connectStream(success, failure, address);
 };
 
 radlib.connectRC522Parsed = function(success, failure, address){
-  //document.getElementById("status").innerHTML = "I'm Inside Radlib!";
   rc522.connectRC522Parsed(success, failure, address);
 };
 
 radlib.connectTSL1128Parsed = function(success, failure, address){
-   //document.getElementById("status").innerHTML = "I'm Inside Radlib!";
    tsl1128.connectUHFParsed(success, failure, address);
 };
-
-radlib.stopDiscovery = function (success, failure) {
-	bluetoothUtils.stopDiscovery(success, failure, "BluetoothComm", "stopDiscovery", []);
-};
-/* COMBINE THE ABOVE FUNCTIONS */
-
-
-/* COMBINED FUNCTIONS FROM ABOVE WILL GO IN NEXT 2 FUNCTIONS */
 
 radlib.directconnect = function(success, failure, reader) {
    console.log("direct connected");
 };
 
+/* COMBINE THE ABOVE FUNCTIONS INTO radlib.connect()*/
+
+/* COMBINE FUNCTIONS BELOW INTO radlib.scan() */
 radlib.scanreaders = function (success, failure, connectionTypes) {
    console.log("scanned for readers");
 };
+/* COMBINE FUNCTIONS ABOVE INTO radlib.scan() */
 
+/* Are we moving stopDiscovery? */
+radlib.stopDiscovery = function (success, failure) {
+   bluetoothUtils.stopDiscovery(success, failure, "BluetoothComm", "stopDiscovery", []);
+};
 
 //export object with all its functions
 module.exports = radlib;
