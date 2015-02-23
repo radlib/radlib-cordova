@@ -30,19 +30,30 @@ $('#cheque').change(
       toggleBT();
    });
 
+var objTSL1128 = {};
+	objTSL1128.connection = "Bluetooth";
+	objTSL1128.model = "TSL1128UHF";
+	objTSL1128.address = "20:14:05:08:15:63";
+	objTSL1128.friendlyName = "UHF Test";
+
+var objRC522 = {};
+	objRC522.connection = "Bluetooth";
+	objRC522.model = "ArduinoRC522LF";
+	objRC522.address = "00:14:03:02:03:26";
+	objRC522.friendlyName = "LF Test";
 
 function getStream() {
    var dropdown = document.getElementById("reader_selector");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      scanConnectLFStream();
+      radlib.directConnect(dumpLog, dumpLog, "", "STREAM"); // CURRENTLY BROKEN
    }
    else if (selectedReader == "tsl_1128") {
-      directConnectUHFStream();
+      radlib.directConnect(dumpLog, dumpLog, objTSL1128, "STREAM");
    }
    else if (selectedReader == "rc522_lf") {
-      directConnectLFStream();
+      radlib.directConnect(dumpLog, dumpLog, objRC522, "STREAM");
    }
    else {
       alert("Please select a reader");
@@ -54,41 +65,17 @@ function getParsed() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      scanConnectLFParsed();
+      radlib.directConnect(dumpLog, dumpLog, "", "PARSED"); // CURRENTLY BROKEN
    }
    else if (selectedReader == "tsl_1128") {
-      directConnectUHFParsed();
+      radlib.directConnect(updateTable, dumpLog, objTSL1128, "PARSED");
    }
    else if (selectedReader == "rc522_lf") {
-      directConnectLFParsed();
+      radlib.directConnect(updateTable, dumpLog, objRC522, "PARSED");
    }
    else {
       alert("Please select a reader");
    }
-}
-
-/*toggles between start scanning for nearby bluetooth devices and stop scanning
-for parsed values
-*/
-function scanConnectLFParsed(){
-   radlib.connectRC522Parsed(updateTable, dumpLog, "");
-}
-
-//direct connect to OUR low freq bluetooth reader for parsed results
-function directConnectLFParsed(){
-   radlib.connectRC522Parsed(updateTable, dumpLog, "00:14:03:02:03:26");
-}
-
-//direct connect to OUR hi freq bluetooth reader for parsed results
-function directConnectUHFParsed(){
-   radlib.connectTSL1128Parsed(updateTable, dumpLog, "20:14:05:08:15:63");
-}
-
-/*toggles between start scanning for nearby bluetooth devices and stop scanning
-for IO Stream
-*/
-function scanConnectLFStream(){
-   radlib.streamIO(dumpLog, dumpLog, "");
 }
 
 // testing
@@ -103,17 +90,6 @@ function testing(){
    db_updateCount(object);
    db_print();
 }
-
-//direct connect to OUR low freq bluetooth reader for IO Stream
-function directConnectLFStream(){
-   radlib.streamIO(dumpLog, dumpLog, "00:14:03:02:03:26");
-}
-
-//direct connect to OUR low freq bluetooth reader for IO Stream
-function directConnectUHFStream(){
-   radlib.streamIO(dumpLog, dumpLog, "20:14:05:08:15:63");
-}
-
 
 //successful/unsuccessful callback function. currently used as a success/error dump
 function dumpLog(data){

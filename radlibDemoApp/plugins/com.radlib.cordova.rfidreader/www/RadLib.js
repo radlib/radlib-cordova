@@ -12,28 +12,31 @@ var tsl1128 = require("./ReaderTSL_1128_UHF");
 //create empty object to be exported
 var radlib = {};
 
-/* COMBINE THE FOLLOWING FUNCTIONS INTO radlib.connect() */
-radlib.streamIO = function(success, failure, address){
-   bluetooth.connectStream(success, failure, address);
+radlib.directConnect = function(success, failure, object, mode) {
+   if (object.connection === "Bluetooth"){
+      if (mode === "PARSED") {
+         if (object.model === "ArduinoRC522LF"){
+            rc522.connectRC522Parsed(success, failure, object.address);
+         } 
+         else if (object.model === "TSL1128UHF"){
+            tsl1128.connectUHFParsed(success, failure, object.address);
+         }
+      }
+      else if (mode === "STREAM") {
+         bluetooth.connectStream(success, failure, object.address);
+      }
+   }
+   else if (object.connection === "Wifi") {
+      // simply here as an example for future expansion
+   }
+   else {
+      dumpLog("ERROR: Not valid connection type!");
+   }
 };
-
-radlib.connectRC522Parsed = function(success, failure, address){
-  rc522.connectRC522Parsed(success, failure, address);
-};
-
-radlib.connectTSL1128Parsed = function(success, failure, address){
-   tsl1128.connectUHFParsed(success, failure, address);
-};
-
-radlib.directconnect = function(success, failure, reader) {
-   console.log("direct connected");
-};
-
-/* COMBINE THE ABOVE FUNCTIONS INTO radlib.connect()*/
 
 /* COMBINE FUNCTIONS BELOW INTO radlib.scan() */
-radlib.scanreaders = function (success, failure, connectionTypes) {
-   console.log("scanned for readers");
+radlib.scanReaders = function (success, failure, connectionTypes) {
+   //console.log("scanned for readers");
 };
 /* COMBINE FUNCTIONS ABOVE INTO radlib.scan() */
 
