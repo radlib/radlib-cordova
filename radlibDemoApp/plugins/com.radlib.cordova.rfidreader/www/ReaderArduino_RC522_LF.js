@@ -1,9 +1,9 @@
+
 var bluetooth = require('./CommBluetooth');
-
 //create empty object to be exported
-var arduino_rc522_lf{};
+var ReaderArduino_RC522_LF = {};
 
-arduino_rc522_lf.connectRC522Parsed = function(success, failure, address) {
+ReaderArduino_RC522_LF.connectRC522Parsed = function(success, failure, address) {
    var tagId, result;
    var returnVal = {};
    var buffer = "";
@@ -39,4 +39,4 @@ arduino_rc522_lf.connectRC522Parsed = function(success, failure, address) {
    }
 };
    
-module.exports = arduino_rc522_lf;
+module.exports = ReaderArduino_RC522_LF;
