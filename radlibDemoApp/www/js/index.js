@@ -77,7 +77,7 @@ function scanConnectLFParsed(){
 
 //direct connect to OUR low freq bluetooth reader for parsed results
 function directConnectLFParsed(){
-	radLib.connectParsed(updateTable, dumpLog, "00:14:03:02:03:26");
+	bluetoothScanner.connectParsed(updateTable, dumpLog, "00:14:03:02:03:26");
 }
 
 //direct connect to OUR hi freq bluetooth reader for parsed results
