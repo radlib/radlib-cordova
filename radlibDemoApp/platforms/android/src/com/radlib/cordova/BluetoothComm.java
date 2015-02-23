@@ -108,14 +108,14 @@ public class BluetoothComm extends CordovaPlugin {
 			return true;
 		}else if(action.equals("turnOnBT")){
 			turnOnBT();
-			callbackContext.success("bluetooth enabled");
+			callbackContext.success("Bluetooth enabled!");
 			return true;
 		}else if(action.equals("turnOffBT")){
 			turnOffBT();
-			callbackContext.success("bluetooth disabled");
+			callbackContext.success("Bluetooth disabled!");
 			return true;
 		}
-		callbackContext.error("invalid command");
+		callbackContext.error("Invalid command!");
 		return false;
 	}
 	
@@ -164,7 +164,7 @@ public class BluetoothComm extends CordovaPlugin {
 	            	deviceNamesArray[deviceNames.size()] = "Cancel";
 	            	AlertDialog.Builder builder = new AlertDialog.Builder(cordova.getActivity());
 					final AlertDialog dialogue = builder.create();
-					builder.setTitle("Pick a bluetooth device");
+					builder.setTitle("Pick a bluetooth device:");
 	            	builder.setItems(deviceNamesArray, new DialogInterface.OnClickListener() {
 	            	    
 	            	    public void onClick(DialogInterface dialog, int which) {

@@ -12,25 +12,33 @@ var tsl1128 = require("./ReaderTSL_1128_UHF");
 //create empty object to be exported
 var radlib = {};
 
-radlib.directConnect = function(success, failure, object, mode) {
-   if (object.connection === "Bluetooth"){
-      if (mode === "PARSED") {
-         if (object.model === "ArduinoRC522LF"){
-            rc522.connectRC522Parsed(success, failure, object.address);
-         } 
-         else if (object.model === "TSL1128UHF"){
-            tsl1128.connectUHFParsed(success, failure, object.address);
+radlib.directConnect = function(success, failure, reader, mode) {
+   switch(reader.connection) {
+      case "BLUETOOTH":
+         console.log("You've requested Bluetooth!");
+
+         if (mode === "PARSED") {
+            if (reader.model === "ARDUINORC522LF"){
+               rc522.connectRC522Parsed(success, failure, reader);
+            } 
+            else if (reader.model === "TSL1128UHF"){
+               tsl1128.connectTSL1128Parsed(success, failure, reader);
+            }
          }
-      }
-      else if (mode === "STREAM") {
-         bluetooth.connectStream(success, failure, object.address);
-      }
-   }
-   else if (object.connection === "Wifi") {
-      // simply here as an example for future expansion
-   }
-   else {
-      dumpLog("ERROR: Not valid connection type!");
+         else if (mode === "STREAM") {
+            bluetooth.connectStream(success, failure, reader.address);
+         }
+
+         break;
+      case "WIFI":
+         console.log("You've requested WiFi!");
+
+         // simply here as an example for future expansion
+
+         break;
+      default:
+         dumpLog("ERROR: Not valid connection type!");
+         break;
    }
 };
 
