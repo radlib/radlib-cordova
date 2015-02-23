@@ -48,10 +48,5 @@ radlib.scanReaders = function (success, failure, connectionTypes) {
 };
 /* COMBINE FUNCTIONS ABOVE INTO radlib.scan() */
 
-/* Are we moving stopDiscovery? */
-radlib.stopDiscovery = function (success, failure) {
-   bluetoothUtils.stopDiscovery(success, failure, "BluetoothComm", "stopDiscovery", []);
-};
-
 //export object with all its functions
 module.exports = radlib;
