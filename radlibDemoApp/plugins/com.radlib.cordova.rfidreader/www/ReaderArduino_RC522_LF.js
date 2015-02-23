@@ -22,10 +22,14 @@ ReaderArduino_RC522_LF.connectRC522Parsed = function(success, failure, address) 
          }
          if(currentFrame.indexOf("responded with NAK") >= 0){//msg given when seen
             returnVal.report = "seen";
+            returnVal.time = resources.getCurrentTime();
+            returnVal.date = resources.getCurrentDate();
             success(returnVal);//return object with "reader", "id", and "firstSeen" fields
          }
          else if(currentFrame.indexOf("Timeout in communication") >= 0){//msg given when lost
             returnVal.report = "lost";
+            returnVal.time = resources.getCurrentTime();
+            returnVal.date = resources.getCurrentDate();
          }
          //start building up the next frame
          buffer = buffer.substring(nextFrameStart, buffer.length);

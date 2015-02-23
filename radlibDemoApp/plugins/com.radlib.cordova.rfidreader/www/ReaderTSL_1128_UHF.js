@@ -25,6 +25,8 @@ ReaderTSL_1128_UHF.connectUHFParsed = function(success, failure, address){
          returnVal.id = currentFrame.substring(idIndex, idIndex + 24);
          returnVal.report = "seen";
          returnVal.reader = "TSL 1128 UHF";
+         returnVal.time = resources.getCurrentTime();
+         returnVal.date = resources.getCurrentDate();
          success(returnVal);
       }
 
