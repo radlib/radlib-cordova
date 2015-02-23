@@ -71,7 +71,7 @@ function getParsed() {
 for parsed values
 */
 function scanConnectLFParsed(){
-   bluetoothScanner.connectParsed(updateTable, dumpLog, "");
+   radlib.connectRC522Parsed(updateTable, dumpLog, "");
 }
 
 //direct connect to OUR low freq bluetooth reader for parsed results
