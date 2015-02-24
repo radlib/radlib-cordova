@@ -17,6 +17,11 @@ $('#cheque').change(
       toggleBT();
    });
 
+$('.check').change(
+	function() {
+       console.log("REAL CHECKBOX CHECKED!!!");
+	});
+
 // Ugly temporary global variables since scan isn't implemented
 var objTSL1128 = {};
   objTSL1128.connection = "BLUETOOTH";
@@ -71,7 +76,7 @@ function testing(){
    var object = {};
    object.id = "12 34 56 78";
    object.firstSeen = "";
-   object.module = "DEBUG";
+   object.friendlyName = "DEBUG";
    object.count = 1;
 
    db_init();
@@ -83,7 +88,7 @@ function testing2(){
    var object = {};
    object.id = "87 65 43 21";
    object.firstSeen = "";
-   object.module = "DEBUG";
+   object.friendlyName = "DEBUG";
    object.count = 1;
 
    db_init();
@@ -92,17 +97,21 @@ function testing2(){
 }
 
 function startdel() {
-	//$('td:nth-child(5), th:nth-child(5)').show();
 	$('.del').show();
+	$('.testonly').hide();
 }
 
 function finishdel() {
 	$('.del').hide();
+	$('.testonly').show();
 }
 
-function deletehtmlrow() {
-	var rowparent = $(this).parent().parent();
-	par.remove();
+function removeEntry(caller) {
+	deletehtmlrow(caller);
+}
+
+function deletehtmlrow(caller) {
+	$(caller).closest("tr").remove();
 }
 
 //direct connect to OUR low freq bluetooth reader for IO Stream

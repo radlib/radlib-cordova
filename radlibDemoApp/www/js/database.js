@@ -103,12 +103,10 @@ function db_print() {
 		    var len = results.rows.length, i;
 		    for (i = 0; i < len; i++){
 		    	htmlTable += "<tr><td>" + results.rows.item(i).id;
-            htmlTable += "</td><td>" + results.rows.item(i).module;
-            htmlTable += "</td><td>" + results.rows.item(i).time_read;
-            htmlTable += "</td><td>" + results.rows.item(i).count + "</td><td class='del' style='text-align:center; display:none;'><button class='del topcoat-button--quiet' style='display:none;'>x</button></td></tr>";
+            	htmlTable += "</td><td>" + results.rows.item(i).friendly_name;
+            	htmlTable += "</td><td>" + results.rows.item(i).time_read;
+           		htmlTable += "</td><td>" + results.rows.item(i).count + "</td><td class='del' style='display:none;'><input type='checkbox' value='checked' class='del check' style='display:none;'></td></tr>";
 		    }
-
-		    //htmlTable += "</table>";
           $("#tagsTable tbody").html(htmlTable);
  		}, null);
 	});

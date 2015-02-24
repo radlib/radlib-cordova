@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -74,7 +74,7 @@
                <select id="reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select an option</option>
                   <option value="scan">Scan for readers</option>
-                   <option value="tsl_1128">TSL 1128</option>
+                  <option value="tsl_1128">TSL 1128</option>
                   <option value="rc522_lf">RC522 LF</option>
                </select>
                <button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button>
@@ -90,7 +90,7 @@
                      <th>RFID Module</th>
                      <th>Time Read</th>
                      <th>Count</th>
-                     <th class="del" style="display:none;">Delete</th>
+                     <th class="del" style="display:none;">Delete?</th>
                   </tr>
                </thead>
                <tbody>
@@ -98,8 +98,12 @@
             </table>
          </div>
 
-         <button id="testing" onClick="testing()">Testing</button>
-         <button id="testing2" onClick="testing2()">Testing2</button>
+         <button id="testing" class="testonly" onClick="testing()">Testing</button>
+         <button id="testing2" class="testonly" onClick="testing2()">Testing2</button>
+         <!--label class="topcoat-checkbox">
+            <input type="checkbox">
+            <div class="topcoat-checkbox__checkmark"></div>&nbsp;Default
+         </label-->
          <!--div id="dbButtons">
             <button class="topcoat-button--large--quiet" id="export" onClick="db_export()">Export Database</button>
             <button class="topcoat-button--large--quiet" id="delete" onClick="db_clear()">Clear Database</button>

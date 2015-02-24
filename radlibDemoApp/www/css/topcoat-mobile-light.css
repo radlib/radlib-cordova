@@ -809,7 +809,7 @@
 * limitations under the License.
 *
 */
-
+/*
 input[type="checkbox"] {
   position: absolute;
   overflow: hidden;
@@ -862,7 +862,7 @@ input[type="checkbox"] {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-clip: padding-box;
-}
+}*/
 
 /**
 *
@@ -918,6 +918,7 @@ input[type="checkbox"] {
 *
 */
 
+/*
 input[type="checkbox"] {
   position: absolute;
   overflow: hidden;
@@ -1005,7 +1006,7 @@ input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark {
     - mobile
     - checkbox
 */
-
+/*
 .topcoat-checkbox__checkmark {
   height: 2rem;
 }
@@ -1074,7 +1075,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   background: #e5e9e8;
   box-shadow: inset 0 1px #fff;
 }
-
+*/
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
