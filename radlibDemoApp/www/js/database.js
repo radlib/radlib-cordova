@@ -28,6 +28,19 @@ function db_init() {
 	});
 }
 
+function db_readerInit() {
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("testDatabase", "1.0", "Reader DB", dbSize, null);
+
+   db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS READERS(connectionType, model, address, friendlyName)');
+   });
+}
+
+function db_deleteRows() {
+   
+}
+
 // Checks to see if object is already in database and updates count or adds entry to database, accordingly
 function db_updateCount(object) {
 	var dbSize = 5 * 1024 * 1024;
@@ -88,15 +101,15 @@ function db_print() {
 	db.transaction(function (tx) {
 	    tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
 		    var len = results.rows.length, i;
-		    htmlTable = "<table id='tagsTable'>";
-		    htmlTable += "<tr><th>ID Tag</th><th>RFID Reader</th><th>Time Read</th><th>Count</th></tr>";
-
 		    for (i = 0; i < len; i++){
-		    	htmlTable += "<tr><th>" + results.rows.item(i).id + "</th><th>" + results.rows.item(i).friendly_name + "</th><th>" + results.rows.item(i).time_read + "</th><th>" + results.rows.item(i).count + "</th></tr>";
+		    	htmlTable += "<tr><td>" + results.rows.item(i).id;
+            htmlTable += "</td><td>" + results.rows.item(i).module;
+            htmlTable += "</td><td>" + results.rows.item(i).time_read;
+            htmlTable += "</td><td>" + results.rows.item(i).count + "</td><td class='del' style='text-align:center; display:none;'><button class='del topcoat-button--quiet' style='display:none;'>x</button></td></tr>";
 		    }
 
-		    htmlTable += "</table>";
-		    document.querySelector('#tagsDB').innerHTML = htmlTable;
+		    //htmlTable += "</table>";
+          $("#tagsTable tbody").html(htmlTable);
  		}, null);
 	});
 }

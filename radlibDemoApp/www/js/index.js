@@ -70,13 +70,49 @@ function getParsed() {
 function testing(){
    var object = {};
    object.id = "12 34 56 78";
-   object.firstSeen = resources.getCurrentTime();
-   object.reader = "DEBUG";
+   object.firstSeen = "";
+   object.module = "DEBUG";
    object.count = 1;
 
    db_init();
    db_updateCount(object);
    db_print();
+}
+
+function testing2(){
+   var object = {};
+   object.id = "87 65 43 21";
+   object.firstSeen = "";
+   object.module = "DEBUG";
+   object.count = 1;
+
+   db_init();
+   db_updateCount(object);
+   db_print();
+}
+
+function startdel() {
+	//$('td:nth-child(5), th:nth-child(5)').show();
+	$('.del').show();
+}
+
+function finishdel() {
+	$('.del').hide();
+}
+
+function deletehtmlrow() {
+	var rowparent = $(this).parent().parent();
+	par.remove();
+}
+
+//direct connect to OUR low freq bluetooth reader for IO Stream
+function directConnectLFStream(){
+   radlib.streamIO(dumpLog, dumpLog, "00:14:03:02:03:26");
+}
+
+//direct connect to OUR low freq bluetooth reader for IO Stream
+function directConnectUHFStream(){
+   radlib.streamIO(dumpLog, dumpLog, "20:14:05:08:15:63");
 }
 
 //successful/unsuccessful callback function. currently used as a success/error dump

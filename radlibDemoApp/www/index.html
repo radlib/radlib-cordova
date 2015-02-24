@@ -19,15 +19,15 @@
       <div class="topcoat-navigation-bar">
          <div class="topcoat-navigation-bar__item left quarter">
             <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button" style="margin-top:5px;">
-                    <span class="topcoat-icon topcoat-icon--menu-stack"></span>
-                </a>
-            </div>
-            <div class="topcoat-navigation-bar__item center half">
-                <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
-            </div>
-            <div class="topcoat-navigation-bar__item right quarter">
-                
-            </div>
+              <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+             </a>
+         </div>
+         <div class="topcoat-navigation-bar__item center half">
+             <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
+         </div>
+         <div class="topcoat-navigation-bar__item right quarter">
+             
+         </div>
       </div>
       <div class="side-nav">
          <nav class="site">
@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Delete Database Rows clicked')">
+                        <a href="#" class="side-nav__button" onclick="startdel()">
                             <p>Delete Database Rows</p>
                         </a>
                     </li>
@@ -50,11 +50,6 @@
                     <li class="topcoat-list__item side-nav__list__item is-active">
                         <a href="#" class="side-nav__button" onclick="alert('© 2015 Team RadLib')">
                             <p>About</p>
-                        </a>
-                    </li>
-                    <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Feedback clicked')">
-                            <p>Feedback</p>
                         </a>
                     </li>
                 </ul>
@@ -71,10 +66,7 @@
             </label>
             <img src="img/32px-Bluetooth.svg.png" style="float:right; margin-right: 10px;"/>
          </div>
-         
          <br />
-
-         <!--button id="buttonToggleBT" onClick="toggleBT()">Turn Bluetooth On</button-->
          <br />
          <div id="input" style="width:100%; text-align: center;">
             <h2 id="status" class="log">Select a reader to get started.</h2>
@@ -92,26 +84,29 @@
          <br /><br />
          <div id="tagsDB">
             <table id="tagsTable">
-               <tr>
-                  <th>ID Tag</th>
-                  <th>RFID Reader</th>
-                  <th>Time Read</th>
-                  <th>Count</th>
-               </tr>
+               <thead>
+                  <tr>
+                     <th>ID Tag</th>
+                     <th>RFID Module</th>
+                     <th>Time Read</th>
+                     <th>Count</th>
+                     <th class="del" style="display:none;">Delete</th>
+                  </tr>
+               </thead>
+               <tbody>
+               </tbody>
             </table>
          </div>
 
-
+         <button id="testing" onClick="testing()">Testing</button>
+         <button id="testing2" onClick="testing2()">Testing2</button>
          <!--div id="dbButtons">
             <button class="topcoat-button--large--quiet" id="export" onClick="db_export()">Export Database</button>
             <button class="topcoat-button--large--quiet" id="delete" onClick="db_clear()">Clear Database</button>
          </div-->
 
+         <button id="finishdel" class="del topcoat-button--cta" style="float:right; display:none;" onclick="finishdel()">Done</button>
         </div>
-        <!--div class="headerDiv">
-         <div><img id="headerImg" src="img/logo.png" /></div>
-         <h1 id="headerTitle">RadLib Demo</h1>
-        </div-->
          
       
       
