@@ -152,7 +152,7 @@ public class BluetoothComm extends CordovaPlugin {
                deviceNames.add(device.getName());
                deviceAddresses.add(device.getAddress());
                 
-            //display the Alert Dialog with the list of devices and cancel button
+            //return array of devices
             }else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                try {
             	   JSONArray returnArray= new JSONArray();
