@@ -44,7 +44,10 @@ radlib.directConnect = function(success, failure, reader, mode) {
 
 /* COMBINE FUNCTIONS BELOW INTO radlib.scan() */
 radlib.scanReaders = function (success, failure, connectionTypes) {
-   //console.log("scanned for readers");
+   if(connectionTypes.indexOf("BLUETOOTH") >= 0){
+      bluetooth.startDiscovery(success, failure);
+   };
+
 };
 /* COMBINE FUNCTIONS ABOVE INTO radlib.scan() */
 

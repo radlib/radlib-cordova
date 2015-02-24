@@ -35,7 +35,7 @@ function getStream() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.directConnect(dumpLog, dumpLog, "", "STREAM"); // CURRENTLY BROKEN
+      bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
    }
    else if (selectedReader == "tsl_1128") {
       radlib.directConnect(dumpLog, dumpLog, objTSL1128, "STREAM");
@@ -53,7 +53,7 @@ function getParsed() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.directConnect(dumpLog, dumpLog, "", "PARSED"); // CURRENTLY BROKEN
+      radlib.scanReaders(deleteMe, dumpLog, ["BLUETOOTH"]);
    }
    else if (selectedReader == "tsl_1128") {
       radlib.directConnect(updateTable, dumpLog, objTSL1128, "PARSED");
@@ -64,6 +64,15 @@ function getParsed() {
    else {
       alert("Please select a reader");
    }
+}
+
+//sample function to show how java returns the device names/addresses
+function deleteMe(data){
+   var string = "";
+   for(var i = 0; i < data.length;i++){
+      string += data[i].name + " " + data[i].address + "\n";
+   }
+   alert(string);
 }
 
 // testing
