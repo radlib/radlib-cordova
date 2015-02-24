@@ -8,6 +8,7 @@ var bluetooth = require("./CommBluetooth");
 var bluetoothUtils = require("./BluetoothUtils")
 var rc522 = require("./ReaderArduino_RC522_LF");
 var tsl1128 = require("./ReaderTSL_1128_UHF");
+var internalCam = require("./InternalBarcodeScanner");
 
 //create empty object to be exported
 var radlib = {};
@@ -15,7 +16,7 @@ var radlib = {};
 radlib.directConnect = function(success, failure, reader, mode) {
    switch(reader.connection) {
       case "BLUETOOTH":
-         console.log("You've requested Bluetooth!");
+         dumpLog("You've requested to use Bluetooth!");
 
          if (mode === "PARSED") {
             if (reader.model === "ARDUINORC522LF"){
@@ -30,10 +31,9 @@ radlib.directConnect = function(success, failure, reader, mode) {
          }
 
          break;
-      case "WIFI":
-         console.log("You've requested WiFi!");
-
-         // simply here as an example for future expansion
+      case "CAMERA":
+         dumpLog("You've requested to use the Camera!");
+         internalCam.scanBarcode(success, failure);
 
          break;
       default:
