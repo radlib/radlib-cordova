@@ -111,7 +111,7 @@ function testpop2(){
 }
 
 function scanBarcode() {
-   radlib.directConnect(updateTable, dumpLog, objBarcode, "PARSED");
+   radlib.directConnect(updateTable, dumpLog, {connection:"CAMERA"}, "PARSED");
 }
 
 function startdel() {
