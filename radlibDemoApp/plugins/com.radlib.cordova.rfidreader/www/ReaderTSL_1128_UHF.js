@@ -3,38 +3,36 @@ var bluetooth = require('./CommBluetooth');
 var resources = require('./Resources');
 var ReaderTSL_1128_UHF = {};
 
-ReaderTSL_1128_UHF.connectTSL1128Parsed = function(success, failure, reader){
-   var tagId, result;
-   var returnVal = {};
+ReaderTSL_1128_UHF.parse = function(success, failure, reader){
    var buffer = "";
 
    var parsedResults = function(data){
-      var idIndex;
+      var idIndex, returnVal = {}, nextFrameStart, currentFrame;
 
       buffer = buffer.concat(data);
 
       if (buffer.lastIndexOf("ER:") >= 0){
-         var nextFrameStart = buffer.lastIndexOf("ER:"); // couldn't add 3 on this line for some reason
-         var currentFrame = buffer.substring(0, nextFrameStart + 3);
+         nextFrameStart = buffer.lastIndexOf("ER:"); // couldn't add 3 on this line for some reason
+         currentFrame = buffer.substring(0, nextFrameStart + 3);
       }
       else {
-         var nextFrameStart = buffer.lastIndexOf("OK:");
-         var currentFrame = buffer.substring(0, nextFrameStart);
+         nextFrameStart = buffer.lastIndexOf("OK:");
+         currentFrame = buffer.substring(0, nextFrameStart);
       }
 
       // Errors and tag reads must happen twice for the parser to react
       if(currentFrame.indexOf("ER:001") >= 0){
-         document.getElementById("status").innerHTML = "ER:001 Command not recognized!";
+         failure("ER:001 Command not recognized!");
          returnVal.report = "lost";
          buffer = buffer.substring(nextFrameStart, buffer.length);
       }
       else if(currentFrame.indexOf("ER:005") >= 0){
-         document.getElementById("status").innerHTML = "ER:005 No Transponder Found!";
+         failure("ER:005 No Transponder Found!");
          returnVal.report = "lost";
          buffer = buffer.substring(nextFrameStart, buffer.length);
       }
       else if(currentFrame.indexOf("ER:008") >= 0){
-         document.getElementById("status").innerHTML = "ER:008 Antenna Not Fitted!";
+         failure("ER:008 Antenna Not Fitted!");
          returnVal.report = "lost";
          buffer = buffer.substring(nextFrameStart, buffer.length);
       }
@@ -54,12 +52,9 @@ ReaderTSL_1128_UHF.connectTSL1128Parsed = function(success, failure, reader){
 
       buffer = buffer.substring(nextFrameStart, buffer.length);
    };
-
-   if (reader.address == ""){ //scan for nearby bluetooth devices
-      bluetooth.startDiscovery(parsedResults, failure);
-   } else { //connect directly to the provided address
-      bluetooth.connectStream(parsedResults, failure, reader.address);
-   }
+   
+   //call bluetooth connect to get input stream
+   bluetooth.connectStream(parsedResults, failure, reader.address);
 };
 
 module.exports = ReaderTSL_1128_UHF;

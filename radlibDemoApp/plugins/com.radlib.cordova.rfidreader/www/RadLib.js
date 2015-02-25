@@ -18,10 +18,10 @@ radlib.directConnect = function(success, failure, reader) {
       case "BLUETOOTH":
          dumpLog("You've requested to use Bluetooth!");
          if (reader.model === "ARDUINORC522LF"){
-            rc522.connectRC522Parsed(success, failure, reader);
+            rc522.parse(success, failure, reader);
          } 
          else if (reader.model === "TSL1128UHF"){
-            tsl1128.connectTSL1128Parsed(success, failure, reader);
+            tsl1128.parse(success, failure, reader);
          }
          break;
       case "CAMERA":
