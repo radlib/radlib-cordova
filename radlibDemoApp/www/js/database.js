@@ -1,31 +1,31 @@
 //update table entries when an ID tag has been seen
 function updateTable(object) {
-	var db_object = {};
-	db_object.id = object.id;
-	//db_object.reader = object.reader;
-	db_object.friendlyName = object.friendlyName;
+   var db_object = {};
+   db_object.id = object.id;
+   //db_object.reader = object.reader;
+   db_object.friendlyName = object.friendlyName;
 
-	if(object.report == "seen"){
-		db_object.firstSeen = object.time;
-		db_updateCount(db_object);
-	}else if(object.report == "lost"){
-		//do nothing for now
-	}
+   if(object.report == "seen"){
+      db_object.firstSeen = object.time;
+      db_updateCount(db_object);
+   }else if(object.report == "lost"){
+      //do nothing for now
+   }
 }
 
 function db_initAndLoad() {
-	db_init();
-	db_print();
+   db_init();
+   db_print();
 }
 
 // Creates a database of 5 MB called TAGS with fields [id, module, time_read, count]
 function db_init() {
-	var dbSize = 5 * 1024 * 1024;
-	var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize, null);
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize, null);
 
-	db.transaction(function (tx) {
-		  tx.executeSql('CREATE TABLE IF NOT EXISTS TAGS(id, friendly_name, time_read, count)');
-	});
+   db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS TAGS(id, friendly_name, time_read, count)');
+   });
 }
 
 function db_readerInit() {
@@ -37,47 +37,43 @@ function db_readerInit() {
    });
 }
 
-function db_deleteRows() {
-   
-}
-
 // Checks to see if object is already in database and updates count or adds entry to database, accordingly
 function db_updateCount(object) {
-	var dbSize = 5 * 1024 * 1024;
-	var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
 
-	db.transaction(function (tx) {
-	    tx.executeSql("SELECT * FROM TAGS WHERE id= '" + object.id + "'", [], function (tx, results) {
-	    	// if no results are found
-	    	if (results.rows.length == 0) {
-	    		db_addEntry(object);
-	    	}
-	    	else {
-	    		db_incrementCount(object);
-	    	}
-	    	db_print();
- 		}, null);
-	});
+   db.transaction(function (tx) {
+       tx.executeSql("SELECT * FROM TAGS WHERE id= '" + object.id + "'", [], function (tx, results) {
+         // if no results are found
+         if (results.rows.length == 0) {
+            db_addEntry(object);
+         }
+         else {
+            db_incrementCount(object);
+         }
+         db_print();
+      }, null);
+   });
 }
 
 // Increments count for an object that exists in the database
 function db_incrementCount(object) {
-	var dbSize = 5 * 1024 * 1024;
-	var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
 
-	db.transaction(function (tx) {
-		  tx.executeSql("UPDATE TAGS SET count = count + 1 WHERE id = '" + object.id + "'");
-	});
+   db.transaction(function (tx) {
+        tx.executeSql("UPDATE TAGS SET count = count + 1 WHERE id = '" + object.id + "'");
+   });
 }
 
 // Adds a new entry for an object that does not yet exist in the database
 function db_addEntry(object) {
-	var dbSize = 5 * 1024 * 1024;
-	var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
 
-	db.transaction(function (tx) {
-		tx.executeSql("INSERT INTO TAGS (id, friendly_name, time_read, count) VALUES(?,?,?,?)", [object.id, object.friendlyName, object.firstSeen, 1], null, null);
-	});
+   db.transaction(function (tx) {
+      tx.executeSql("INSERT INTO TAGS (id, friendly_name, time_read, count) VALUES(?,?,?,?)", [object.id, object.friendlyName, object.firstSeen, 1], null, null);
+   });
 
 }
 
@@ -86,48 +82,48 @@ function db_deleteEntry(object) {
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
    
-	db.transaction(function (tx) {
-		tx.executeSql("DELETE FROM TAGS WHERE id = '" + object.id + "'");
-	});   
+   db.transaction(function (tx) {
+      tx.executeSql("DELETE FROM TAGS WHERE id = '" + object.id + "'");
+   });   
 
 }
 
 // Updates HTML table containing database entries
 function db_print() {
-	var dbSize = 5 * 1024 * 1024;
-	var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
-	var htmlTable;
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
+   var htmlTable;
 
-	db.transaction(function (tx) {
-	    tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
-		    var len = results.rows.length, i;
-		    for (i = 0; i < len; i++){
-		    	htmlTable += "<tr><td>" + results.rows.item(i).id;
-            	htmlTable += "</td><td>" + results.rows.item(i).friendly_name;
-            	htmlTable += "</td><td>" + results.rows.item(i).time_read;
-           		htmlTable += "</td><td>" + results.rows.item(i).count + "</td><td class='del' style='display:none;'><input type='checkbox' value='checked' class='del check' style='display:none;'></td></tr>";
-		    }
+   db.transaction(function (tx) {
+       tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
+          var len = results.rows.length, i;
+          for (i = 0; i < len; i++){
+            htmlTable += "<tr><td>" + results.rows.item(i).id;
+               htmlTable += "</td><td>" + results.rows.item(i).friendly_name;
+               htmlTable += "</td><td>" + results.rows.item(i).time_read;
+               htmlTable += "</td><td>" + results.rows.item(i).count + "</td><td class='del' style='display:none;'><input type='checkbox' value='checked' class='del check' style='display:none;'></td></tr>";
+          }
           $("#tagsTable tbody").html(htmlTable);
- 		}, null);
-	});
+      }, null);
+   });
 }
 
 // Clears contents of table
 function db_clear() {
-	var dbSize = 5 * 1024 * 1024;
-	var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("tagDatabase", "1.0", "Tag DB", dbSize);
 
-	var result = confirm("Are you sure you want to clear the database?");
-	
-	if (result == true) {
-		db.transaction(function (tx) {
-  			tx.executeSql('DROP TABLE TAGS');
-		});
+   var result = confirm("Are you sure you want to clear the database?");
+   
+   if (result == true) {
+      db.transaction(function (tx) {
+         tx.executeSql('DROP TABLE TAGS');
+      });
 
-		document.querySelector('#tagsDB').innerHTML = "<table id='tagsTable'><tr><th>ID Tag</th><th>RFID Reader</th><th>Time Read</th><th>Count</th></tr></table>";
-		alert("Database cleared!");
-		db_init();
-	}
+      document.querySelector('#tagsDB').innerHTML = "<table id='tagsTable'><tr><th>ID Tag</th><th>RFID Reader</th><th>Time Read</th><th>Count</th></tr></table>";
+      alert("Database cleared!");
+      db_init();
+   }
 
 }
 
@@ -185,7 +181,7 @@ function writeToFile(writer){
          
          //write the string to file
          blob = new Blob([csvTextString], {type: 'text/plain'});
-         writer.write(blob);	 
+         writer.write(blob);   
       }, null);
    });
 };
