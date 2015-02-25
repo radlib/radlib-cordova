@@ -9,6 +9,7 @@ function initialize_all() {
         }
     };
     db_initAndLoad();
+   // db_printReaders();
 }
 
 $('#cheque').change(
@@ -76,6 +77,18 @@ function deleteMe(data){
 }
 
 // testing
+function testing(){
+   var object = {};
+   object.connection = "poop";
+   object.model = "Test";
+   object.address = "12345 5 6";
+   object.friendlyName = "Tali";
+              console.log("Im here in testing");
+   db_initReaders();
+   db_checkReaderEntries(object);
+}
+
+// testing
 function testpop(){
    var object = {};
    object.id = "12 34 56 78";
@@ -95,6 +108,10 @@ function testpop2(){
    db_init();
    db_updateCount(object);
    db_print();
+}
+
+function scanBarcode() {
+   radlib.directConnect(updateTable, dumpLog, objBarcode, "PARSED");
 }
 
 function startdel() {
