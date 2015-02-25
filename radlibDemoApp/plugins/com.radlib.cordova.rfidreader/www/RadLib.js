@@ -13,7 +13,7 @@ var internalCam = require("./InternalBarcodeScanner");
 //create empty object to be exported
 var radlib = {};
 
-radlib.directConnect = function(success, failure, reader) {
+radlib.connect = function(success, failure, reader) {
    switch(reader.connection) {
       case "BLUETOOTH":
          if (reader.model === "ARDUINORC522LF"){
@@ -35,14 +35,12 @@ radlib.directConnect = function(success, failure, reader) {
    }
 };
 
-/* COMBINE FUNCTIONS BELOW INTO radlib.scan() */
-radlib.scanReaders = function (success, failure, connectionTypes) {
+radlib.scan = function (success, failure, connectionTypes) {
    if(connectionTypes.indexOf("BLUETOOTH") >= 0){
       bluetooth.startDiscovery(success, failure);
    };
 
 };
-/* COMBINE FUNCTIONS ABOVE INTO radlib.scan() */
 
 //export object with all its functions
 module.exports = radlib;
