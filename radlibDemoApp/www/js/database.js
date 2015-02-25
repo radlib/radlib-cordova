@@ -59,6 +59,8 @@ function db_updateCount(object) {
 }
 
 // Increments count for an object that exists in the database
+function db_incrementCount(object) {
+   var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
 
    db.transaction(function (tx) {
