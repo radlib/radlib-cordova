@@ -126,12 +126,10 @@ function finishdel() {
    $('#tagsTable').find('tr').each(
       function() {
          var row = $(this);
-         //console.log(row);
          if (row.find('input[type="checkbox"]').is(':checked')) {
-            //console.log("A checkbox in row" + row[0].rowIndex + "was checked!!!");
-            //console.log("to delete: " + row[0].cells[0].innerHTML)
             var objToDelete = {};
             objToDelete.id = row[0].cells[0].innerHTML;
+            objToDelete.friendlyName = row[0].cells[1].innerHTML;
             db_deleteEntry(objToDelete);
             row.remove();
          }

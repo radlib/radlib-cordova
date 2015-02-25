@@ -135,20 +135,18 @@ function db_deleteReaderEntry(object) {
 function db_print() {
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
-   var htmlTable;
+   var htmlTable = "";
 
    db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
          var len = results.rows.length, i;
-         htmlTable = "<table id='tagsTable'>";
-         htmlTable += "<tr><th>ID Tag</th><th>Reader</th><th>Time Read</th><th>Count</th></tr>";
-
          for (i = 0; i < len; i++){
-            htmlTable += "<tr><th>" + results.rows.item(i).id + "</th><th>" + results.rows.item(i).friendly_name + "</th><th>" + results.rows.item(i).time_read + "</th><th>" + results.rows.item(i).count + "</th></tr>";
+            htmlTable += "<tr><td>" + results.rows.item(i).id;
+            htmlTable += "</td><td>" + results.rows.item(i).friendly_name;
+            htmlTable += "</td><td>" + results.rows.item(i).time_read;
+            htmlTable += "</td><td>" + results.rows.item(i).count + "</td><td class='del' style='display:none;'><input type='checkbox' value='checked' class='del check' style='display:none;'></td></tr>";
          }
-
-         htmlTable += "</table>";
-         document.querySelector('#tagsDB').innerHTML = htmlTable;
+         $("#tagsTable tbody").html(htmlTable);
          }, null);
    });
 }
@@ -185,7 +183,7 @@ function db_clear() {
          tx.executeSql('DROP TABLE TAGS');
       });
 
-      document.querySelector('#tagsDB').innerHTML = "<table id='tagsTable'><tr><th>ID Tag</th><th>RFID Reader</th><th>Time Read</th><th>Count</th></tr></table>";
+      $("#tagsTable tbody").html("");
       alert("TAGS table cleared!");
       db_init();
    }
