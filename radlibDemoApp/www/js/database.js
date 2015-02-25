@@ -135,7 +135,7 @@ function db_deleteReaderEntry(object) {
 function db_print() {
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
-   var htmlTable;
+   var htmlTable = "";
 
    db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM TAGS', [], function (tx, results) {
