@@ -48,7 +48,7 @@
                         </a>
                     </li>
                     <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Â© 2015 Team RadLib')">
+                        <a href="#" class="side-nav__button" onclick="alert('© 2015 Team RadLib')">
                             <p>About</p>
                         </a>
                     </li>
@@ -65,6 +65,7 @@
          <br />
          <!--<h2>Select a reader to get started.</h2-->
          <div>
+            <button id="scanBarcode" onClick="scanBarcode()">Internal Barcode Scanner</button>
             <label class="topcoat-switch" style="float:right;">
                <input type="checkbox" id="cheque" class="topcoat-switch__input" onchange="toggleBT()">
                <div class="topcoat-switch__toggle"></div>
@@ -100,11 +101,7 @@
                </tr>
             </table>
          </div>
-   <!--          <select id="readersDB" class="topcoat-select">
-                  <option value="prompt" selected="true" disabled>Select a Reader</option>
 
-             </select>
-             <button id="testing" onClick="testing()">Testing</button>  -->
 
          <!--div id="dbButtons">
             <button class="topcoat-button--large--quiet" id="export" onClick="db_export()">Export Database</button>
@@ -112,15 +109,10 @@
          </div-->
 
         </div>
-        
-
         <!--div class="headerDiv">
          <div><img id="headerImg" src="img/logo.png" /></div>
          <h1 id="headerTitle">RadLib Demo</h1>
         </div-->
-         
-      
-      
 
       <!--
       <button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
@@ -134,7 +126,7 @@
       
       <button id="buttonDirectIOStream" onClick="directConnectLFStream()">Direct Connect LF IO Stream</button>
 
-
+      <button id="testing" onClick="testing()">Testing</button>
       
       <button id="delete" onClick="db_clear()">Clear Database</button> -->
 

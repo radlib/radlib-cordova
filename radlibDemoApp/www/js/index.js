@@ -30,6 +30,12 @@ var objRC522 = {};
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "Friendly LF Reader Name";
 
+var objBarcode = {};
+  objBarcode.connection = "CAMERA";
+  objBarcode.model = "INTERNALCAMERA";
+  objBarcode.address = "";
+  objBarcode.friendlyName = "Internal Camera";
+
 function getStream() {
    var dropdown = document.getElementById("reader_selector");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
@@ -77,6 +83,10 @@ function testing(){
    db_init();
    db_updateCount(object);
    db_print();
+}
+
+function scanBarcode() {
+   radlib.directConnect(updateTable, dumpLog, objBarcode, "PARSED");
 }
 
 //successful/unsuccessful callback function. currently used as a success/error dump
