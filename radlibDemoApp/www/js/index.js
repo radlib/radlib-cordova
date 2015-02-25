@@ -73,7 +73,7 @@ function getParsed() {
 }
 
 // testing
-/*function testing(){
+/*function testpop(){
    var object = {};
    object.id = "12 34 56 78";
    object.firstSeen = "";
@@ -85,7 +85,7 @@ function getParsed() {
    db_print();
 }
 
-function testing2(){
+function testpop2(){
    var object = {};
    object.id = "87 65 43 21";
    object.firstSeen = "";
