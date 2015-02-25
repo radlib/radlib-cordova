@@ -13,23 +13,16 @@ var internalCam = require("./InternalBarcodeScanner");
 //create empty object to be exported
 var radlib = {};
 
-radlib.directConnect = function(success, failure, reader, mode) {
+radlib.directConnect = function(success, failure, reader) {
    switch(reader.connection) {
       case "BLUETOOTH":
          dumpLog("You've requested to use Bluetooth!");
-
-         if (mode === "PARSED") {
-            if (reader.model === "ARDUINORC522LF"){
-               rc522.connectRC522Parsed(success, failure, reader);
-            } 
-            else if (reader.model === "TSL1128UHF"){
-               tsl1128.connectTSL1128Parsed(success, failure, reader);
-            }
+         if (reader.model === "ARDUINORC522LF"){
+            rc522.connectRC522Parsed(success, failure, reader);
+         } 
+         else if (reader.model === "TSL1128UHF"){
+            tsl1128.connectTSL1128Parsed(success, failure, reader);
          }
-         else if (mode === "STREAM") {
-            bluetooth.connectStream(success, failure, reader.address);
-         }
-
          break;
       case "CAMERA":
          dumpLog("You've requested to use the Camera!");

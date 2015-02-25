@@ -31,7 +31,7 @@ var objRC522 = {};
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "Friendly LF Reader Name";
 
-function getStream() {
+/*function getStream() {
    var dropdown = document.getElementById("reader_selector");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
@@ -47,7 +47,7 @@ function getStream() {
    else {
       alert("Please select a reader");
    }
-}
+}*/
 
 function getParsed() {
    var dropdown = document.getElementById("reader_selector");
@@ -57,10 +57,10 @@ function getParsed() {
       radlib.scanReaders(deleteMe, dumpLog, ["BLUETOOTH"]);
    }
    else if (selectedReader == "tsl_1128") {
-      radlib.directConnect(updateTable, dumpLog, objTSL1128, "PARSED");
+      radlib.directConnect(updateTable, dumpLog, objTSL1128);
    }
    else if (selectedReader == "rc522_lf") {
-      radlib.directConnect(updateTable, dumpLog, objRC522, "PARSED");
+      radlib.directConnect(updateTable, dumpLog, objRC522);
    }
    else {
       alert("Please select a reader");
@@ -111,7 +111,7 @@ function testpop2(){
 }
 
 function scanBarcode() {
-   radlib.directConnect(updateTable, dumpLog, {connection:"CAMERA"}, "PARSED");
+   radlib.directConnect(updateTable, dumpLog, {connection:"CAMERA"});
 }
 
 function startdel() {
