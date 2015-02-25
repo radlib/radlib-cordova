@@ -27,7 +27,6 @@
              <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
          </div>
          <div class="topcoat-navigation-bar__item right quarter">
-            yolo
          </div>
       </div>
       <div class="side-nav">
@@ -61,6 +60,7 @@
          <br />
          <!--<h2>Select a reader to get started.</h2-->
          <div>
+            <button id="scanBarcode" onClick="scanBarcode()">Internal Barcode Scanner</button>
             <label class="topcoat-switch" style="float:right;">
                <input type="checkbox" id="cheque" class="topcoat-switch__input" onchange="toggleBT()">
                <div class="topcoat-switch__toggle"></div>
@@ -109,12 +109,9 @@
          </select>
              
          <button id="testing" onClick="testing()">Testing</button-->
-
             <button id="finishdel" class="del topcoat-button--cta" style="float:right; display:none;" onclick="finishdel()">Done</button>
          </div>
-         
-      
-      
+        </div>
 
       <!--
       <button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
@@ -128,7 +125,7 @@
       
       <button id="buttonDirectIOStream" onClick="directConnectLFStream()">Direct Connect LF IO Stream</button>
 
-
+      <button id="testing" onClick="testing()">Testing</button>
       
       <button id="delete" onClick="db_clear()">Clear Database</button> -->
 
