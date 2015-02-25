@@ -9,6 +9,8 @@ function initialize_all() {
         }
     };
     db_initAndLoad();
+   // db_printReaders();
+
 }
 
 $('#cheque').change(
@@ -84,14 +86,13 @@ function deleteMe(data){
 // testing
 function testing(){
    var object = {};
-   object.id = "12 34 56 78";
-   object.firstSeen = resources.getCurrentTime();
-   object.reader = "DEBUG";
-   object.count = 1;
-
-   db_init();
-   db_updateCount(object);
-   db_print();
+   object.connection = "poop";
+   object.model = "Test";
+   object.address = "12345 5 6";
+   object.friendlyName = "Tali";
+              console.log("Im here in testing");
+   db_initReaders();
+   db_checkReaderEntries(object);
 }
 
 function scanBarcode() {
