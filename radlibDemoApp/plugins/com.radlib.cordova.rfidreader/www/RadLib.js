@@ -16,21 +16,21 @@ var radlib = {};
 radlib.directConnect = function(success, failure, reader) {
    switch(reader.connection) {
       case "BLUETOOTH":
-         dumpLog("You've requested to use Bluetooth!");
          if (reader.model === "ARDUINORC522LF"){
             rc522.parse(success, failure, reader);
          } 
          else if (reader.model === "TSL1128UHF"){
             tsl1128.parse(success, failure, reader);
+         }else{
+            failure("ERROR: Unsupported bluetooth model");
          }
          break;
       case "CAMERA":
-         dumpLog("You've requested to use the Camera!");
          internalCam.scanBarcode(success, failure);
 
          break;
       default:
-         dumpLog("ERROR: Not valid connection type!");
+         failure("ERROR: Not valid connection type!");
          break;
    }
 };
