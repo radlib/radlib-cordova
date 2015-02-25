@@ -30,12 +30,18 @@ var objRC522 = {};
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "Friendly LF Reader Name";
 
+var objBarcode = {};
+  objBarcode.connection = "CAMERA";
+  objBarcode.model = "INTERNALCAMERA";
+  objBarcode.address = "";
+  objBarcode.friendlyName = "Internal Camera";
+
 function getStream() {
    var dropdown = document.getElementById("reader_selector");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.directConnect(dumpLog, dumpLog, "", "STREAM"); // CURRENTLY BROKEN
+      bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
    }
    else if (selectedReader == "tsl_1128") {
       radlib.directConnect(dumpLog, dumpLog, objTSL1128, "STREAM");
@@ -53,7 +59,7 @@ function getParsed() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.directConnect(dumpLog, dumpLog, "", "PARSED"); // CURRENTLY BROKEN
+      radlib.scanReaders(deleteMe, dumpLog, ["BLUETOOTH"]);
    }
    else if (selectedReader == "tsl_1128") {
       radlib.directConnect(updateTable, dumpLog, objTSL1128, "PARSED");
@@ -64,6 +70,15 @@ function getParsed() {
    else {
       alert("Please select a reader");
    }
+}
+
+//sample function to show how java returns the device names/addresses
+function deleteMe(data){
+   var string = "";
+   for(var i = 0; i < data.length;i++){
+      string += data[i].name + " " + data[i].address + "\n";
+   }
+   alert(string);
 }
 
 // testing
@@ -77,6 +92,10 @@ function testing(){
    db_init();
    db_updateCount(object);
    db_print();
+}
+
+function scanBarcode() {
+   radlib.directConnect(updateTable, dumpLog, objBarcode, "PARSED");
 }
 
 //successful/unsuccessful callback function. currently used as a success/error dump

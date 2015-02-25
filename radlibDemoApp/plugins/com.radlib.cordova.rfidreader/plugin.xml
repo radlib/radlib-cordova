@@ -20,6 +20,9 @@
    <js-module name="RadLib" src ="www/RadLib.js">
       <clobbers target="radlib" />
    </js-module>
+
+   <js-module name="InternalBarcodeScanner" src ="www/InternalBarcodeScanner.js">
+   </js-module>
     
    <js-module name="CommBluetooth" src ="www/CommBluetooth.js">
    </js-module>
