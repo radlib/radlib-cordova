@@ -5,7 +5,6 @@
 
 //require the necessary external files
 var bluetooth = require("./CommBluetooth");
-var bluetoothUtils = require("./BluetoothUtils")
 var rc522 = require("./ReaderArduino_RC522_LF");
 var tsl1128 = require("./ReaderTSL_1128_UHF");
 var internalCam = require("./InternalBarcodeScanner");
