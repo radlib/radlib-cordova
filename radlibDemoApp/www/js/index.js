@@ -10,7 +10,6 @@ function initialize_all() {
     };
     db_initAndLoad();
    // db_printReaders();
-
 }
 
 $('#cheque').change(
@@ -31,12 +30,6 @@ var objRC522 = {};
   objRC522.model = "ARDUINORC522LF";
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "Friendly LF Reader Name";
-
-var objBarcode = {};
-  objBarcode.connection = "CAMERA";
-  objBarcode.model = "INTERNALCAMERA";
-  objBarcode.address = "";
-  objBarcode.friendlyName = "Internal Camera";
 
 function getStream() {
    var dropdown = document.getElementById("reader_selector");
@@ -95,8 +88,55 @@ function testing(){
    db_checkReaderEntries(object);
 }
 
+// testing
+function testpop(){
+   var object = {};
+   object.id = "12 34 56 78";
+   object.firstSeen = "";
+   object.friendlyName = "DEBUG";
+   object.count = 1;
+   db_init();
+   db_updateCount(object);
+   db_print();
+}
+function testpop2(){
+   var object = {};
+   object.id = "87 65 43 21";
+   object.firstSeen = "";
+   object.friendlyName = "DEBUG";
+   object.count = 1;
+   db_init();
+   db_updateCount(object);
+   db_print();
+}
+
 function scanBarcode() {
    radlib.directConnect(updateTable, dumpLog, objBarcode, "PARSED");
+}
+
+function startdel() {
+   $('.del').show();
+   $('.testonly').hide();
+}
+
+// Remove HTML rows for rows with a checked checkbox
+function finishdel() {
+   $('.del').hide();
+   $('.testonly').show();
+   $('#tagsTable').find('tr').each(
+      function() {
+         var row = $(this);
+         //console.log(row);
+         if (row.find('input[type="checkbox"]').is(':checked')) {
+            //console.log("A checkbox in row" + row[0].rowIndex + "was checked!!!");
+            //console.log("to delete: " + row[0].cells[0].innerHTML)
+            var objToDelete = {};
+            objToDelete.id = row[0].cells[0].innerHTML;
+            db_deleteEntry(objToDelete);
+            row.remove();
+         }
+      }
+   );
 }
 
 //successful/unsuccessful callback function. currently used as a success/error dump

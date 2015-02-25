@@ -15,7 +15,7 @@ function updateTable(object) {
 
 function db_initAndLoad() {
    db_init();
-   db_initReaders()
+   db_initReaders();
    db_print();
 }
 
@@ -129,7 +129,6 @@ function db_deleteReaderEntry(object) {
    db.transaction(function (tx) {
       tx.executeSql("DELETE FROM READERS WHERE friendlyName = '" + object.friendlyName + "'");
    });
-
 }
 
 // Updates HTML table containing database entries

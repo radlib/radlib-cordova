@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+      <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
+        <link rel="icon" type="image/png" href="img/logosquare.png" />
         <title>RadLib Demo</title>
 
         <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
@@ -19,15 +20,14 @@
       <div class="topcoat-navigation-bar">
          <div class="topcoat-navigation-bar__item left quarter">
             <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button" style="margin-top:5px;">
-                    <span class="topcoat-icon topcoat-icon--menu-stack"></span>
-                </a>
-            </div>
-            <div class="topcoat-navigation-bar__item center half">
-                <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
-            </div>
-            <div class="topcoat-navigation-bar__item right quarter">
-                
-            </div>
+              <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+             </a>
+         </div>
+         <div class="topcoat-navigation-bar__item center half">
+             <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
+         </div>
+         <div class="topcoat-navigation-bar__item right quarter">
+         </div>
       </div>
       <div class="side-nav">
          <nav class="site">
@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Delete Database Rows clicked')">
+                        <a href="#" class="side-nav__button" onclick="startdel()">
                             <p>Delete Database Rows</p>
                         </a>
                     </li>
@@ -52,11 +52,6 @@
                             <p>About</p>
                         </a>
                     </li>
-                    <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('Feedback clicked')">
-                            <p>Feedback</p>
-                        </a>
-                    </li>
                 </ul>
          </nav>
         </div>
@@ -65,54 +60,56 @@
          <br />
          <!--<h2>Select a reader to get started.</h2-->
          <div>
-            <button id="scanBarcode" onClick="scanBarcode()">Internal Barcode Scanner</button>
+            <button id="scanBarcode" class="topcoat-button" onClick="scanBarcode()">Barcode Scanner</button>
             <label class="topcoat-switch" style="float:right;">
                <input type="checkbox" id="cheque" class="topcoat-switch__input" onchange="toggleBT()">
                <div class="topcoat-switch__toggle"></div>
             </label>
             <img src="img/32px-Bluetooth.svg.png" style="float:right; margin-right: 10px;"/>
          </div>
-         
-         <br />
-
-         <!--button id="buttonToggleBT" onClick="toggleBT()">Turn Bluetooth On</button-->
-         <br />
          <div id="input" style="width:100%; text-align: center;">
             <h2 id="status" class="log">Select a reader to get started.</h2>
             <div id="user_input_buttons">
                <select id="reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select an option</option>
                   <option value="scan">Scan for readers</option>
-                   <option value="tsl_1128">TSL 1128</option>
+                  <option value="tsl_1128">TSL 1128</option>
                   <option value="rc522_lf">RC522 LF</option>
                </select>
                <button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button>
                <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Get Parsed Data</button>
             </div>
          </div>
-         <br /><br />
+         <br />
          <div id="tagsDB">
             <table id="tagsTable">
-               <tr>
-                  <th>ID Tag</th>
-                  <th>RFID Reader</th>
-                  <th>Time Read</th>
-                  <th>Count</th>
-               </tr>
+               <thead>
+                  <tr>
+                     <th>ID Tag</th>
+                     <th>Reader</th>
+                     <th>Time Read</th>
+                     <th>Count</th>
+                     <th class="del" style="display:none;">Delete?</th>
+                  </tr>
+               </thead>
+               <tbody>
+               </tbody>
             </table>
          </div>
 
+         <!-- Katrina's testing buttons -->
+         <!--button id="testing" class="testonly" onClick="testpop()">Testing</button>
+         <button id="testing2" class="testonly" onClick="testpop2()">Testing2</button-->
 
-         <!--div id="dbButtons">
-            <button class="topcoat-button--large--quiet" id="export" onClick="db_export()">Export Database</button>
-            <button class="topcoat-button--large--quiet" id="delete" onClick="db_clear()">Clear Database</button>
-         </div-->
-
+         <!-- Jeslin's testing buttons -->
+         <!--select id="readersDB" class="topcoat-select">
+            <option value="prompt" selected="true" disabled>Select a Reader</option>
+         </select>
+             
+         <button id="testing" onClick="testing()">Testing</button-->
+            <button id="finishdel" class="del topcoat-button--cta" style="float:right; display:none;" onclick="finishdel()">Done</button>
+         </div>
         </div>
-        <!--div class="headerDiv">
-         <div><img id="headerImg" src="img/logo.png" /></div>
-         <h1 id="headerTitle">RadLib Demo</h1>
-        </div-->
 
       <!--
       <button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
