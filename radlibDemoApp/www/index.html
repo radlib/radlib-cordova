@@ -60,8 +60,7 @@
 
         <div class="main-content">
          <br />
-         <!--<h2>Select a reader to get started.</h2-->
-         <div>
+         <div class="controls">
             <button id="scanBarcode" class="topcoat-button" onClick="scanBarcode()">Barcode Scanner</button>
             <label class="topcoat-switch" style="float:right;">
                <input type="checkbox" id="cheque" class="topcoat-switch__input" onchange="toggleBT()">
@@ -69,8 +68,9 @@
             </label>
             <img src="img/32px-Bluetooth.svg.png" style="float:right; margin-right: 10px;"/>
          </div>
-         <div id="input" style="width:100%; text-align: center;">
-            <h2 id="status" class="log">Select a reader to get started.</h2>
+         <h2 id="status" class="log">Select a reader to get started.</h2>
+         <div id="input" class="controls" style="width:100%; text-align: center;">
+            <!--h2 id="status" class="log">Select a reader to get started.</h2-->
             <div id="user_input_buttons">
                <select id="reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select an option</option>
@@ -79,7 +79,7 @@
                   <option value="rc522_lf">RC522 LF</option>
                </select>
                <!--button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button-->
-               <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Get Parsed Data</button>
+               <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Get Data!</button>
             </div>
          </div>
          <br />
@@ -99,6 +99,11 @@
             </table>
          </div>
 
+
+         <div id="confirmButtons" style="text-align:center;">
+            <br />
+            <button id="finishdel" class="del topcoat-button--cta" style="text-align:center; display:none;" onclick="finishdel()">Finished!</button>
+         </div>
          <!-- Katrina's testing buttons -->
          <!--button id="testing" class="testonly" onClick="testpop()">Testing</button>
          <button id="testing2" class="testonly" onClick="testpop2()">Testing2</button-->
@@ -109,7 +114,7 @@
          </select>
              
          <button id="testing" onClick="testing()">Testing</button-->
-            <button id="finishdel" class="del topcoat-button--cta" style="float:right; display:none;" onclick="finishdel()">Done</button>
+            <!--button id="finishdel" class="del topcoat-button--cta" style="text-align:center; display:none;" onclick="finishdel()">Done</button-->
          </div>
         </div>
 

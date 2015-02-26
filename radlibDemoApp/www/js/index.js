@@ -132,12 +132,15 @@ function startdel() {
    toggleMenu();
    $('.del').show();
    $('.testonly').hide();
+   $('.controls').hide();
+   dumpLog("Select the rows you would like to delete from the table.");
 }
 
 // Remove HTML rows for rows with a checked checkbox
 function finishdel() {
    $('.del').hide();
    $('.testonly').show();
+   $('.controls').show();
    $('#tagsTable').find('tr').each(
       function() {
          var row = $(this);
@@ -150,6 +153,7 @@ function finishdel() {
          }
       }
    );
+   dumpLog("Select a reader to get started.");
 }
 
 //successful/unsuccessful callback function. currently used as a success/error dump
