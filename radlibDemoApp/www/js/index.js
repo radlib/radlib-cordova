@@ -31,7 +31,7 @@ var objRC522 = {};
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "Friendly LF Reader Name";
 
-function getStream() {
+/*function getStream() {
    var dropdown = document.getElementById("reader_selector");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
@@ -39,28 +39,28 @@ function getStream() {
       bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
    }
    else if (selectedReader == "tsl_1128") {
-      radlib.directConnect(dumpLog, dumpLog, objTSL1128, "STREAM");
+      radlib.connect(dumpLog, dumpLog, objTSL1128, "STREAM");
    }
    else if (selectedReader == "rc522_lf") {
-      radlib.directConnect(dumpLog, dumpLog, objRC522, "STREAM");
+      radlib.connect(dumpLog, dumpLog, objRC522, "STREAM");
    }
    else {
       alert("Please select a reader");
    }
-}
+}*/
 
 function getParsed() {
    var dropdown = document.getElementById("reader_selector");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.scanReaders(deleteMe, dumpLog, ["BLUETOOTH"]);
+      radlib.scan(deleteMe, dumpLog, ["BLUETOOTH"]);
    }
    else if (selectedReader == "tsl_1128") {
-      radlib.directConnect(updateTable, dumpLog, objTSL1128, "PARSED");
+      radlib.connect(updateTable, dumpLog, objTSL1128);
    }
    else if (selectedReader == "rc522_lf") {
-      radlib.directConnect(updateTable, dumpLog, objRC522, "PARSED");
+      radlib.connect(updateTable, dumpLog, objRC522);
    }
    else {
       alert("Please select a reader");
@@ -111,7 +111,7 @@ function testpop2(){
 }
 
 function scanBarcode() {
-   radlib.directConnect(updateTable, dumpLog, objBarcode, "PARSED");
+   radlib.connect(updateTable, dumpLog, {connection:"CAMERA"});
 }
 
 function startdel() {
@@ -126,12 +126,10 @@ function finishdel() {
    $('#tagsTable').find('tr').each(
       function() {
          var row = $(this);
-         //console.log(row);
          if (row.find('input[type="checkbox"]').is(':checked')) {
-            //console.log("A checkbox in row" + row[0].rowIndex + "was checked!!!");
-            //console.log("to delete: " + row[0].cells[0].innerHTML)
             var objToDelete = {};
             objToDelete.id = row[0].cells[0].innerHTML;
+            objToDelete.friendlyName = row[0].cells[1].innerHTML;
             db_deleteEntry(objToDelete);
             row.remove();
          }
