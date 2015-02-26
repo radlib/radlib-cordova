@@ -8,53 +8,22 @@ body {
    position: absolute;
 }
 
-#buttonToggleBT {
-  float: right;
-   width: 40px%;
-   font-size: 15px;
+#confirmButtons {
+   text-align: center;
 }
 
-div.headerDiv {
-   display: block;
-   position: absolute;
-   width: 100%;
-   background: black;
+.finishdel {
+   text-align: center;
 }
 
-#dbButtons {
-  bottom: 0px;
-  position: fixed;
-  width: 100%;
-}
-
-#delete {
-   width: 50%;
-   font-size: 15px;
-   float: left;
-}
-
-#export {
-   width: 50%;
-   font-size: 15px;
-   float: left;
-}
-
-#headerTitle {
-   float: right;
-   margin-right: 10px;
-   color: white;
-}
-
-#headerImg{
-   float: left;
-   margin-top: 10px;
-   margin-left: 10px;
-   width: 100px;
+.hamburger {
+   margin-top: 5px;
 }
 
 #input {
    width: 100%;
    font-size: 20px;
+   text-align: center;
 }
 
 .input_button {
@@ -77,6 +46,12 @@ div.headerDiv {
    font-size: 20px;
    width: 100%;
    text-align: center;
+}
+
+#logo {
+   height: 50px;
+   margin-right: 10px;
+   margin-top: 5px;
 }
 
 table {

@@ -21,7 +21,7 @@
     <body onload="initialize_all()">
       <div class="topcoat-navigation-bar">
          <div class="topcoat-navigation-bar__item left quarter">
-            <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button" style="margin-top:5px;" onclick="toggleMenu()">
+            <a id="slide-menu-button" class="hamburger topcoat-icon-button--quiet slide-menu-button" onclick="toggleMenu()">
               <span class="topcoat-icon topcoat-icon--menu-stack"></span>
              </a>
          </div>
@@ -29,6 +29,7 @@
              <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
          </div>
          <div class="topcoat-navigation-bar__item right quarter">
+            <img id="logo" src="img/logosquare.png"/>
          </div>
       </div>
       <div class="side-nav">
@@ -69,7 +70,7 @@
             <img src="img/32px-Bluetooth.svg.png" style="float:right; margin-right: 10px;"/>
          </div>
          <h2 id="status" class="log">Select a reader to get started.</h2>
-         <div id="input" class="controls" style="width:100%; text-align: center;">
+         <div id="input" class="controls">
             <!--h2 id="status" class="log">Select a reader to get started.</h2-->
             <div id="user_input_buttons">
                <select id="reader_selector" class="topcoat-select">
@@ -100,7 +101,7 @@
          </div>
 
 
-         <div id="confirmButtons" style="text-align:center;">
+         <div id="confirmButtons">
             <br />
             <button id="finishdel" class="del topcoat-button--cta" style="text-align:center; display:none;" onclick="finishdel()">Finished!</button>
          </div>

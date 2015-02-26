@@ -1,13 +1,4 @@
 function initialize_all() {
-   /*var slideMenuButton = document.getElementById('slide-menu-button');
-    slideMenuButton.onclick = function (e) {
-        var cl = document.body.classList;
-        if (cl.contains('left-nav')) {
-            cl.remove('left-nav');
-        } else {
-            cl.add('left-nav');
-        }
-    };*/
     db_initAndLoad();
    // db_printReaders();
 }
@@ -23,14 +14,15 @@ function toggleMenu() {
 
 function showAbout() {
    toggleMenu();
-   alert("© 2015 Team RadLib");
+   alert("Radlib Demo Application\n© 2015 Team RadLib");
 }
 
 $('#cheque').change(
    function() {
       console.log("CHANGED CHECKBOX!");
       toggleBT();
-   });
+   }
+);
 
 // Ugly temporary global variables since scan isn't implemented
 var objTSL1128 = {};
