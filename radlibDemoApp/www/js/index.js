@@ -1,5 +1,5 @@
 function initialize_all() {
-   var slideMenuButton = document.getElementById('slide-menu-button');
+   /*var slideMenuButton = document.getElementById('slide-menu-button');
     slideMenuButton.onclick = function (e) {
         var cl = document.body.classList;
         if (cl.contains('left-nav')) {
@@ -7,9 +7,23 @@ function initialize_all() {
         } else {
             cl.add('left-nav');
         }
-    };
+    };*/
     db_initAndLoad();
    // db_printReaders();
+}
+
+function toggleMenu() {
+   var cl = document.body.classList;
+      if (cl.contains('left-nav')) {
+         cl.remove('left-nav');
+      } else {
+       cl.add('left-nav');
+      }
+}
+
+function showAbout() {
+   toggleMenu();
+   alert("© 2015 Team RadLib");
 }
 
 $('#cheque').change(
@@ -115,6 +129,7 @@ function scanBarcode() {
 }
 
 function startdel() {
+   toggleMenu();
    $('.del').show();
    $('.testonly').hide();
 }

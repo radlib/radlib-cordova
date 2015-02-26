@@ -3,9 +3,11 @@
     <head>
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+      <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
         <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" type="image/png" href="img/logosquare.png" />
         <title>RadLib Demo</title>
 
@@ -19,7 +21,7 @@
     <body onload="initialize_all()">
       <div class="topcoat-navigation-bar">
          <div class="topcoat-navigation-bar__item left quarter">
-            <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button" style="margin-top:5px;">
+            <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button" style="margin-top:5px;" onclick="toggleMenu()">
               <span class="topcoat-icon topcoat-icon--menu-stack"></span>
              </a>
          </div>
@@ -48,7 +50,7 @@
                         </a>
                     </li>
                     <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="alert('© 2015 Team RadLib')">
+                        <a href="#" class="side-nav__button" onclick="showAbout()">
                             <p>About</p>
                         </a>
                     </li>
