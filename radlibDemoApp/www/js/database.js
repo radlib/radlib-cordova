@@ -173,6 +173,8 @@ function db_printReaders() {
 
 // Clears contents of table
 function db_clear() {
+   toggleMenu();
+
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
 
@@ -199,6 +201,7 @@ function db_export() {
    //cordova.file.externalRootDirectory accesses the root directory
    //Download specifies the Download directory within the root directory
    //gotDirectory runs on success, dumpLog runs on error
+   toggleMenu();
    window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory + "Download", gotDirectory, dumpLog);
 
 }
@@ -222,7 +225,7 @@ function writeToFile(writer){
 
    //adds alerts to tell the user when the exporting is completed or failed
    writer.onwriteend = function(e) {
-      alert("CSV Writing complete");
+      alert("CSV Writing complete! You can find radlib.csv in your phone's Download folder.");
    };
 
    writer.onerror = function(e) {
