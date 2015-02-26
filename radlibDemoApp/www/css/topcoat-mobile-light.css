@@ -3619,6 +3619,8 @@ body {
   color: #000;
   font: 16px "Source Sans", helvetica, arial, sans-serif;
   font-weight: 400;
+  height: 100%;
+  width: 100%;
 }
 
 body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
