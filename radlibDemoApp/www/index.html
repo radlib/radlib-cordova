@@ -4,14 +4,14 @@
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
       <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         
-        <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="icon" type="image/png" href="img/logosquare.png" />
-        <title>RadLib Demo</title>
+      <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
+      <link rel="stylesheet" type="text/css" href="css/index.css" />
+      <link rel="icon" type="image/png" href="img/logosquare.png" />
+      <title>RadLib Demo</title>
 
-        <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+      <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
       <script type="text/javascript" src="js/index.js"></script>
       <script type="text/javascript" src="js/database.js"></script>
       <script type="text/javascript" src="cordova.js"></script>
@@ -21,47 +21,47 @@
     <body onload="initialize_all()">
       <div class="topcoat-navigation-bar">
          <div class="topcoat-navigation-bar__item left quarter">
-            <a id="slide-menu-button" class="topcoat-icon-button--quiet slide-menu-button" style="margin-top:5px;" onclick="toggleMenu()">
-              <span class="topcoat-icon topcoat-icon--menu-stack"></span>
-             </a>
+            <a id="slide-menu-button" class="hamburger topcoat-icon-button--quiet slide-menu-button" onclick="toggleMenu()">
+               <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+            </a>
          </div>
          <div class="topcoat-navigation-bar__item center half">
              <h1 class="topcoat-navigation-bar__title">RadLib Demo</h1>
          </div>
          <div class="topcoat-navigation-bar__item right quarter">
+            <img id="logo" src="img/logosquare.png"/>
          </div>
       </div>
       <div class="side-nav">
          <nav class="site">
-             <ul class="topcoat-list side-nav__list">
-                    <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="db_export()">
-                            <p>Export to CSV</p>
-                        </a>
-                    </li>
-                    <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="startdel()">
-                            <p>Delete Database Rows</p>
-                        </a>
-                    </li>
-                    <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="db_clear()">
-                            <p>Delete Database</p>
-                        </a>
-                    </li>
-                    <li class="topcoat-list__item side-nav__list__item is-active">
-                        <a href="#" class="side-nav__button" onclick="showAbout()">
-                            <p>About</p>
-                        </a>
-                    </li>
-                </ul>
+            <ul class="topcoat-list side-nav__list">
+               <li class="topcoat-list__item side-nav__list__item is-active">
+                  <a href="#" class="side-nav__button" onclick="db_export()">
+                      <p>Export to CSV</p>
+                  </a>
+               </li>
+               <li class="topcoat-list__item side-nav__list__item is-active">
+                  <a href="#" class="side-nav__button" onclick="startdel()">
+                      <p>Delete Database Rows</p>
+                  </a>
+               </li>
+               <li class="topcoat-list__item side-nav__list__item is-active">
+                  <a href="#" class="side-nav__button" onclick="db_clear()">
+                      <p>Delete Database</p>
+                  </a>
+               </li>
+               <li class="topcoat-list__item side-nav__list__item is-active">
+                  <a href="#" class="side-nav__button" onclick="showAbout()">
+                      <p>About</p>
+                  </a>
+               </li>
+            </ul>
          </nav>
         </div>
 
-        <div class="main-content">
+         <div class="main-content">
          <br />
-         <!--<h2>Select a reader to get started.</h2-->
-         <div>
+         <div class="controls">
             <button id="scanBarcode" class="topcoat-button" onClick="scanBarcode()">Barcode Scanner</button>
             <label class="topcoat-switch" style="float:right;">
                <input type="checkbox" id="cheque" class="topcoat-switch__input" onchange="toggleBT()">
@@ -69,8 +69,8 @@
             </label>
             <img src="img/32px-Bluetooth.svg.png" style="float:right; margin-right: 10px;"/>
          </div>
-         <div id="input" style="width:100%; text-align: center;">
-            <h2 id="status" class="log">Select a reader to get started.</h2>
+         <h2 id="status" class="log">Select a reader to get started.</h2>
+         <div id="input" class="controls">
             <div id="user_input_buttons">
                <select id="reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select an option</option>
@@ -78,8 +78,8 @@
                   <option value="tsl_1128">TSL 1128</option>
                   <option value="rc522_lf">RC522 LF</option>
                </select>
-               <button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button>
-               <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Get Parsed Data</button>
+               <!--button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button-->
+               <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Get Data!</button>
             </div>
          </div>
          <br />
@@ -98,7 +98,10 @@
                </tbody>
             </table>
          </div>
-
+         <div id="confirmButtons">
+            <br />
+            <button id="finishdel" class="del topcoat-button--cta" style="text-align:center; display:none;" onclick="finishdel()">Finished!</button>
+         </div>
          <!-- Katrina's testing buttons -->
          <!--button id="testing" class="testonly" onClick="testpop()">Testing</button>
          <button id="testing2" class="testonly" onClick="testpop2()">Testing2</button-->
@@ -106,15 +109,13 @@
          <!-- Jeslin's testing buttons -->
          <!--select id="readersDB" class="topcoat-select">
             <option value="prompt" selected="true" disabled>Select a Reader</option>
-         </select>
+         </select-->
              
-         <button id="testing" onClick="testing()">Testing</button-->
-            <button id="finishdel" class="del topcoat-button--cta" style="float:right; display:none;" onclick="finishdel()">Done</button>
          </div>
         </div>
 
-      <!--
-      <button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
+      <!-- Old buttons, to delete when project is complete -->
+      <!--button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
 
       <button id="buttonDirectIOParsed" onClick="directConnectLFParsed()">Direct Connect LF IO Parsed</button>
       <br />
@@ -128,9 +129,6 @@
       <button id="testing" onClick="testing()">Testing</button>
       
       <button id="delete" onClick="db_clear()">Clear Database</button> -->
-
-      
-      
       <br />
     </body>
 </html>
