@@ -1,8 +1,8 @@
 var resources = {};
 
 /**
-  returns current time in HH:MM:SS string format
-*/
+ * Returns time in HH:MM:SS string format
+ */
 resources.getCurrentTime = function(){
   var timeNow = new Date();
   var hours   = timeNow.getHours();
@@ -15,8 +15,8 @@ resources.getCurrentTime = function(){
   return timeString;
 }
 
- /**
-    returns date in MM/DD/YYYY format
+/**
+ * Returns time in MM:DD:YYYY string format
  */
 resources.getCurrentDate = function(){
   var dateNow = new Date();

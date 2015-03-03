@@ -34,14 +34,14 @@ $('#cheque').change(
 
 // Ugly temporary global variables since scan isn't implemented
 var objTSL1128 = {};
-  objTSL1128.connection = "BLUETOOTH";
-  objTSL1128.model = "TSL1128UHF";
+  objTSL1128.connectionType = "BLUETOOTH";
+  objTSL1128.model = "TSL_1128_UHF";
   objTSL1128.address = "20:14:05:08:15:63";
   objTSL1128.friendlyName = "Friendly UHF Reader Name";
 
 var objRC522 = {};
-  objRC522.connection = "BLUETOOTH";
-  objRC522.model = "ARDUINORC522LF";
+  objRC522.connectionType = "BLUETOOTH";
+  objRC522.model = "ARDUINO_RC522_LF";
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "Friendly LF Reader Name";
 
@@ -125,7 +125,7 @@ function testpop2(){
 }
 
 function scanBarcode() {
-   radlib.connect(updateTable, dumpLog, {connection:"CAMERA"});
+   radlib.connect(updateTable, dumpLog, {connectionType:"CAMERA"});
 }
 
 function startdel() {
