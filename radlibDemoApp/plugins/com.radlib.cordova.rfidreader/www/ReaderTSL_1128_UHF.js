@@ -3,6 +3,24 @@ var bluetooth = require('./CommBluetooth');
 var resources = require('./Resources');
 var ReaderTSL_1128_UHF = {};
 
+//DARREN FIX THIS COMMENT
+
+/**
+ * Provides a parser to parse the RC522 LF Bluetooth device. This calls
+ * the successful every time a "frame" has been built, the error callback 
+ * if it failed to connect to the device, and the reader object sent in from
+ * RadLib.js. On each successful callback, an object with the following properties
+ * is returned:
+ *       id id of the read tag
+ *       reader device name of this reader
+ *       friendlyName user specified name of this reader
+ *       time time frame was read
+ *       date date frame was read
+ *       frame the frame which was parsed
+ * @success function(string stream) function to call on success
+ * @failure function(string errorMsg) function to call on failure
+ * @address string mac address of the bluetooth device to connect to
+ */
 ReaderTSL_1128_UHF.parse = function(success, failure, reader){
    var buffer = "";
 
