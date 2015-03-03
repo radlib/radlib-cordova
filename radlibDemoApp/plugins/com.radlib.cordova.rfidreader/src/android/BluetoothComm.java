@@ -161,14 +161,14 @@ public class BluetoothComm extends CordovaPlugin {
             //return array of devices
             }else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                try {
-            	   JSONArray returnArray= new JSONArray();
+            	   JSONArray returnArray = new JSONArray();
             	   JSONObject returnObject;
             	   for(int i = 0; i < deviceNames.size(); i++){
-            		   returnObject = new JSONObject();
+                     returnObject = new JSONObject();
     	               returnObject.put("name", deviceNames.get(i));
     	               returnObject.put("address", deviceAddresses.get(i));
                      returnObject.put("connectionType", "BLUETOOTH");
-    	               returnArray.put(returnObject); 
+                     returnArray.put(returnObject); 
             	   }
                   callbackContext.success(returnArray);
                } catch (JSONException e) {
