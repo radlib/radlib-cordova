@@ -91,7 +91,7 @@ function db_checkReaderEntries(object) {
          db_addReaderEntry(object);
       }
       else {
-         alert("Reader Name " + object.friendlyName + " already exists!");
+         console.log("Reader Name " + object.friendlyName + " already exists!");
       }
       db_printReaders();
       }, null);
@@ -107,7 +107,6 @@ function db_addReaderEntry(object) {
       tx.executeSql("INSERT INTO READERS (connection, model, address, friendlyName) VALUES(?,?,?,?)", 
          [object.connection, object.model, object.address, object.friendlyName], null, null);
    });
-
 }
 
 //deletes specified tag from the table
@@ -163,7 +162,7 @@ function db_printReaders() {
          var len = results.rows.length, i;
          ReaderTable = "<option value='prompt' selected='true' disabled>Select a Reader</option>";
          for (i = 0; i < len; i++){
-            ReaderTable += "<option value='" + results.rows.item(i).friendlyName + "'>" + results.rows.item(i).friendlyName + "</option>";
+            ReaderTable += "<option value='" + results.rows.item(i).model + "'>" + results.rows.item(i).friendlyName + "</option>";
          }
          document.querySelector('#readersDB').innerHTML = ReaderTable;
          }, null);

@@ -1,6 +1,8 @@
 function initialize_all() {
-    db_initAndLoad();
-   // db_printReaders();
+   db_initAndLoad();
+   db_checkReaderEntries(objTSL1128);
+   db_checkReaderEntries(objRC522);
+   db_printReaders();
 }
 
 function toggleMenu() {
@@ -10,6 +12,10 @@ function toggleMenu() {
       } else {
        cl.add('left-nav');
       }
+}
+
+function hideModal() {
+   $('#modal').hide();
 }
 
 function showAbout() {
@@ -29,13 +35,13 @@ var objTSL1128 = {};
   objTSL1128.connection = "BLUETOOTH";
   objTSL1128.model = "TSL1128UHF";
   objTSL1128.address = "20:14:05:08:15:63";
-  objTSL1128.friendlyName = "Friendly UHF Reader Name";
+  objTSL1128.friendlyName = "TSL 1128";
 
 var objRC522 = {};
   objRC522.connection = "BLUETOOTH";
   objRC522.model = "ARDUINORC522LF";
   objRC522.address = "00:14:03:02:03:26";
-  objRC522.friendlyName = "Friendly LF Reader Name";
+  objRC522.friendlyName = "RC522 LF";
 
 /*function getStream() {
    var dropdown = document.getElementById("reader_selector");
@@ -60,7 +66,7 @@ function getParsed() {
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
 
    if (selectedReader == "scan") {
-      radlib.scan(deleteMe, dumpLog, ["BLUETOOTH"]);
+      selectConnectionScreen();
    }
    else if (selectedReader == "tsl_1128") {
       radlib.connect(updateTable, dumpLog, objTSL1128);
@@ -73,14 +79,76 @@ function getParsed() {
    }
 }
 
-//sample function to show how java returns the device names/addresses
-function deleteMe(data){
-   var string = "";
-   for(var i = 0; i < data.length;i++){
-      string += data[i].name + " " + data[i].address + "\n";
-   }
-   alert(string);
+function selectConnectionScreen() {
+   $('.controls').hide();
+   $('.selectConnectionscan').show();
+   $('#tagsDB').hide();
+
+   dumpLog("Please choose a connection type.");
 }
+
+function selectConnectionType() {
+   var connectionDropdown = document.getElementById("connection_type_selector");
+   var selectedConnection = connectionDropdown.options[connectionDropdown.selectedIndex].value;
+
+   if (selectedConnection == "BLUETOOTH") {
+      dumpLog("Scanning for readers, please wait...");
+
+      radlib.scan(deleteMe, dumpLog, ["BLUETOOTH"]);
+   }
+   else {
+      dumpLog("Please select a valid connection type");
+   }
+}
+
+//sample function to show how java returns the device names/addresses
+// DO NOT DELETE!!! MUST RENAME LATER!!!!!!!
+function deleteMe(data) {
+   dumpLog("Select a reader to connect<br>and save it to the database.");
+   $('.controls').hide();
+   $('.selectConnectionscan').hide();
+   $('.addReader').show();
+   $('#tagsDB').hide();
+
+   // RETURNS AN ARRAY OF READERS
+   var string = "";
+   for(var i = 0; i < data.length;i++) {
+      //string += data[i].name + " " + data[i].address + "\n";
+      document.getElementById("detected_reader_selector").innerHTML += "<option value='" + data[i].address +"'>" + data[i].name + " - " + data[i].address + "</option>";
+   }
+   //alert(string);
+}
+
+function saveReader() {
+   // stop discovery, MOVE THIS LATER
+   bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
+
+   dumpLog("Adding reader to database...");
+
+   var connectionDropdown = document.getElementById("detected_reader_selector");
+   var readerModel = connectionDropdown.options[connectionDropdown.selectedIndex].innerHTML;
+   var readerAddress = connectionDropdown.options[connectionDropdown.selectedIndex].value;
+   var friendlyName = document.getElementById("friendlyName").value;
+
+   if(friendlyName == "") {
+      friendlyName = "My New Reader";
+   }
+
+   var newReader = {};
+   newReader.connection = "BLUETOOTH";
+   newReader.model = readerModel;
+   newReader.address = readerAddress;
+   newReader.friendlyName = friendlyName;
+
+   db_checkReaderEntries(newReader);
+
+   dumpLog("Reader saved!");
+
+   $('.addReader').hide();
+   $('.controls').show();
+   $('#tagsDB').show();
+}
+
 
 // testing
 function testing(){
@@ -89,7 +157,7 @@ function testing(){
    object.model = "Test";
    object.address = "12345 5 6";
    object.friendlyName = "Tali";
-              console.log("Im here in testing");
+   console.log("I'm here in testing");
    db_initReaders();
    db_checkReaderEntries(object);
 }

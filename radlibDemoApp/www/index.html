@@ -18,7 +18,7 @@
     </head>
 
     <!-- Initialize database as soon as body loads -->
-    <body onload="initialize_all()">
+   <body onload="initialize_all()">
       <div class="topcoat-navigation-bar">
          <div class="topcoat-navigation-bar__item left quarter">
             <a id="slide-menu-button" class="hamburger topcoat-icon-button--quiet slide-menu-button" onclick="toggleMenu()">
@@ -57,11 +57,11 @@
                </li>
             </ul>
          </nav>
-        </div>
+      </div>
 
-         <div class="main-content">
-         <br />
+      <div class="main-content">
          <div class="controls">
+            <br />
             <button id="scanBarcode" class="topcoat-button" onClick="scanBarcode()">Barcode Scanner</button>
             <label class="topcoat-switch" style="float:right;">
                <input type="checkbox" id="cheque" class="topcoat-switch__input" onchange="toggleBT()">
@@ -69,7 +69,10 @@
             </label>
             <img src="img/32px-Bluetooth.svg.png" style="float:right; margin-right: 10px;"/>
          </div>
-         <h2 id="status" class="log">Select a reader to get started.</h2>
+         <div class="log">
+            <br />
+            <h2 id="status" class="log">Select a reader to get started.</h2>
+         </div>
          <div id="input" class="controls">
             <div id="user_input_buttons">
                <select id="reader_selector" class="topcoat-select">
@@ -79,10 +82,11 @@
                   <option value="rc522_lf">RC522 LF</option>
                </select>
                <!--button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button-->
-               <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Get Data!</button>
+               <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Go!</button>
             </div>
+            <br />
          </div>
-         <br />
+
          <div id="tagsDB">
             <table id="tagsTable">
                <thead>
@@ -98,21 +102,47 @@
                </tbody>
             </table>
          </div>
-         <div id="confirmButtons">
+         <div id="confirmButtons" class="del">
             <br />
             <button id="finishdel" class="del topcoat-button--cta" style="text-align:center; display:none;" onclick="finishdel()">Finished!</button>
          </div>
+
          <!-- Katrina's testing buttons -->
          <!--button id="testing" class="testonly" onClick="testpop()">Testing</button>
          <button id="testing2" class="testonly" onClick="testpop2()">Testing2</button-->
 
          <!-- Jeslin's testing buttons -->
-         <!--select id="readersDB" class="topcoat-select">
-            <option value="prompt" selected="true" disabled>Select a Reader</option>
-         </select-->
-             
+         <select id="readersDB" class="topcoat-select controls">
+            <option value="prompt" selected="true" disabled>Tap here to select an option</option>
+         </select>
+
+         <div class="selectConnectionscan" style="display:none;">
+            <div id="selectedConnections" style="text-align:center;">
+               <select id="connection_type_selector" class="topcoat-select">
+                  <option value="prompt" selected="true" disabled>Select a connection type</option>
+                  <option value="BLUETOOTH">Bluetooth</option>
+                  <option value="WIFI" disabled>Wifi - not yet implemented</option>
+                  <option value="USB" disabled>USB - not yet implemented</option>
+               </select><br /><br />
+               <button id="button_selectconnection" class="topcoat-button--cta" onclick="selectConnectionType()">Find Readers</button>
+            </div>
          </div>
-        </div>
+
+         <div class="addReader" style="display:none;">
+           <div id="detectedReaders" style="text-align:center;">
+               <select id="detected_reader_selector" class="topcoat-select">
+                  <option value="prompt" selected="true" disabled>Tap hereee</option>
+               </select><br />
+               <p>Optional:<br/>Enter a friendly name for this reader</p>
+               <input type="text" id="friendlyName" class="topcoat-text-input" placeholder="MyNewReader">
+               <br /><br />
+               <button id="button_selectdetected" class="topcoat-button--cta" onclick="saveReader()">Get Connected</button>
+            </div>
+         </div-->
+         
+
+             
+      </div>
 
       <!-- Old buttons, to delete when project is complete -->
       <!--button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
@@ -129,6 +159,6 @@
       <button id="testing" onClick="testing()">Testing</button>
       
       <button id="delete" onClick="db_clear()">Clear Database</button> -->
-      <br />
+
     </body>
 </html>
