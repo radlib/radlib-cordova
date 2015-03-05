@@ -47,6 +47,8 @@ public class BluetoothComm extends CordovaPlugin {
         
       /**
          Initializes the thread.
+         @device Bluetooth device to connect to
+         @callbackContext Cordova callback object to act on callback functions.
       */
       public BluetoothThread(BluetoothDevice device, CallbackContext callbackContext){
          this.device = device;
@@ -65,6 +67,10 @@ public class BluetoothComm extends CordovaPlugin {
          }
       }
         
+      /**
+         Run method that forwards all data received from the foreign bluetooth device
+         back to Apache Cordova JavaScript caller's callback function.
+      */
       public void run() {
          byte[] data = new byte[1024];
          byte[] bufferT = new byte[1024];
@@ -118,10 +124,10 @@ public class BluetoothComm extends CordovaPlugin {
    }
     
    /**
-      Scans for nearby blue tooth devices, and shows an AlertDialog menu upon completion of scan. 
-      The AlertDialog will contain a list of the device names and mac addresses.
-      Selecting from menu will then call connectTo() with the selected mac address.
-      @...  callback function
+      Scans for nearby blue tooth devices. Calls the callback function provided
+      by the Apache Cordova callbackContext with a JavaScript array of
+      JavaScript objects, each with the property "name" and "address".
+      @callbackContext Cordova callback object to act on callback functions.
    */
    public void scanNearbyBluetooth(final CallbackContext callbackContext){
       if(!adapter.isEnabled()){
@@ -155,13 +161,14 @@ public class BluetoothComm extends CordovaPlugin {
             //return array of devices
             }else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                try {
-            	   JSONArray returnArray= new JSONArray();
+            	   JSONArray returnArray = new JSONArray();
             	   JSONObject returnObject;
             	   for(int i = 0; i < deviceNames.size(); i++){
-            		   returnObject = new JSONObject();
-    	               returnObject.put("name", deviceNames.get(i));
-    	               returnObject.put("address", deviceAddresses.get(i));
-    	               returnArray.put(returnObject); 
+                     returnObject = new JSONObject();
+                     returnObject.put("name", deviceNames.get(i));
+                     returnObject.put("address", deviceAddresses.get(i));
+                     returnObject.put("connectionType", "BLUETOOTH");
+                     returnArray.put(returnObject); 
             	   }
                   callbackContext.success(returnArray);
                } catch (JSONException e) {
@@ -181,7 +188,7 @@ public class BluetoothComm extends CordovaPlugin {
     
    /** 
       Connects to the device with mac address : "address"
-      @callbackContext way to access callbacks later
+      @callbackContext Cordova callback object to act on callback functions.
       @macAddress the mac address of the blue tooth device to connect to
    */
    public void connect(String address, CallbackContext callbackContext){

@@ -3,6 +3,22 @@ var bluetooth = require('./CommBluetooth');
 var resources = require('./Resources');
 var ReaderTSL_1128_UHF = {};
 
+/**
+ * Provides a parser to parse the TSL 1128 Bluetooth reader. This calls
+ * success every time an "EP:" tag line is found and the error callback 
+ * if it has failed to connect to the device or after two error reads.
+ * On each successful callback, an object with the following properties
+ * is returned:
+ *       id - id of the read tag
+ *       reader - device name of this reader
+ *       friendlyName - user specified name of this reader
+ *       time - time frame was read
+ *       date - date frame was read
+ *       frame - the frame which was parsed
+ * @success function(string stream) function to call on success
+ * @failure function(string errorMsg) function to call on failure
+ * @address string mac address of the bluetooth device to connect to
+ */
 ReaderTSL_1128_UHF.parse = function(success, failure, reader){
    var buffer = "";
 
