@@ -33,9 +33,9 @@ var objTSL1128 = {};
 
 var objRC522 = {};
   objRC522.connectionType = "BLUETOOTH";
-  objRC522.model = "ARDUINO_RC522_LF";
+  objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
-  objRC522.friendlyName = "Friendly LF Reader Name";
+  objRC522.friendlyName = "Friendly HF Reader Name";
 
 /*function getStream() {
    var dropdown = document.getElementById("reader_selector");
@@ -65,7 +65,7 @@ function getParsed() {
    else if (selectedReader == "tsl_1128") {
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
-   else if (selectedReader == "rc522_lf") {
+   else if (selectedReader == "rc522_hf") {
       radlib.connect(updateTable, dumpLog, objRC522);
    }
    else {
