@@ -4,7 +4,7 @@ var resources = require('./Resources');
 var ReaderArduino_RC522_HF = {};
 
 /**
- * Provides a parser to parse the RC522 LF Bluetooth device. This calls
+ * Provides a parser to parse the RC522 HF Bluetooth device. This calls
  * the success every time a "frame" has been built, the error callback 
  * if it failed to connect to the device, and the reader object sent in from
  * RadLib.js. On each successful callback, an object with the following properties
