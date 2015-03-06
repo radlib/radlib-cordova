@@ -31,7 +31,7 @@
       <clobbers target="bluetoothUtils" />
    </js-module>
     
-   <js-module name="ReaderArduino_RC522_LF" src ="www/ReaderArduino_RC522_LF.js">
+   <js-module name="ReaderArduino_RC522_HF" src ="www/ReaderArduino_RC522_HF.js">
    </js-module>
     
    <js-module name="ReaderTSL_1128_UHF" src ="www/ReaderTSL_1128_UHF.js">
