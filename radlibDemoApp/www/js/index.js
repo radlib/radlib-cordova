@@ -82,14 +82,13 @@ function deleteMe(data){
    alert(string);
 }
 
-// testing
+// testing Reader DB functionality
 function testing(){
    var object = {};
-   object.connection = "poop";
-   object.model = "Test";
+   object.connection = "TestConnection";
+   object.model = "TestModel";
    object.address = "12345 5 6";
-   object.friendlyName = "Tali";
-              console.log("Im here in testing");
+   object.friendlyName = "DEBUG";
    db_initReaders();
    db_checkReaderEntries(object);
 }
