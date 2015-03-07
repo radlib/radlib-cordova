@@ -71,8 +71,8 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
       <ul>
         <li>id: id of tag that was read</li>
         <li>reader: device name of the reader</li>
-        <li>time: time the frame was read</li>
-        <li>date: date the frame was read</li>
+        <li>time: time the frame was read in the form hh:MM:SS AM/PM</li>
+        <li>date: date the frame was read in the form mm:dd:yyyy</li>
         <li>frame: the frame of data which was parsed</li>
       <ul>
     </td>
