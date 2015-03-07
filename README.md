@@ -3,7 +3,7 @@ RadLib
 An Apache Cordova plugin that allows for interfacing mobile applications with RFID tag readers.
 ######The currently supported readers are as follows:
 - [Technology Solutions 1128 Bluetooth UHF Reader](http://www.tsl.uk.com/products/1128-bluetooth-handheld-uhf-rfid-reader/)
-- RC522 RF Reader()
+- [RC522 HF Reader](http://playground.arduino.cc/Learning/MFRC522)
 - Barcode scanner using phone camera
 
 ######Supported Platforms
@@ -97,5 +97,68 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
   </tr>
 </table>
 
+The `bluetoothUtils` object has three functions: `turnOnBluetooth()`, `turnOffBluetooth()`, and `stopDiscovery()`:
 
+<table>
+  <tr>
+    <td colspan="2"><code>bluetoothUtils.turnOnBluetooth = function(success, failure);</code></td>
+  </tr>
+  <tr>
+    <td colspan="2">Description: enables the Bluetooth module located in the Android phone</td>
+  </tr>
+  <tr>
+    <td><code>success</code></td>
+    <td>
+      Callback function providing a success message
+    </td>
+  </tr>
+  <tr>
+    <td><code>failure</code></td>
+    <td>
+      Callback function providing a failure message
+    </td>
+  </tr>
+</table>
 
+<table>
+  <tr>
+    <td colspan="2"><code>bluetoothUtils.turnOffBluetooth = function(success, failure);</code></td>
+  </tr>
+  <tr>
+    <td colspan="2">Description: disables the Bluetooth module located in the Android phone</td>
+  </tr>
+  <tr>
+    <td><code>success</code></td>
+    <td>
+      Callback function providing a success message
+    </td>
+  </tr>
+  <tr>
+    <td><code>failure</code></td>
+    <td>
+      Callback function providing a failure message
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td colspan="2"><code>bluetoothUtils.stopDiscovery = function(success, failure);</code></td>
+  </tr>
+  <tr>
+    <td colspan="2">Description: tells the bluetooth device to finish up looking nearby bluetooth devices. This function only needs to be called if radlib.scan() for Bluetooth is to be stopped prematurely.
+</td>
+  </tr>
+  <tr>
+    <td><code>success</code></td>
+    <td>
+      Callback function providing a success message
+    </td>
+  </tr>
+  <tr>
+    <td><code>failure</code></td>
+    <td>
+      Callback function providing a failure message
+    </td>
+  </tr>
+</table>
