@@ -4,7 +4,7 @@ An Apache Cordova plugin that allows for interfacing mobile applications with RF
 ######The currently supported readers are as follows:
 - [Technology Solutions 1128 Bluetooth UHF Reader](http://www.tsl.uk.com/products/1128-bluetooth-handheld-uhf-rfid-reader/)
 - [RC522 HF Reader](http://playground.arduino.cc/Learning/MFRC522)
-- Barcode scanner using phone camera
+- [Barcode scanner using phone camera](https://github.com/wildabeast/BarcodeScanner)
 
 ######Supported Platforms
 - Android 4.4+
@@ -12,7 +12,7 @@ An Apache Cordova plugin that allows for interfacing mobile applications with RF
 If you're comfortable with JavaScript, HTML, and CSS, it's easy to make your own app with RadLib!
 
 #Installation - Quick Start
-Make sure you have the Cordova Command-Line Interface and the Android SDK installed.
+Make sure you have the [Cordova Command-Line Interface](http://www.google.com/url?q=http%3A%2F%2Fcordova.apache.org%2Fdocs%2Fen%2F3.6.0%2F%2Fguide_cli_index.md.html%23The%2520Command-Line%2520Interface&sa=D&sntz=1&usg=AFQjCNGC6EfuvxtBLI_TRexDGn15S0xdsA) and the Android SDK installed.
 
 Run the command `git clone https://github.com/radlib/radlib-cordova.git` to download all the files for our sample application. 
 If you have an Android hardware device, you can run `cordova run android` to flash the demo application to your device.
