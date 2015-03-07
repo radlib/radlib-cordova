@@ -39,7 +39,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
       <ul>
         <li>name: name of the found device</li>
         <li>address: address of the found device</li>
-        <li>connectionType: type of connection for the device. Currently only "BLUETOOTH" is supported.</li>
+        <li>connectionType: an array of connection type strings. Currently only ["BLUETOOTH"] is supported.</li>
       <ul>
     </td>
   </tr>
