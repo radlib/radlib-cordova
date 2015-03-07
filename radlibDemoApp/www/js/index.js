@@ -39,9 +39,10 @@ var objTSL1128 = {};
 
 var objRC522 = {};
   objRC522.connectionType = "BLUETOOTH";
-  objRC522.model = "ARDUINO_RC522_LF";
+  objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "RC522 LF";
+
 
 /*function getStream() {
    var dropdown = document.getElementById("reader_selector");
@@ -71,7 +72,7 @@ function getParsed() {
    else if (selectedReader == "tsl_1128") {
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
-   else if (selectedReader == "rc522_lf") {
+   else if (selectedReader == "rc522_hf") {
       radlib.connect(updateTable, dumpLog, objRC522);
    }
    else {
@@ -149,15 +150,14 @@ function saveReader() {
    $('#tagsDB').show();
 }
 
-
-// testing
+// testing Reader DB functionality
 function testing(){
    var object = {};
-   object.connection = "poop";
-   object.model = "Test";
+   object.connection = "TestConnection";
+   object.model = "TestModel";
    object.address = "12345 5 6";
-   object.friendlyName = "Tali";
-   console.log("I'm here in testing");
+   object.friendlyName = "DEBUG";
+
    db_initReaders();
    db_checkReaderEntries(object);
 }

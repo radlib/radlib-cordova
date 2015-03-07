@@ -5,7 +5,7 @@
 
 //require the necessary external files
 var bluetooth = require("./CommBluetooth");
-var rc522 = require("./ReaderArduino_RC522_LF");
+var rc522 = require("./ReaderArduino_RC522_HF");
 var tsl1128 = require("./ReaderTSL_1128_UHF");
 var internalCam = require("./InternalBarcodeScanner");
 
@@ -27,7 +27,7 @@ var radlib = {};
 radlib.connect = function(success, failure, reader) {
    switch(reader.connectionType) {
       case "BLUETOOTH":
-         if (reader.model === "ARDUINO_RC522_LF"){
+         if (reader.model === "ARDUINO_RC522_HF"){
             rc522.parse(success, failure, reader);
          } 
          else if (reader.model === "TSL_1128_UHF"){
