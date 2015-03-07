@@ -81,6 +81,7 @@ function db_addEntry(object) {
 
 // Checks to see if object is already in database and updates count or adds entry to database, accordingly
 function db_checkReaderEntries(object) {
+   alert("HEYOOOO");
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
 
@@ -88,6 +89,7 @@ function db_checkReaderEntries(object) {
       tx.executeSql("SELECT * FROM READERS WHERE friendlyName= '" + object.friendlyName + "'", [], function (tx, results) {
       // if no results are found
       if (results.rows.length == 0) {
+         alert("new reader!");
          db_addReaderEntry(object);
       }
       else {
@@ -150,6 +152,24 @@ function db_print() {
    });
 }
 
+function db_listReaders() {
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
+   var ReaderList;
+
+   db.transaction(function (tx) {
+      tx.executeSql('SELECT * FROM READERS', [], function (tx, results) {
+         var len = results.rows.length, i;
+         for (i = 0; i < len; i++){
+            htmlTable += "<tr><td>" + results.rows.item(i).model;
+            htmlTable += "</td><td>" + results.rows.item(i).address;
+            htmlTable += "</td><td>" + results.rows.item(i).friendlyName;
+            htmlTable += "</td><td>" + results.rows.item(i).connection + "</td><td class='del' style='display:none;'><input type='checkbox' value='checked' class='del check' style='display:none;'></td></tr>";
+         }
+         $("#readersTable tbody").html(htmlTable);
+         }, null);
+   });
+}
 
 // Updates HTML table containing database entries
 function db_printReaders() {
@@ -160,7 +180,10 @@ function db_printReaders() {
    db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM READERS', [], function (tx, results) {
          var len = results.rows.length, i;
-         ReaderTable = "<option value='prompt' selected='true' disabled>Select a Reader</option>";
+         ReaderTable = "<option value='prompt' selected='true' disabled>Tap here to select an option</option>";
+         ReaderTable += "<option value='scan'>Scan for readers</option>";
+         ReaderTable += "<option value='tsl_1128'>TSL 1128</option>";
+         ReaderTable += "<option value='rc522_lf'>RC522 LF</option>";
          for (i = 0; i < len; i++){
             ReaderTable += "<option value='" + results.rows.item(i).model + "'>" + results.rows.item(i).friendlyName + "</option>";
          }

@@ -69,7 +69,7 @@ function getParsed() {
    if (selectedReader == "scan") {
       selectConnectionScreen();
    }
-   else if (selectedReader == "tsl_1128") {
+   else if (selectedReader == "tsl_1128" || selectedReader == "Throne") {
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
    else if (selectedReader == "rc522_hf") {
@@ -122,7 +122,7 @@ function deleteMe(data) {
 
 function saveReader() {
    // stop discovery, MOVE THIS LATER
-   bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
+   //bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
 
    dumpLog("Adding reader to database...");
 
@@ -142,7 +142,6 @@ function saveReader() {
    newReader.friendlyName = friendlyName;
 
    db_checkReaderEntries(newReader);
-
    dumpLog("Reader saved!");
 
    $('.addReader').hide();
@@ -196,6 +195,14 @@ function startdel() {
    dumpLog("Select the rows you would like to delete from the table.");
 }
 
+function startdelREADER() {
+   toggleMenu();
+   db_listReaders();
+   $('.delRead').show();
+   $('.controls').hide();
+   dumpLog("Select the rows you would like to delete from the table.");
+}
+
 // Remove HTML rows for rows with a checked checkbox
 function finishdel() {
    $('.del').hide();
@@ -209,6 +216,24 @@ function finishdel() {
             objToDelete.id = row[0].cells[0].innerHTML;
             objToDelete.friendlyName = row[0].cells[1].innerHTML;
             db_deleteEntry(objToDelete);
+            row.remove();
+         }
+      }
+   );
+   dumpLog("Select a reader to get started.");
+}
+
+function finishdelREADER() {
+   $('.delRead').hide();
+   $('.testonly').show();
+   $('.controls').show();
+   $('#readersTable').find('tr').each(
+      function() {
+         var row = $(this);
+         if (row.find('input[type="checkbox"]').is(':checked')) {
+            var objToDelete = {};
+            objToDelete.friendlyName = row[0].cells[1].innerHTML;
+            db_deleteReaderEntry(objToDelete);
             row.remove();
          }
       }
