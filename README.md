@@ -146,7 +146,7 @@ The `bluetoothUtils` object has three functions: `turnOnBluetooth()`, `turnOffBl
     <td colspan="2"><code>bluetoothUtils.stopDiscovery = function(success, failure);</code></td>
   </tr>
   <tr>
-    <td colspan="2">Description: tells the bluetooth device to finish up looking nearby bluetooth devices. This function only needs to be called if `radlib.scan()` for Bluetooth is to be stopped prematurely.
+    <td colspan="2">Description: tells the bluetooth device to finish up looking nearby bluetooth devices. This function only needs to be called if <code>radlib.scan()</code> for Bluetooth is to be stopped prematurely.
 </td>
   </tr>
   <tr>
