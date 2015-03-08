@@ -52,7 +52,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
   <tr>
     <td><code>connectionTypes</code></td>
     <td>
-     An array of connectionType to scan for. Currently the only supported value inside <code>connectionTypes</code> is 
+     An array of connectionType to scan for. Currently the only supported value for <code>connectionTypes</code> is 
   ["BLUETOOTH"]
     </td>
   </tr>
