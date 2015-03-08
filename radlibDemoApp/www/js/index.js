@@ -32,47 +32,31 @@ $('#cheque').change(
 
 // Ugly temporary global variables since scan isn't implemented
 var objTSL1128 = {};
-  objTSL1128.connectionType = "BLUETOOTH";
+  objTSL1128.connection = "BLUETOOTH";
   objTSL1128.model = "TSL_1128_UHF";
   objTSL1128.address = "20:14:05:08:15:63";
   objTSL1128.friendlyName = "TSL 1128";
 
 var objRC522 = {};
-  objRC522.connectionType = "BLUETOOTH";
+  objRC522.connection = "BLUETOOTH";
   objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "RC522 LF";
 
-
-/*function getStream() {
-   var dropdown = document.getElementById("reader_selector");
-   var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-
-   if (selectedReader == "scan") {
-      bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
-   }
-   else if (selectedReader == "tsl_1128") {
-      radlib.connect(dumpLog, dumpLog, objTSL1128, "STREAM");
-   }
-   else if (selectedReader == "rc522_lf") {
-      radlib.connect(dumpLog, dumpLog, objRC522, "STREAM");
-   }
-   else {
-      alert("Please select a reader");
-   }
-}*/
-
 function getParsed() {
-   var dropdown = document.getElementById("reader_selector");
+   var dropdown = document.getElementById("readersDB");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-
+   //alert(selectedReader);
    if (selectedReader == "scan") {
       selectConnectionScreen();
    }
-   else if (selectedReader == "tsl_1128" || selectedReader == "Throne") {
+   else if (selectedReader == "TSL_1128_UHF" || selectedReader == "Throne") {
+      if (selectedReader=="Throne") {
+         alert("THRONE!!!!!!!!!!!");
+      }
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
-   else if (selectedReader == "rc522_hf") {
+   else if (selectedReader == "ARDUINO_RC522_HF") {
       radlib.connect(updateTable, dumpLog, objRC522);
    }
    else {
@@ -84,11 +68,11 @@ function selectConnectionScreen() {
    $('.controls').hide();
    $('.selectConnectionscan').show();
    $('#tagsDB').hide();
-
    dumpLog("Please choose a connection type.");
 }
 
 function selectConnectionType() {
+   $('#button_selectconnection').disabled = "disabled";
    var connectionDropdown = document.getElementById("connection_type_selector");
    var selectedConnection = connectionDropdown.options[connectionDropdown.selectedIndex].value;
 
@@ -144,8 +128,8 @@ function saveReader() {
    db_checkReaderEntries(newReader);
    dumpLog("Reader saved!");
 
-   $('.addReader').hide();
    $('.controls').show();
+   $('.addReader').hide();
    $('#tagsDB').show();
 }
 
@@ -198,8 +182,9 @@ function startdel() {
 function startdelREADER() {
    toggleMenu();
    db_listReaders();
-   $('.delRead').show();
    $('.controls').hide();
+   $('.delRead').show();
+   $('#tagsTable').hide();
    dumpLog("Select the rows you would like to delete from the table.");
 }
 
@@ -227,17 +212,19 @@ function finishdelREADER() {
    $('.delRead').hide();
    $('.testonly').show();
    $('.controls').show();
+   $('#tagsTable').show();
    $('#readersTable').find('tr').each(
       function() {
          var row = $(this);
          if (row.find('input[type="checkbox"]').is(':checked')) {
             var objToDelete = {};
-            objToDelete.friendlyName = row[0].cells[1].innerHTML;
+            objToDelete.friendlyName = row[0].cells[2].innerHTML;
             db_deleteReaderEntry(objToDelete);
             row.remove();
          }
       }
    );
+   db_printReaders();
    dumpLog("Select a reader to get started.");
 }
 

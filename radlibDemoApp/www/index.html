@@ -56,6 +56,11 @@
                   </a>
                </li>
                <li class="topcoat-list__item side-nav__list__item is-active">
+                  <a href="#" class="side-nav__button" onclick="db_clearReaders()">
+                      <p>Clear All Saved Readers</p>
+                  </a>
+               </li>
+               <li class="topcoat-list__item side-nav__list__item is-active">
                   <a href="#" class="side-nav__button" onclick="showAbout()">
                       <p>About</p>
                   </a>
@@ -80,12 +85,15 @@
          </div>
          <div id="input" class="controls">
             <div id="user_input_buttons">
-               <select id="reader_selector" class="topcoat-select">
+               <select id="readersDB" class="topcoat-select controls">
+                  <option value="prompt" selected="true" disabled>Tap here to select an option</option>
+               </select>
+               <!--select id="reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select an option</option>
                   <option value="scan">Scan for readers</option>
                   <option value="tsl_1128">TSL 1128</option>
                   <option value="rc522_hf">RC522 HF</option>
-               </select>
+               </select-->
                <!--button id="button_stream" class="topcoat-button--cta" onclick="getStream()">Get I/O Stream</button-->
                <button id="button_parsed" class="topcoat-button--cta" onclick="getParsed()">Go!</button>
             </div>
@@ -120,7 +128,7 @@
                      <th>Address</th>
                      <th>Friendly Name</th>
                      <th>Connection</th>
-                     <th class="del" style="display:none;">Delete?</th>
+                     <th class="delRead" style="display:none;">Delete?</th>
                   </tr>
                </thead>
                <tbody>
@@ -133,13 +141,13 @@
          </div>
 
          <!-- Katrina's testing buttons -->
-         <button id="testing" class="testonly" onClick="testpop()">Testing</button>
-         <button id="testing2" class="testonly" onClick="testpop2()">Testing2</button>
+         <!--button id="testing" class="testonly" onClick="testpop()">Testing</button>
+         <button id="testing2" class="testonly" onClick="testpop2()">Testing2</button-->
 
          <!-- Jeslin's testing buttons -->
-         <select id="readersDB" class="topcoat-select controls">
+         <!--select id="readersDB" class="topcoat-select controls">
             <option value="prompt" selected="true" disabled>Tap here to select an option</option>
-         </select>
+         </select-->
 
          <div class="selectConnectionscan" style="display:none;">
             <div id="selectedConnections" style="text-align:center;">
@@ -150,8 +158,6 @@
                   <option value="USB" disabled>USB - not yet implemented</option>
                </select><br /><br />
                <button id="button_selectconnection" class="topcoat-button--cta" onclick="selectConnectionType()">Find Readers</button>
-
-               <button id="lol" class="topcoat-button--cta" onclick="deleteMe()">Go!</button>
             </div>
          </div>
 
@@ -159,32 +165,14 @@
            <div id="detectedReaders" style="text-align:center;">
                <select id="detected_reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select a reader</option>
-                  <option value="0000">SomeReader</option>
                </select><br />
                <p>Optional:<br/>Enter a friendly name for this reader</p>
                <input type="text" id="friendlyName" class="topcoat-text-input" placeholder="MyNewReader">
                <br /><br />
                <button id="button_selectdetected" class="topcoat-button--cta" onclick="saveReader()">Get Connected</button>
             </div>
-         </div-->
+         </div>
              
       </div>
-
-      <!-- Old buttons, to delete when project is complete -->
-      <!--button id="buttonScanIOParsed" onClick="scanConnectLFParsed()">Scan for Readers IO Parsed</button>
-
-      <button id="buttonDirectIOParsed" onClick="directConnectLFParsed()">Direct Connect LF IO Parsed</button>
-      <br />
-      
-      <button id="buttonToggleBT" onClick="toggleBT()">Turn Bluetooth On</button>
-      
-      <button id="buttonScanIOStream" onClick="scanConnectLFStream()">Scan IO Stream</button>
-      
-      <button id="buttonDirectIOStream" onClick="directConnectLFStream()">Direct Connect LF IO Stream</button>
-
-      <button id="testing" onClick="testing()">Testing</button>
-      
-      <button id="delete" onClick="db_clear()">Clear Database</button> -->
-
     </body>
 </html>

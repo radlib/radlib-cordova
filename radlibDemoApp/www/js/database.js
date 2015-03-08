@@ -81,7 +81,6 @@ function db_addEntry(object) {
 
 // Checks to see if object is already in database and updates count or adds entry to database, accordingly
 function db_checkReaderEntries(object) {
-   alert("HEYOOOO");
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
 
@@ -104,6 +103,9 @@ function db_checkReaderEntries(object) {
 function db_addReaderEntry(object) {
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
+
+   console.log("adding entry...");
+   console.log(object);
 
    db.transaction(function (tx) {
       tx.executeSql("INSERT INTO READERS (connection, model, address, friendlyName) VALUES(?,?,?,?)", 
@@ -155,7 +157,7 @@ function db_print() {
 function db_listReaders() {
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
-   var ReaderList;
+   var htmlTable;
 
    db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM READERS', [], function (tx, results) {
@@ -164,7 +166,7 @@ function db_listReaders() {
             htmlTable += "<tr><td>" + results.rows.item(i).model;
             htmlTable += "</td><td>" + results.rows.item(i).address;
             htmlTable += "</td><td>" + results.rows.item(i).friendlyName;
-            htmlTable += "</td><td>" + results.rows.item(i).connection + "</td><td class='del' style='display:none;'><input type='checkbox' value='checked' class='del check' style='display:none;'></td></tr>";
+            htmlTable += "</td><td>" + results.rows.item(i).connection + "</td><td class='delRead'><input type='checkbox' value='checked' class='delRead check'></td></tr>";
          }
          $("#readersTable tbody").html(htmlTable);
          }, null);
@@ -176,16 +178,16 @@ function db_printReaders() {
    var dbSize = 5 * 1024 * 1024;
    var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
    var ReaderTable;
+   console.log("printing readers");
 
    db.transaction(function (tx) {
       tx.executeSql('SELECT * FROM READERS', [], function (tx, results) {
          var len = results.rows.length, i;
          ReaderTable = "<option value='prompt' selected='true' disabled>Tap here to select an option</option>";
          ReaderTable += "<option value='scan'>Scan for readers</option>";
-         ReaderTable += "<option value='tsl_1128'>TSL 1128</option>";
-         ReaderTable += "<option value='rc522_lf'>RC522 LF</option>";
          for (i = 0; i < len; i++){
             ReaderTable += "<option value='" + results.rows.item(i).model + "'>" + results.rows.item(i).friendlyName + "</option>";
+            console.log(results.rows.item(i).model);
          }
          document.querySelector('#readersDB').innerHTML = ReaderTable;
          }, null);
@@ -211,7 +213,25 @@ function db_clear() {
       alert("TAGS table cleared!");
       db_init();
    }
+}
 
+function db_clearReaders() {
+   toggleMenu();
+
+   var dbSize = 5 * 1024 * 1024;
+   var db = openDatabase("RadLibDatabase", "1.0", "RadLib DB", dbSize);
+
+   var result = confirm("Are you sure you want to clear the READERS table?");
+
+   if (result == true) {
+      db.transaction(function (tx) {
+         tx.executeSql('DROP TABLE READERS');
+      });
+
+      $("#readersTable tbody").html("");
+      alert("READERS table cleared!");
+      db_initReaders();
+   }
 }
 
 //allow cordova.file to be used
