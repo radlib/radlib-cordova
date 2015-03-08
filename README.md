@@ -30,7 +30,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
     <td colspan="2"><code>radlib.scan = function (success, failure, connectionTypes);</code></td>
   </tr>
   <tr>
-    <td colspan="2">Description: Scans for nearby devices based on the connectionType(s) specified.</td>
+    <td colspan="2">Description: scans for nearby devices based on the connectionType(s) specified.</td>
   </tr>
   <tr>
     <td><code>success</code></td>
@@ -62,7 +62,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
     <td colspan="2"><code>radlib.connect = function (success, failure, reader);</code></td>
   </tr>
   <tr>
-    <td colspan="2">Description: Connects to a specified reader.</td>
+    <td colspan="2">Description: connects to a specified reader.</td>
   </tr>
   <tr>
     <td><code>success</code></td>
