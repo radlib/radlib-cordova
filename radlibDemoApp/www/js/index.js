@@ -1,6 +1,8 @@
 function initialize_all() {
-    db_initAndLoad();
-   // db_printReaders();
+   db_initAndLoad();
+   db_checkReaderEntries(objTSL1128);
+   db_checkReaderEntries(objRC522);
+   db_printReaders();
 }
 
 function toggleMenu() {
@@ -10,6 +12,10 @@ function toggleMenu() {
       } else {
        cl.add('left-nav');
       }
+}
+
+function hideModal() {
+   $('#modal').hide();
 }
 
 function showAbout() {
@@ -26,46 +32,27 @@ $('#cheque').change(
 
 // Ugly temporary global variables since scan isn't implemented
 var objTSL1128 = {};
-  objTSL1128.connectionType = "BLUETOOTH";
+  objTSL1128.connection = "BLUETOOTH";
   objTSL1128.model = "TSL_1128_UHF";
   objTSL1128.address = "20:14:05:08:15:63";
-  objTSL1128.friendlyName = "Friendly UHF Reader Name";
+  objTSL1128.friendlyName = "TSL 1128";
 
 var objRC522 = {};
-  objRC522.connectionType = "BLUETOOTH";
+  objRC522.connection = "BLUETOOTH";
   objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
-  objRC522.friendlyName = "Friendly HF Reader Name";
-
-/*function getStream() {
-   var dropdown = document.getElementById("reader_selector");
-   var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-
-   if (selectedReader == "scan") {
-      bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
-   }
-   else if (selectedReader == "tsl_1128") {
-      radlib.connect(dumpLog, dumpLog, objTSL1128, "STREAM");
-   }
-   else if (selectedReader == "rc522_lf") {
-      radlib.connect(dumpLog, dumpLog, objRC522, "STREAM");
-   }
-   else {
-      alert("Please select a reader");
-   }
-}*/
+  objRC522.friendlyName = "RC522 HF";
 
 function getParsed() {
-   var dropdown = document.getElementById("reader_selector");
+   var dropdown = document.getElementById("readersDB");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-
    if (selectedReader == "scan") {
-      radlib.scan(deleteMe, dumpLog, ["BLUETOOTH"]);
+      selectConnectionScreen();
    }
-   else if (selectedReader == "tsl_1128") {
+   else if (selectedReader == "TSL_1128_UHF" || selectedReader == "Throne") {
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
-   else if (selectedReader == "rc522_hf") {
+   else if (selectedReader == "ARDUINO_RC522_HF") {
       radlib.connect(updateTable, dumpLog, objRC522);
    }
    else {
@@ -73,13 +60,69 @@ function getParsed() {
    }
 }
 
-//sample function to show how java returns the device names/addresses
-function deleteMe(data){
-   var string = "";
-   for(var i = 0; i < data.length;i++){
-      string += data[i].name + " " + data[i].address + "\n";
+function selectConnectionScreen() {
+   $('.controls').hide();
+   $('.selectConnectionscan').show();
+   $('#tagsDB').hide();
+   dumpLog("Please choose a connection type.");
+}
+
+function selectConnectionType() {
+   var selectConnectButton = $('#button_selectconnection');
+   var connectionDropdown = document.getElementById("connection_type_selector");
+   var selectedConnection = connectionDropdown.options[connectionDropdown.selectedIndex].value;
+
+   if (selectedConnection == "BLUETOOTH") {
+      dumpLog("Scanning for readers, please wait...");
+
+      radlib.scan(showDetected, dumpLog, ["BLUETOOTH"]);
    }
-   alert(string);
+   else {
+      dumpLog("Please select a valid connection type");
+   }
+}
+
+// show detected readers
+function showDetected(data) {
+   dumpLog("Select a reader to connect<br>and save it to the database.");
+   $('.controls').hide();
+   $('.selectConnectionscan').hide();
+   $('#confirmButtons').hide();
+   $('#readerConfirmButtons').hide();
+   $('.addReader').show();
+   $('#tagsDB').hide();
+
+   for(var i = 0; i < data.length;i++) {
+      document.getElementById("detected_reader_selector").innerHTML += "<option value='" + data[i].address +"'>" + data[i].name + " - " + data[i].address + "</option>";
+   }
+}
+
+function saveReader() {
+   bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
+
+   dumpLog("Adding reader to database...");
+
+   var connectionDropdown = document.getElementById("detected_reader_selector");
+   var readerModel = connectionDropdown.options[connectionDropdown.selectedIndex].innerHTML.split(" - ")[0];
+   var readerAddress = connectionDropdown.options[connectionDropdown.selectedIndex].value;
+   var friendlyName = document.getElementById("friendlyName").value;
+
+   if(friendlyName == "") {
+      friendlyName = "My New Reader";
+   }
+
+   var newReader = {};
+   newReader.connection = "BLUETOOTH";
+   newReader.model = readerModel;
+   newReader.address = readerAddress;
+   newReader.friendlyName = friendlyName;
+
+   db_checkReaderEntries(newReader);
+   dumpLog("Reader saved!");
+
+   $('.controls').show();
+   $('.addReader').hide();
+   $('#tagsDB').show();
 }
 
 // testing Reader DB functionality
@@ -89,6 +132,7 @@ function testing(){
    object.model = "TestModel";
    object.address = "12345 5 6";
    object.friendlyName = "DEBUG";
+
    db_initReaders();
    db_checkReaderEntries(object);
 }
@@ -116,7 +160,7 @@ function testpop2(){
 }
 
 function scanBarcode() {
-   radlib.connect(updateTable, dumpLog, {connectionType:"CAMERA"});
+   radlib.connect(updateTable, dumpLog, {connection:"CAMERA"});
 }
 
 function startdel() {
@@ -124,6 +168,15 @@ function startdel() {
    $('.del').show();
    $('.testonly').hide();
    $('.controls').hide();
+   dumpLog("Select the rows you would like to delete from the table.");
+}
+
+function startdelREADER() {
+   toggleMenu();
+   db_listReaders();
+   $('.controls').hide();
+   $('.delRead').show();
+   $('#tagsTable').hide();
    dumpLog("Select the rows you would like to delete from the table.");
 }
 
@@ -144,6 +197,26 @@ function finishdel() {
          }
       }
    );
+   dumpLog("Select a reader to get started.");
+}
+
+function finishdelREADER() {
+   $('.delRead').hide();
+   $('.testonly').show();
+   $('.controls').show();
+   $('#tagsTable').show();
+   $('#readersTable').find('tr').each(
+      function() {
+         var row = $(this);
+         if (row.find('input[type="checkbox"]').is(':checked')) {
+            var objToDelete = {};
+            objToDelete.friendlyName = row[0].cells[2].innerHTML;
+            db_deleteReaderEntry(objToDelete);
+            row.remove();
+         }
+      }
+   );
+   db_printReaders();
    dumpLog("Select a reader to get started.");
 }
 

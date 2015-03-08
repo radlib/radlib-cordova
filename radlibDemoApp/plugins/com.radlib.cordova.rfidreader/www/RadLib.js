@@ -25,7 +25,7 @@ var radlib = {};
  * @reader JSON object detailing the properties of the RFID reader to connect to
  */
 radlib.connect = function(success, failure, reader) {
-   switch(reader.connectionType) {
+   switch(reader.connection) {
       case "BLUETOOTH":
          if (reader.model === "ARDUINO_RC522_HF"){
             rc522.parse(success, failure, reader);
