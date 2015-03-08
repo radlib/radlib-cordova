@@ -69,25 +69,21 @@ function selectConnectionScreen() {
 
 function selectConnectionType() {
    var selectConnectButton = $('#button_selectconnection');
-   //$(selectConnectButton).prop("disabled", true);
-
    var connectionDropdown = document.getElementById("connection_type_selector");
    var selectedConnection = connectionDropdown.options[connectionDropdown.selectedIndex].value;
 
    if (selectedConnection == "BLUETOOTH") {
       dumpLog("Scanning for readers, please wait...");
 
-      radlib.scan(deleteMe, dumpLog, ["BLUETOOTH"]);
+      radlib.scan(showDetected, dumpLog, ["BLUETOOTH"]);
    }
    else {
       dumpLog("Please select a valid connection type");
    }
 }
 
-//sample function to show how java returns the device names/addresses
-// DO NOT DELETE!!! MUST RENAME LATER!!!!!!!
-function deleteMe(data) {
-   //$(selectConnectButton).prop("disabled", false);
+// show detected readers
+function showDetected(data) {
    dumpLog("Select a reader to connect<br>and save it to the database.");
    $('.controls').hide();
    $('.selectConnectionscan').hide();
@@ -95,17 +91,13 @@ function deleteMe(data) {
    $('#readerConfirmButtons').hide();
    $('.addReader').show();
    $('#tagsDB').hide();
-   // RETURNS AN ARRAY OF READERS
-   var string = "";
+
    for(var i = 0; i < data.length;i++) {
-      //string += data[i].name + " " + data[i].address + "\n";
       document.getElementById("detected_reader_selector").innerHTML += "<option value='" + data[i].address +"'>" + data[i].name + " - " + data[i].address + "</option>";
    }
-   //alert(string);
 }
 
 function saveReader() {
-   // stop discovery, MOVE THIS LATER
    bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
 
    dumpLog("Adding reader to database...");
