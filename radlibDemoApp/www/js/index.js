@@ -46,14 +46,10 @@ var objRC522 = {};
 function getParsed() {
    var dropdown = document.getElementById("readersDB");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-   //alert(selectedReader);
    if (selectedReader == "scan") {
       selectConnectionScreen();
    }
    else if (selectedReader == "TSL_1128_UHF" || selectedReader == "Throne") {
-      if (selectedReader=="Throne") {
-         alert("THRONE!!!!!!!!!!!");
-      }
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
    else if (selectedReader == "ARDUINO_RC522_HF") {
@@ -106,12 +102,12 @@ function deleteMe(data) {
 
 function saveReader() {
    // stop discovery, MOVE THIS LATER
-   //bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
+   bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
 
    dumpLog("Adding reader to database...");
 
    var connectionDropdown = document.getElementById("detected_reader_selector");
-   var readerModel = connectionDropdown.options[connectionDropdown.selectedIndex].innerHTML;
+   var readerModel = connectionDropdown.options[connectionDropdown.selectedIndex].innerHTML.split(" - ")[0];
    var readerAddress = connectionDropdown.options[connectionDropdown.selectedIndex].value;
    var friendlyName = document.getElementById("friendlyName").value;
 
