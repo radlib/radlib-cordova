@@ -41,7 +41,7 @@ var objRC522 = {};
   objRC522.connection = "BLUETOOTH";
   objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
-  objRC522.friendlyName = "RC522 LF";
+  objRC522.friendlyName = "RC522 HF";
 
 function getParsed() {
    var dropdown = document.getElementById("readersDB");
