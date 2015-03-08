@@ -68,7 +68,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
   <tr>
     <td><code>success</code></td>
     <td>
-      A function that is called back on success. On success, the callback function will be provided with an object with the following properties:
+      A function that is called back on success. On success, the callback function will be provided with an array of objects with the following properties:
       <ul>
         <li>id: id of tag that was read</li>
         <li>reader: device name of the reader</li>
