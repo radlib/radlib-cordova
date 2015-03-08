@@ -88,7 +88,6 @@ function db_checkReaderEntries(object) {
       tx.executeSql("SELECT * FROM READERS WHERE friendlyName= '" + object.friendlyName + "'", [], function (tx, results) {
       // if no results are found
       if (results.rows.length == 0) {
-         alert("new reader!");
          db_addReaderEntry(object);
       }
       else {
