@@ -52,7 +52,8 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
   <tr>
     <td><code>connectionTypes</code></td>
     <td>
-     An array of connectionType to scan for. Currently the only supported value inside <code>connectionTypes</code> is "BLUETOOTH"
+     An array of connectionType to scan for. Currently the only supported value inside <code>connectionTypes</code> is 
+  ["BLUETOOTH"]
     </td>
   </tr>
 </table>
@@ -74,7 +75,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
         <li>time: time the frame was read in the form HH:mm:ss AM/PM</li>
         <li>date: date the frame was read in the form MM:dd:yyyy</li>
         <li>frame: the frame of data which was parsed</li>
-      <ul>
+      </ul>
     </td>
   </tr>
   <tr>
@@ -92,6 +93,10 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
         <li>address: address of the reader device (only required for "BLUETOOTH" connectionType)</li>
         <li>connectionType: type of connection for device. Currently only "BLUETOOTH" and "CAMERA" are supported</li>
       </ul>
+      and the following optional property:
+      <ul>
+        <li>friendlyName: a user specified name to help differentiate between readers</li>
+      <ul>
       Note: the required properties for this reader object are similar to what is returned in <code>scan()</code>. It is possible to save the object obtained from <code>scan()</code>, add a model property to it, and then use it for <code>connect()</code>.
     </td>
   </tr>
