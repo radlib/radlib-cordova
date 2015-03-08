@@ -68,7 +68,9 @@ function selectConnectionScreen() {
 }
 
 function selectConnectionType() {
-   $('#button_selectconnection').disabled = "disabled";
+   var selectConnectButton = $('#button_selectconnection');
+   //$(selectConnectButton).prop("disabled", true);
+
    var connectionDropdown = document.getElementById("connection_type_selector");
    var selectedConnection = connectionDropdown.options[connectionDropdown.selectedIndex].value;
 
@@ -85,12 +87,14 @@ function selectConnectionType() {
 //sample function to show how java returns the device names/addresses
 // DO NOT DELETE!!! MUST RENAME LATER!!!!!!!
 function deleteMe(data) {
+   //$(selectConnectButton).prop("disabled", false);
    dumpLog("Select a reader to connect<br>and save it to the database.");
    $('.controls').hide();
    $('.selectConnectionscan').hide();
+   $('#confirmButtons').hide();
+   $('#readerConfirmButtons').hide();
    $('.addReader').show();
    $('#tagsDB').hide();
-
    // RETURNS AN ARRAY OF READERS
    var string = "";
    for(var i = 0; i < data.length;i++) {
