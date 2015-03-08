@@ -160,7 +160,7 @@ function testpop2(){
 }
 
 function scanBarcode() {
-   radlib.connect(updateTable, dumpLog, {connectionType:"CAMERA"});
+   radlib.connect(updateTable, dumpLog, {connection:"CAMERA"});
 }
 
 function startdel() {
