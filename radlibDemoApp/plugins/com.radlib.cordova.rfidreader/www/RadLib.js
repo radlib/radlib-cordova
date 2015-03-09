@@ -1,8 +1,3 @@
-//These comments are extremely obviously who writes in javascript/nodejs, so
-//generally they should not even be in the file like this
-//but these are provided here since some of you have never touched js/nodejs
-//Should probably delete these sort of comments in the end.
-
 //require the necessary external files
 var bluetooth = require("./CommBluetooth");
 var rc522 = require("./ReaderArduino_RC522_HF");
@@ -18,7 +13,7 @@ var radlib = {};
  * callback function is called. Accepted reader objects are required
  * to have the following properties:
  *       reader.connectionType : "BLUETOOTH" or "CAMERA"
- *       reader.model : "ARDUINO_RC522_LF" or TSL_1128_UHF for bluetooth connectionTypes
+ *       reader.model : "ARDUINO_RC522_HF" or TSL_1128_UHF for bluetooth connectionTypes
  *       reader.address : mac address in string format
  * @success function(JSON parsedObj) function to call on success
  * @failure function(string errorMsg) function to call on failure

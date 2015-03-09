@@ -9,6 +9,7 @@
       <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
       <link rel="stylesheet" type="text/css" href="css/index.css" />
       <link rel="icon" type="image/png" href="img/logosquare.png" />
+
       <title>RadLib Demo</title>
 
       <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
@@ -16,7 +17,6 @@
       <script type="text/javascript" src="js/database.js"></script>
       <script type="text/javascript" src="cordova.js"></script>
     </head>
-
     <!-- Initialize database as soon as body loads -->
    <body onload="initialize_all()">
       <div class="topcoat-navigation-bar">
@@ -133,7 +133,7 @@
             <button id="finishdelread" class="delRead topcoat-button--cta" style="text-align:center; display:none;" onclick="finishdelREADER()">Finished!</button>
          </div>
 
-         <div class="selectConnectionscan" style="display:none;">
+         <div class="selectConnectionScreen" style="display:none;">
             <div id="selectedConnections" style="text-align:center;">
                <select id="connection_type_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Select a connection type</option>
