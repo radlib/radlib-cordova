@@ -78,7 +78,7 @@ function getParsed() {
    if (selectedReader == "scan") {
       showSelectConnectionScreen();
    }
-   else if (selectedReader == "TSL_1128_UHF" || selectedReader == "Throne") {
+   else if (selectedReader == "TSL_1128_UHF") {
       radlib.connect(updateTable, dumpLog, objTSL1128);
    }
    else if (selectedReader == "ARDUINO_RC522_HF") {
@@ -136,6 +136,45 @@ function showDetected(data) {
 /*
  * Saves the selected reader to the reader database and returns reader to the initial home screen.
  */
+function saveReaderAndConnect() {
+   var detectedReaders = document.getElementById("detected_reader_selector");
+   var deviceModel = document.getElementById("device_model_selector");
+
+   var selectedReaderAddress = detectedReaders.options[detectedReaders.selectedIndex].value;
+   var selectedModel = deviceModel.options[deviceModel.selectedIndex].value;
+
+   if (selectedReaderAddress == "prompt") {
+      alert("Please select a reader to save");
+   }
+   else if (selectedModel == "prompt") {
+      alert("Please select a device model for parsing");
+   }
+   else {
+      var friendlyName = document.getElementById("friendlyName").value;
+
+      if (friendlyName == "") {
+         friendlyName = "My New Reader";
+      }
+
+      var newReader = {};
+      newReader.connection = "BLUETOOTH";
+      newReader.model = selectedModel;
+      newReader.address = selectedReaderAddress;
+      newReader.friendlyName = friendlyName;
+
+      dumpLog("Adding reader to database...");
+      db_checkReaderEntries(newReader);
+      dumpLog("Reader saved! Connecting...");
+
+      $('.controls').show();
+      $('.addReader').hide();
+      $('#tagsDB').show();
+
+      radlib.connect(updateTable, dumpLog, newReader);
+   }
+}
+
+/*
 function saveReader() {
    bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
 
@@ -162,7 +201,7 @@ function saveReader() {
    $('.controls').show();
    $('.addReader').hide();
    $('#tagsDB').show();
-}
+}*/
 
 /*
  * Toggles the menu drawer.
