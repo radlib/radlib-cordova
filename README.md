@@ -75,6 +75,7 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
         <li>time: time the frame was read in the form HH:mm:ss AM/PM</li>
         <li>date: date the frame was read in the form MM:dd:yyyy</li>
         <li>frame: the frame of data which was parsed</li>
+        <li>friendlyName: user specified name sent in through the <code>reader</code> object</li>
       </ul>
     </td>
   </tr>
