@@ -9,7 +9,7 @@
 var objTSL1128 = {};
   objTSL1128.connection = "BLUETOOTH";
   objTSL1128.model = "TSL_1128_UHF";
-  objTSL1128.address = "20:14:05:08:15:63";
+  objTSL1128.address = "20:14:05:08:15:63"; //00:07:80:08:78:01
   objTSL1128.friendlyName = "TSL 1128";
 
 /*
@@ -72,20 +72,19 @@ function scanBarcode() {
 /*
  * Connects to the reader selected by the user.
  */
-function getParsed() {
+function getParsed() { ////// CHANGE THIS TO SEND OBJECTS TO RADLIB.CONNECT
    var dropdown = document.getElementById("readersDB");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-   if (selectedReader == "scan") {
+   
+   if (selectedReader =="prompt") {
+      alert("Please select a reader");
+   }
+   else if (selectedReader == "scan") {
       showSelectConnectionScreen();
    }
-   else if (selectedReader == "TSL_1128_UHF") {
-      radlib.connect(updateTable, dumpLog, objTSL1128);
-   }
-   else if (selectedReader == "ARDUINO_RC522_HF") {
-      radlib.connect(updateTable, dumpLog, objRC522);
-   }
    else {
-      alert("Please select a reader");
+      var parsedObj = JSON.parse(selectedReader);
+      radlib.connect(updateTable, dumpLog, parsedObj);
    }
 }
 
