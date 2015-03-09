@@ -1,8 +1,3 @@
-//These comments are extremely obviously who writes in javascript/nodejs, so
-//generally they should not even be in the file like this
-//but these are provided here since some of you have never touched js/nodejs
-//Should probably delete these sort of comments in the end.
-
 //require the necessary external files
 var bluetooth = require("./CommBluetooth");
 var rc522 = require("./ReaderArduino_RC522_HF");
