@@ -261,7 +261,7 @@ function showAbout() {
 
 
 
-/* TESTING FUNCTIONS FOR DEBUGGING *?
+/* TESTING FUNCTIONS FOR DEBUGGING */
 
 /*
  * Tests functionality of the reader database table.
