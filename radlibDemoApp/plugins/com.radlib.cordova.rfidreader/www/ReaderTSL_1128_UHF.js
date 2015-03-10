@@ -28,7 +28,7 @@ ReaderTSL_1128_UHF.parse = function(success, failure, reader){
       buffer = buffer.concat(data);
 
       if (buffer.lastIndexOf("ER:") >= 0){
-         nextFrameStart = buffer.lastIndexOf("ER:") + 6; // couldn't add 3 on this line for some reason
+         nextFrameStart = buffer.lastIndexOf("ER:") + 6;
          currentFrame = buffer.substring(0, nextFrameStart);
       }
       else if (buffer.lastIndexOf("OK:") >= 0){
@@ -37,7 +37,6 @@ ReaderTSL_1128_UHF.parse = function(success, failure, reader){
          buffer = buffer.substring(nextFrameStart, buffer.length);
       }
 
-      // Errors and tag reads must happen twice for the parser to react
       if(currentFrame.indexOf("ER:001") >= 0){
          failure("ER:001 Command not recognized!");
          returnVal.report = "lost";
@@ -68,7 +67,7 @@ ReaderTSL_1128_UHF.parse = function(success, failure, reader){
       }
    };
    
-   //call bluetooth connect to get input stream
+   // Call bluetooth connect to get input stream
    bluetooth.connectStream(parsedResults, failure, reader.address);
 };
 
