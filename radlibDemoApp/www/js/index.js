@@ -5,21 +5,22 @@
 
 /*
  * Object representing the TSL 1128 UHF reader.
- */
 var objTSL1128 = {};
   objTSL1128.connection = "BLUETOOTH";
   objTSL1128.model = "TSL_1128_UHF";
   objTSL1128.address = "20:14:05:08:15:63"; //00:07:80:08:78:01
   objTSL1128.friendlyName = "TSL 1128";
+*/
 
 /*
  * Object representing the RC522 HF reader.
- */
 var objRC522 = {};
   objRC522.connection = "BLUETOOTH";
   objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "RC522 HF";
+
+*/
 
 /*
  * Calls functions from database.js to initialize database with the values from the previous session.
@@ -27,8 +28,8 @@ var objRC522 = {};
  */
 function initialize_all() {
    db_initAndLoad();
-   db_checkReaderEntries(objTSL1128);
-   db_checkReaderEntries(objRC522);
+   //db_checkReaderEntries(objTSL1128);
+   //db_checkReaderEntries(objRC522);
    db_printReaders();
 }
 
