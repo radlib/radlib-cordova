@@ -28,12 +28,13 @@ ReaderTSL_1128_UHF.parse = function(success, failure, reader){
       buffer = buffer.concat(data);
 
       if (buffer.lastIndexOf("ER:") >= 0){
-         nextFrameStart = buffer.lastIndexOf("ER:"); // couldn't add 3 on this line for some reason
-         currentFrame = buffer.substring(0, nextFrameStart + 3);
-      }
-      else {
-         nextFrameStart = buffer.lastIndexOf("OK:");
+         nextFrameStart = buffer.lastIndexOf("ER:") + 6; // couldn't add 3 on this line for some reason
          currentFrame = buffer.substring(0, nextFrameStart);
+      }
+      else if (buffer.lastIndexOf("OK:") >= 0){
+         nextFrameStart = buffer.lastIndexOf("OK:") + 3;
+         currentFrame = buffer.substring(0, nextFrameStart);
+         buffer = buffer.substring(nextFrameStart, buffer.length);
       }
 
       // Errors and tag reads must happen twice for the parser to react
@@ -65,8 +66,6 @@ ReaderTSL_1128_UHF.parse = function(success, failure, reader){
          returnVal.date = resources.getCurrentDate();
          success(returnVal);
       }
-
-      buffer = buffer.substring(nextFrameStart, buffer.length);
    };
    
    //call bluetooth connect to get input stream
