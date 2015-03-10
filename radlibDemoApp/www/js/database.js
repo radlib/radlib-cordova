@@ -185,8 +185,8 @@ function db_printReaders() {
          ReaderTable = "<option value='prompt' selected='true' disabled>Tap here to select an option</option>";
          ReaderTable += "<option value='scan'>Scan for readers</option>";
          for (i = 0; i < len; i++){
-            ReaderTable += "<option value='" + results.rows.item(i).model + "'>" + results.rows.item(i).friendlyName + "</option>";
-            console.log(results.rows.item(i).model);
+            var stringifiedObj = JSON.stringify(results.rows.item(i));
+            ReaderTable += "<option value='" + stringifiedObj + "'>" + results.rows.item(i).friendlyName + "</option>";
          }
          document.querySelector('#readersDB').innerHTML = ReaderTable;
          }, null);

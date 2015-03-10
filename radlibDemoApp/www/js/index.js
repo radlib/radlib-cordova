@@ -5,21 +5,22 @@
 
 /*
  * Object representing the TSL 1128 UHF reader.
- */
 var objTSL1128 = {};
   objTSL1128.connection = "BLUETOOTH";
   objTSL1128.model = "TSL_1128_UHF";
-  objTSL1128.address = "20:14:05:08:15:63";
+  objTSL1128.address = "20:14:05:08:15:63"; //00:07:80:08:78:01
   objTSL1128.friendlyName = "TSL 1128";
+*/
 
 /*
  * Object representing the RC522 HF reader.
- */
 var objRC522 = {};
   objRC522.connection = "BLUETOOTH";
   objRC522.model = "ARDUINO_RC522_HF";
   objRC522.address = "00:14:03:02:03:26";
   objRC522.friendlyName = "RC522 HF";
+
+*/
 
 /*
  * Calls functions from database.js to initialize database with the values from the previous session.
@@ -27,8 +28,8 @@ var objRC522 = {};
  */
 function initialize_all() {
    db_initAndLoad();
-   db_checkReaderEntries(objTSL1128);
-   db_checkReaderEntries(objRC522);
+   //db_checkReaderEntries(objTSL1128);
+   //db_checkReaderEntries(objRC522);
    db_printReaders();
 }
 
@@ -72,20 +73,19 @@ function scanBarcode() {
 /*
  * Connects to the reader selected by the user.
  */
-function getParsed() {
+function getParsed() { ////// CHANGE THIS TO SEND OBJECTS TO RADLIB.CONNECT
    var dropdown = document.getElementById("readersDB");
    var selectedReader = dropdown.options[dropdown.selectedIndex].value;
-   if (selectedReader == "scan") {
+   
+   if (selectedReader =="prompt") {
+      alert("Please select a reader");
+   }
+   else if (selectedReader == "scan") {
       showSelectConnectionScreen();
    }
-   else if (selectedReader == "TSL_1128_UHF" || selectedReader == "Throne") {
-      radlib.connect(updateTable, dumpLog, objTSL1128);
-   }
-   else if (selectedReader == "ARDUINO_RC522_HF") {
-      radlib.connect(updateTable, dumpLog, objRC522);
-   }
    else {
-      alert("Please select a reader");
+      var parsedObj = JSON.parse(selectedReader);
+      radlib.connect(updateTable, dumpLog, parsedObj);
    }
 }
 
@@ -136,6 +136,45 @@ function showDetected(data) {
 /*
  * Saves the selected reader to the reader database and returns reader to the initial home screen.
  */
+function saveReaderAndConnect() {
+   var detectedReaders = document.getElementById("detected_reader_selector");
+   var deviceModel = document.getElementById("device_model_selector");
+
+   var selectedReaderAddress = detectedReaders.options[detectedReaders.selectedIndex].value;
+   var selectedModel = deviceModel.options[deviceModel.selectedIndex].value;
+
+   if (selectedReaderAddress == "prompt") {
+      alert("Please select a reader to save");
+   }
+   else if (selectedModel == "prompt") {
+      alert("Please select a device model for parsing");
+   }
+   else {
+      var friendlyName = document.getElementById("friendlyName").value;
+
+      if (friendlyName == "") {
+         friendlyName = "My New Reader";
+      }
+
+      var newReader = {};
+      newReader.connection = "BLUETOOTH";
+      newReader.model = selectedModel;
+      newReader.address = selectedReaderAddress;
+      newReader.friendlyName = friendlyName;
+
+      dumpLog("Adding reader to database...");
+      db_checkReaderEntries(newReader);
+      dumpLog("Reader saved! Connecting...");
+
+      $('.controls').show();
+      $('.addReader').hide();
+      $('#tagsDB').show();
+
+      radlib.connect(updateTable, dumpLog, newReader);
+   }
+}
+
+/*
 function saveReader() {
    bluetoothUtils.stopDiscovery(dumpLog, dumpLog);
 
@@ -162,7 +201,7 @@ function saveReader() {
    $('.controls').show();
    $('.addReader').hide();
    $('#tagsDB').show();
-}
+}*/
 
 /*
  * Toggles the menu drawer.

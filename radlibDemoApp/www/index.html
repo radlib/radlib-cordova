@@ -150,10 +150,17 @@
                <select id="detected_reader_selector" class="topcoat-select">
                   <option value="prompt" selected="true" disabled>Tap here to select a reader</option>
                </select><br />
-               <p>Optional:<br/>Enter a friendly name for this reader</p>
+               <p>Optional:<br/>Enter a friendly name for this reader.</p>
                <input type="text" id="friendlyName" class="topcoat-text-input" placeholder="MyNewReader">
+               <br />
+               <p>Select a device model for parsing.</p>
+               <select id="device_model_selector" class="topcoat-select">
+                  <option value="prompt" selected="true" disabled>Select a device model</option>
+                  <option value="ARDUINO_RC522_HF">ARDUINO RC522 HF</option>
+                  <option value="TSL_1128_UHF">TSL 1128 UHF</option>
+               </select>
                <br /><br />
-               <button id="button_selectdetected" class="topcoat-button--cta" onclick="saveReader()">Get Connected</button>
+               <button id="button_selectdetected" class="topcoat-button--cta" onclick="saveReaderAndConnect()">Get Connected</button>
             </div>
          </div>
              
