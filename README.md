@@ -18,7 +18,39 @@ Run the command `git clone https://github.com/radlib/radlib-cordova.git` to down
 If you have an Android hardware device, you can run `cordova run android` to flash the demo application to your device.
 
 #Installation - Starting from Scratch
-Follow the instructions to start a new project with RadLib at the [Cordova Plugin Registry](http://plugins.cordova.io/#/package/com.radlib.cordova.rfidreader).
+The plugin can be found at the [Cordova Plugin Registry](http://plugins.cordova.io/#/package/com.radlib.cordova.rfidreader).  
+
+1. Make sure an up-to-date version of Node.js is installed, then install the Cordova Command-Line Interface:  
+
+    ```  
+    npm install -g cordova
+    ```  
+
+2. Create a project and add platforms (please see list below for supported platforms)  
+
+    ```
+    cordova create my_sample_app  
+    cd my_sample_app  
+    cordova platform add android  
+    ``` 
+    
+3. Add the plugin to your project  
+
+    ```
+    cordova plugin add com.radlib.cordova.rfidreader
+    ```  
+    
+4. Build and run, using the commands
+
+    ```
+    cordova build android  
+    cordova emulate android
+    ```  
+    or (if hardware device attached)  
+    ```
+    cordova run android
+    ```  
+
 
 #Using RadLib
 The plugin declares two global objects, `radlib` and `bluetoothUtils`.
