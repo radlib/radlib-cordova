@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/radlib/radlib-cordova/master/radlibDemoApp/www/img/logo.png" height="25"></img> RadLib
+<img src="https://raw.githubusercontent.com/radlib/radlib-cordova/master/SampleApps/radlibDemoApp/www/img/logo.png" height="25"></img> RadLib
 =======================================================
 An Apache Cordova plugin that allows for interfacing mobile applications with RFID tag readers.
 ######The currently supported readers are as follows:
