@@ -1,0 +1,21 @@
+c:\test\AppDirectory\platforms\android\ant-build\classes.dex : \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\phonegap\plugins\barcodescanner\BarcodeScanner.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothComm$1.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothComm$BluetoothThread.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\cordova\BluetoothComm.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\BuildConfig.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\CordovaApp.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$array.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$attr.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$color.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$dimen.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$drawable.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$id.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$layout.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$menu.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$raw.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$string.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R$xml.class \
+c:\test\AppDirectory\platforms\android\ant-build\classes\com\radlib\tutorial\R.class \
+c:\test\AppDirectory\platforms\android\ant-build\dexedLibs\classes-42f9d9fe3200737ed0bacc95246b9b29.jar \
+c:\test\AppDirectory\platforms\android\ant-build\dexedLibs\com.google.zxing.client.android.captureactivity-6df00c870b2b607b514c3fad391336ec.jar \
