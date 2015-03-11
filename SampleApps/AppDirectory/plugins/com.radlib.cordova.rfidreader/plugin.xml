@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin 
+   id="com.radlib.cordova.rfidreader" 
+   version="0.0.0" 
+   xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+   xmlns:android="http://schemas.android.com/apk/res/android">
+   
+   <name>Radlib Plugin</name>
+   <description>Cordova Plugin to enable communications to specified RFID Readers</description>
+   <author>Team RadLib</author>
+   <keywords>radlib</keywords>
+   
+   <engines>
+      <engine name="cordova" version=">=3.6.3" />
+   </engines>
+   
+   <js-module name="Resources" src ="www/Resources.js">
+   </js-module>
+    
+   <js-module name="RadLib" src ="www/RadLib.js">
+      <clobbers target="radlib" />
+   </js-module>
+
+   <js-module name="InternalBarcodeScanner" src ="www/InternalBarcodeScanner.js">
+   </js-module>
+    
+   <js-module name="CommBluetooth" src ="www/CommBluetooth.js">
+   </js-module>
+    
+   <js-module name="BluetoothUtils" src ="www/BluetoothUtils.js">
+      <clobbers target="bluetoothUtils" />
+   </js-module>
+    
+   <js-module name="ReaderArduino_RC522_HF" src ="www/ReaderArduino_RC522_HF.js">
+   </js-module>
+    
+   <js-module name="ReaderTSL_1128_UHF" src ="www/ReaderTSL_1128_UHF.js">
+   </js-module>
+   
+   <dependency id="com.phonegap.plugins.barcodescanner" url="https://github.com/wildabeast/BarcodeScanner" commit="fb600c1710ff2f786a1c3a31cd135d69846817fe"/>
+    
+   <platform name="android">
+      
+      <config-file target="res/xml/config.xml" parent="/widget">
+         <feature name="BluetoothComm">
+            <param name="android-package" value="com.radlib.cordova.BluetoothComm"/>
+         </feature>
+      </config-file>
+      
+      <source-file src="src/android/BluetoothComm.java"
+         target-dir="src/com/radlib/cordova"/>
+
+      <config-file target="AndroidManifest.xml" parent="/manifest">
+         <uses-permission android:name="android.permission.BLUETOOTH" />
+         <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+      </config-file> 
+         
+   </platform>
+   
+</plugin>
