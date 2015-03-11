@@ -108,6 +108,9 @@ The `radlib` object has two functions,  `connect()` and `scan()`:
         <li>date: date the frame was read in the form MM:dd:yyyy</li>
         <li>frame: the frame of data which was parsed</li>
         <li>friendlyName: user specified name sent in through the <code>reader</code> object</li>
+        <li>report: a string with value "seen" or "lost"</li>
+          <li>For continuous readers, like the "ARDUINO_RC522_LF", report is “seen” on tag reads and “lost” on tag lost</li>
+          <li>For trigger readers, like the  “TSL_1128_UHF” or Barcode Scanner, report is always “seen”</li>
       </ul>
     </td>
   </tr>
